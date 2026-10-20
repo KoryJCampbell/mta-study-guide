@@ -1,6 +1,6 @@
 // Offline cache for the MTA study guide.
 // Page: network first, fall back to cache. Fonts: cache first.
-var CACHE = 'mta-la-v1';
+var CACHE = 'mta-la-v2';
 var CORE = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', function (e) {
