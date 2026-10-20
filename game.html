@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Diamond Run — MTA Study Game</title>
+<meta name="description" content="A 3D quiz runner for the Los Angeles (CA) Alumni Chapter MTA study guide, Spring 2027.">
+<meta name="theme-color" content="#2A0604">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --crimson:#70110C; --night:#2A0604; --cream:#F2EBD7;
+  --cream-2:rgba(242,235,215,.8); --cream-3:rgba(242,235,215,.52); --line:rgba(242,235,215,.2);
+  --glass:rgba(34,6,4,.66); --ink:#2A0B08; --ink-2:#5E514B;
+  --good:#3E9A62; --good-bg:#DDEFE1; --good-ink:#1E5A34; --bad:#C0392B; --bad-bg:#F5D5D0; --bad-ink:#8E1B12; --gold:#E9C979;
+  --display:"Cinzel","Trajan Pro","Palatino Linotype",Palatino,Georgia,serif;
+  --body:"Source Sans 3",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --st:env(safe-area-inset-top,0px); --sb:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:var(--night);color:var(--cream);font-family:var(--body);overflow:hidden;overscroll-behavior:none;-webkit-user-select:none;user-select:none}
+button{font:inherit;color:inherit;touch-action:manipulation}
+a{color:inherit}
+[hidden]{display:none!important}
+
+#scene{position:fixed;inset:0;width:100%;height:100%;display:block}
+#touch{position:fixed;inset:0;touch-action:none;z-index:1}
+
+/* ---------- play HUD ---------- */
+.hud{position:fixed;z-index:2;left:0;right:0;top:0;padding:calc(10px + var(--st)) 12px 0;display:flex;align-items:center;gap:10px;pointer-events:none}
+.hud > *{pointer-events:auto}
+.lives{display:flex;gap:9px;padding-left:4px;min-width:84px}
+.lives i{width:15px;height:15px;transform:rotate(45deg);background:var(--cream);border-radius:2px;box-shadow:0 0 12px rgba(242,235,215,.55);transition:background .3s,box-shadow .3s}
+.lives i.off{background:transparent;box-shadow:inset 0 0 0 1.5px var(--cream-3)}
+.score{flex:1;text-align:center;font-family:var(--display);font-weight:700;font-size:1.4rem;letter-spacing:.04em;font-variant-numeric:tabular-nums;text-shadow:0 2px 10px rgba(0,0,0,.45)}
+.icon-btn{width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--glass);display:grid;place-items:center;cursor:pointer;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.icon-btn svg{width:20px;height:20px}
+
+.qcard{position:fixed;z-index:2;left:50%;top:calc(60px + var(--st));transform:translateX(-50%);width:min(720px,calc(100% - 20px));
+  background:rgba(242,235,215,.97);color:var(--ink);border-radius:16px;padding:11px 16px 13px;box-shadow:0 12px 32px rgba(0,0,0,.38);pointer-events:none}
+.qtop{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.qdeck{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--crimson)}
+.streak{font-size:.75rem;font-weight:700;color:#8a5a12;letter-spacing:.04em}
+.qtext{margin:5px 0 0;font-size:clamp(1.05rem,2.7vw,1.32rem);line-height:1.3;font-weight:600}
+.timer{height:4px;background:rgba(112,17,12,.13);border-radius:3px;margin-top:10px;overflow:hidden}
+.timer i{display:block;height:100%;background:var(--crimson);transform-origin:left center}
+
+.lanes{position:fixed;z-index:2;left:50%;transform:translateX(-50%);bottom:calc(12px + var(--sb));width:min(900px,calc(100% - 14px));display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.lane{min-height:66px;border-radius:14px;border:1.5px solid var(--line);background:var(--glass);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  padding:9px 8px;font-size:clamp(.84rem,2.5vw,1.02rem);font-weight:600;line-height:1.22;cursor:pointer;position:relative;display:flex;align-items:center;justify-content:center;text-align:center;
+  transition:background .15s,color .15s,border-color .15s,transform .15s}
+.lane:active{transform:scale(.97)}
+.lane.on{background:var(--cream);color:var(--crimson);border-color:var(--cream)}
+.lane.right{background:var(--good-bg);color:var(--good-ink);border-color:var(--good)}
+.lane.wrong{background:var(--bad-bg);color:var(--bad-ink);border-color:var(--bad)}
+.lane kbd{position:absolute;top:5px;left:8px;font:700 .66rem var(--body);opacity:.55;border:0;padding:0;display:none}
+.rush-hint{position:fixed;z-index:2;left:50%;transform:translateX(-50%);bottom:calc(88px + var(--sb));font-size:.78rem;color:var(--cream-3);letter-spacing:.06em;pointer-events:none;white-space:nowrap}
+.rush-hint .k{display:none}
+
+.toast{position:fixed;z-index:3;left:50%;top:47%;transform:translate(-50%,-50%) scale(.92);opacity:0;transition:opacity .18s,transform .18s;pointer-events:none;text-align:center;width:min(500px,calc(100% - 36px))}
+.toast.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.toast .pts{font-family:var(--display);font-weight:700;font-size:2.6rem;color:var(--cream);text-shadow:0 3px 22px rgba(0,0,0,.55)}
+.toast .mult{font-weight:700;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;font-size:.8rem;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+.toast .miss{background:rgba(242,235,215,.98);color:var(--ink);border-radius:14px;padding:12px 16px 13px;box-shadow:0 14px 34px rgba(0,0,0,.45);border-top:4px solid var(--bad)}
+.toast .miss b{display:block;color:var(--bad-ink);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:3px}
+.toast .miss p{margin:0;font-size:1.15rem;font-weight:700;color:var(--crimson)}
+.toast .miss small{display:block;margin-top:6px;font-size:.9rem;color:var(--ink-2);line-height:1.38}
+.toast .info{background:var(--glass);border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-weight:600}
+
+/* ---------- menus ---------- */
+.overlay{position:fixed;z-index:4;inset:0;display:flex;align-items:center;justify-content:center;padding:calc(20px + var(--st)) 18px calc(20px + var(--sb));
+  background:radial-gradient(ellipse at 50% 40%,rgba(42,6,4,.35),rgba(16,2,1,.86) 75%);overflow-y:auto}
+.panel{width:min(560px,100%);text-align:center;margin:auto}
+.badge{width:62px;height:62px;margin:0 auto 12px;display:block;filter:drop-shadow(0 6px 16px rgba(0,0,0,.45))}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(2.3rem,9vw,3.5rem);letter-spacing:.06em;margin:0;line-height:1.02;text-shadow:0 4px 24px rgba(0,0,0,.5)}
+h2.big{font-family:var(--display);font-weight:700;font-size:clamp(1.8rem,7vw,2.5rem);letter-spacing:.05em;margin:0}
+.sub{color:var(--cream-2);margin:10px 0 22px;font-size:.98rem;line-height:1.45}
+.label{font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--cream-3);margin:0 0 10px}
+.decks{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 0 22px}
+.chip{border:1px solid var(--line);background:rgba(242,235,215,.07);border-radius:999px;padding:8px 14px;font-weight:600;font-size:.92rem;cursor:pointer;transition:background .15s}
+.chip:hover{background:rgba(242,235,215,.14)}
+.chip[aria-pressed="true"]{background:var(--cream);color:var(--crimson);border-color:var(--cream)}
+.chip:disabled{opacity:.38;cursor:default}
+.cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-width:210px;padding:15px 30px;border-radius:14px;border:0;background:var(--cream);color:var(--crimson);
+  font-family:var(--display);font-weight:700;font-size:1.15rem;letter-spacing:.1em;cursor:pointer;box-shadow:0 10px 28px rgba(0,0,0,.4);transition:transform .15s}
+.cta:hover{transform:translateY(-1px)}
+.cta svg{width:16px;height:16px}
+.ghost{background:transparent;border:1px solid var(--line);color:var(--cream);padding:12px 20px;border-radius:12px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+.ghost:hover{background:rgba(242,235,215,.08)}
+.row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.how{margin:22px auto 0;max-width:31rem;color:var(--cream-2);font-size:.9rem;line-height:1.55}
+.how .k{display:none}
+kbd{font-family:var(--body);font-size:.78rem;border:1px solid var(--cream-3);border-radius:4px;padding:0 5px;white-space:nowrap}
+.meta{margin-top:14px;color:var(--gold);font-size:.85rem;font-weight:600;letter-spacing:.04em}
+.back{display:inline-block;margin-top:18px;color:var(--cream-2);font-size:.9rem;text-underline-offset:3px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:18px 0}
+.stats div{background:rgba(242,235,215,.07);border:1px solid var(--line);border-radius:12px;padding:10px 4px}
+.stats b{display:block;font-family:var(--display);font-size:1.45rem;font-variant-numeric:tabular-nums}
+.stats span{font-size:.68rem;color:var(--cream-2);text-transform:uppercase;letter-spacing:.12em}
+.newbest{color:var(--gold);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.78rem;margin-top:8px}
+.review{text-align:left;background:rgba(242,235,215,.97);color:var(--ink);border-radius:14px;padding:4px 14px 6px;max-height:36vh;overflow-y:auto;margin:0 0 18px;-webkit-user-select:text;user-select:text}
+.review h3{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--crimson);margin:10px 0 2px}
+.review ul{margin:0;padding:0;list-style:none}
+.review li{padding:8px 0;border-top:1px solid #DCD2BE;font-size:.9rem;line-height:1.38;color:var(--ink-2)}
+.review li:first-child{border-top:0}
+.review li b{display:block;color:var(--crimson);font-size:.98rem}
+.perfect{color:var(--cream-2);margin:0 0 18px}
+
+@media (hover:hover) and (pointer:fine){
+  .lane kbd{display:block}
+  .how .k,.rush-hint .k{display:inline}
+  .how .t,.rush-hint .t{display:none}
+}
+@media (min-width:900px){
+  .qcard{top:calc(68px + var(--st))}
+  .lanes{bottom:22px}
+  .lane{min-height:72px}
+  .rush-hint{bottom:106px}
+}
+@media (max-height:640px){
+  .qcard{top:calc(54px + var(--st));padding:8px 14px 10px}
+  .qtext{font-size:1rem}
+  .lane{min-height:54px;padding:6px}
+  .rush-hint{display:none}
+}
+</style>
+</head>
+<body>
+<canvas id="scene" aria-hidden="true"></canvas>
+<div id="touch"></div>
+
+<div class="hud" id="hud" hidden>
+  <div class="lives" id="lives" role="img" aria-label="3 lives"><i></i><i></i><i></i></div>
+  <div class="score" id="score">0</div>
+  <button type="button" class="icon-btn" id="mute" aria-label="Sound on" aria-pressed="false"></button>
+  <button type="button" class="icon-btn" id="pause" aria-label="Pause"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></button>
+</div>
+
+<div class="qcard" id="qcard" hidden aria-live="polite">
+  <div class="qtop"><span class="qdeck" id="qdeck"></span><span class="streak" id="streak"></span></div>
+  <p class="qtext" id="qtext"></p>
+  <div class="timer"><i id="timer"></i></div>
+</div>
+
+<div class="lanes" id="lanes" hidden>
+  <button type="button" class="lane" data-lane="0"><kbd>1</kbd><span></span></button>
+  <button type="button" class="lane" data-lane="1"><kbd>2</kbd><span></span></button>
+  <button type="button" class="lane" data-lane="2"><kbd>3</kbd><span></span></button>
+</div>
+<div class="rush-hint" id="rushHint" hidden><span class="t">Swipe up to rush the gates for bonus points</span><span class="k">Press <kbd>↑</kbd> or <kbd>Space</kbd> to rush the gates for bonus points</span></div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<section class="overlay" id="menu">
+  <div class="panel">
+    <svg class="badge" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 3 L97 50 L50 97 L3 50 Z" fill="#F2EBD7"/><path d="M50 15 L85 50 L50 85 L15 50 Z" fill="none" stroke="#70110C" stroke-width="1.6"/><text x="50" y="57" text-anchor="middle" font-family="Cinzel,'Trajan Pro',Palatino,serif" font-weight="700" font-size="21" fill="#70110C">&Kappa;&Alpha;&Psi;</text></svg>
+    <h1>Diamond Run</h1>
+    <p class="sub">MTA study game · Los Angeles (CA) Alumni Chapter · Spring 2027</p>
+    <p class="label">Pick a deck</p>
+    <div class="decks" id="decks"></div>
+    <button type="button" class="cta" id="start"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>Start run</button>
+    <p class="meta" id="best"></p>
+    <p class="how">Steer the diamond through the gate with the right answer. <span class="t">Tap a lane or swipe left and right. Swipe up to rush the gates when you know it.</span><span class="k">Use <kbd>←</kbd> <kbd>→</kbd> or <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd>, or click a lane. Press <kbd>↑</kbd> to rush the gates when you know it.</span> Three misses ends the run, and anything you miss comes back more often.</p>
+    <a class="back" href="./">← Back to the study guide</a>
+  </div>
+</section>
+
+<section class="overlay" id="paused" hidden>
+  <div class="panel">
+    <h2 class="big">Paused</h2>
+    <p class="sub" id="pausedDeck"></p>
+    <div class="row">
+      <button type="button" class="cta" id="resume">Resume</button>
+      <button type="button" class="ghost" id="endRun">End run</button>
+    </div>
+  </div>
+</section>
+
+<section class="overlay" id="over" hidden>
+  <div class="panel">
+    <h2 class="big">Run over</h2>
+    <p class="newbest" id="ovNew" hidden>New best</p>
+    <div class="stats">
+      <div><b id="ovScore">0</b><span>Score</span></div>
+      <div><b id="ovRight">0/0</b><span>Correct</span></div>
+      <div><b id="ovBest">0</b><span>Best</span></div>
+    </div>
+    <div class="review" id="ovReview"><h3>Study these</h3><ul id="ovList"></ul></div>
+    <p class="perfect" id="ovPerfect" hidden>No misses this run.</p>
+    <div class="row">
+      <button type="button" class="cta" id="again">Run it back</button>
+      <button type="button" class="ghost" id="toMenu">Change deck</button>
+    </div>
+    <a class="back" href="./">← Back to the study guide</a>
+  </div>
+</section>
+
+<section class="overlay" id="nogl" hidden>
+  <div class="panel">
+    <h2 class="big">3D isn't available</h2>
+    <p class="sub">This browser couldn't start the 3D view. The flash cards in the study guide cover the same material.</p>
+    <a class="cta" href="./#cards" style="text-decoration:none">Open flash cards</a>
+  </div>
+</section>
+
+<script type="module" src="game.js"></script>
+</body>
+</html>

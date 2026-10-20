@@ -1,7 +1,8 @@
-// Offline cache for the MTA study guide.
+// Offline cache for the MTA study guide and the Diamond Run game.
 // Page: network first, fall back to cache. Fonts: cache first.
-var CACHE = 'mta-la-v2';
-var CORE = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
+var CACHE = 'mta-la-v3';
+var CORE = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png',
+  './game.html', './game.js', './game-data.js', './vendor/three.module.min.js'];
 
 self.addEventListener('install', function (e) {
   e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(CORE); }).then(function () { return self.skipWaiting(); }));
