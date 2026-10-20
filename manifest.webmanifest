@@ -1,0 +1,14 @@
+{
+  "name": "MTA Study Guide — Los Angeles (CA) Alumni Chapter",
+  "short_name": "MTA Guide",
+  "description": "Kappa Alpha Psi Membership Training Academy study guide, Spring 2027.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#70110C",
+  "theme_color": "#70110C",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

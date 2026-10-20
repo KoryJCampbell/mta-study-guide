@@ -2,216 +2,348 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#651322">
-<title>Kappa Alpha Psi Fraternity, Inc. — Los Angeles (CA) Alumni Chapter — MTA</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='12'%20fill='%23651322'/%3E%3Cpath%20d='M32%2010L52%2032L32%2054L12%2032Z'%20fill='%23f6f0e2'/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#70110C">
+<meta name="color-scheme" content="light dark">
+<title>MTA Study Guide — Los Angeles (CA) Alumni Chapter</title>
+<meta name="description" content="Kappa Alpha Psi Membership Training Academy study guide for the Los Angeles (CA) Alumni Chapter, Spring 2027.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MTA Guide">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap">
 <style>
 :root{
-  --crimson:#651322; --crimson-deep:#480d18; --cream:#f6f0e2;
-  --paper:#fffdf8; --ink:#26161a; --muted:#7d6a6d; --line:#e8ddcb; --tint:#faf5ea;
+  --crimson:#70110C; --crimson-deep:#4A0A07; --crimson-ink:#2E0604;
+  --cream:#F2EBD7; --paper:#FBF8F1; --paper-2:#F2EBD7;
+  --ink:#221A17; --ink-2:#5E514B; --ink-3:#8E8179;
+  --rule:#DCD2BE; --rule-strong:#C9BBA0;
+  --known:#2F6B45; --known-bg:#E5F0E8;
+  --on-crimson:#F2EBD7; --on-crimson-2:rgba(242,235,215,.72); --on-crimson-3:rgba(242,235,215,.45);
+  --display:"Cinzel","Trajan Pro","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --body:"Source Sans 3",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --side:300px; --tabbar:62px;
+  --t0:.8125rem; --t1:1rem; --t2:1.2rem; --t3:1.45rem; --t4:1.85rem; --t5:2.3rem;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --cream:#F2EBD7; --paper:#1A1311; --paper-2:#241B18;
+    --ink:#EFE6D6; --ink-2:#BBAEA2; --ink-3:#8E8179;
+    --rule:#3B2E2A; --rule-strong:#55433D;
+    --known:#8FC9A2; --known-bg:#1F3328;
+    --crimson:#9A2419;
+  }
 }
 *{box-sizing:border-box}
-body{
-  margin:0; font-family:Palatino,"Palatino Linotype","Book Antiqua",Georgia,serif;
-  background:var(--cream); color:var(--ink); line-height:1.5;
-  -webkit-text-size-adjust:100%;
-}
-.hero{background:var(--crimson); color:var(--cream); padding:26px 20px 20px}
-.hero-inner{max-width:640px; margin:0 auto}
-.hero .diamond{width:26px;height:26px;transform:rotate(45deg);background:var(--cream);border-radius:4px;margin-bottom:14px}
-.hero h1{margin:0;font-size:24px;line-height:1.25;font-weight:600}
-.hero p{margin:8px 0 0;font-size:15px;opacity:.9}
+html{font-size:16px;scroll-behavior:smooth}
+@media (min-width:900px){html{font-size:17px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.55;
+  -webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased}
+a{color:var(--crimson)}
+button{font-family:var(--body)}
+:focus-visible{outline:3px solid var(--crimson);outline-offset:2px}
+@media (prefers-color-scheme:dark){:focus-visible{outline-color:var(--cream)}}
 
-nav{
-  position:sticky; top:0; z-index:5; background:var(--crimson-deep);
-  overflow-x:auto; -webkit-overflow-scrolling:touch; white-space:nowrap;
-  padding:8px 14px; scrollbar-width:none;
-}
-nav::-webkit-scrollbar{display:none}
-nav a{color:var(--cream); text-decoration:none; font-size:13.5px;
-  padding:6px 12px; border-radius:99px; display:inline-block}
-nav a:active,nav a:hover{background:rgba(246,240,226,.15)}
+/* ---------- side / masthead ---------- */
+.side{background:linear-gradient(180deg,var(--crimson) 0%,var(--crimson-deep) 100%);color:var(--on-crimson);
+  padding:22px 20px 18px;position:relative}
+.side-inner{max-width:640px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center}
+.badge{width:64px;height:64px;flex:none}
+.badge svg{width:100%;height:100%;display:block}
+.identity{min-width:0}
+.identity .org{margin:0;font-family:var(--display);font-weight:600;font-size:.72rem;letter-spacing:.06em;color:var(--on-crimson-2);line-height:1.3}
+.identity h1{margin:3px 0 0;font-family:var(--display);font-weight:700;font-size:1.05rem;line-height:1.25;letter-spacing:.01em;color:var(--cream)}
+.identity .mta{margin:5px 0 0;font-size:.9rem;color:var(--on-crimson-2);line-height:1.35}
+.motto{display:none;margin:0;font-family:var(--display);font-weight:500;font-size:.78rem;letter-spacing:.04em;line-height:1.5;color:var(--on-crimson-2)}
+.toc{display:none}
+.ring-wrap{display:none}
 
-main{max-width:640px; margin:0 auto; padding:8px 16px 60px}
-section{background:var(--paper); border-radius:14px; margin-top:16px;
-  box-shadow:0 2px 10px rgba(72,13,24,.08); overflow:hidden; scroll-margin-top:52px}
-.sec-head{padding:16px 18px 4px}
-.sec-head h2{margin:0;font-size:20px;font-weight:600;color:var(--crimson);line-height:1.3}
-.sec-body{padding:10px 18px 18px;font-size:15px}
-.sec-body p{margin:8px 0 0}
-ul.plain{margin:6px 0 0;padding-left:20px}
-ul.plain li{margin:5px 0}
-ol.plain{margin:6px 0 0;padding-left:22px}
-ol.plain li{margin:6px 0}
-.sub{font-size:13.5px;color:var(--muted)}
-.src{font-size:12.5px;color:var(--muted);margin-top:12px}
+/* mobile section strip */
+.strip{position:sticky;top:0;z-index:20;background:var(--crimson-ink);overflow-x:auto;white-space:nowrap;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;padding:8px 12px;border-bottom:1px solid rgba(0,0,0,.25)}
+.strip::-webkit-scrollbar{display:none}
+.strip a{display:inline-block;color:var(--on-crimson-2);text-decoration:none;font-size:.88rem;font-weight:600;
+  padding:7px 12px;border-radius:999px}
+.strip a.active{background:var(--cream);color:var(--crimson-ink)}
 
-.reveal-btn{
-  font:inherit;font-size:14px;border:1px solid var(--crimson);color:var(--crimson);
-  background:none;border-radius:99px;padding:7px 16px;cursor:pointer;margin-top:12px;
-}
-.reveal-btn[aria-expanded="true"]{background:var(--crimson);color:var(--cream)}
-.hidden-block{display:none}
-.hidden-block.show{display:block}
+/* ---------- main ---------- */
+main{padding:0 18px calc(var(--tabbar) + 24px + env(safe-area-inset-bottom))}
+.col{max-width:42rem;margin:0 auto}
+.view{display:none}
+.view.active{display:block}
 
-details.fold{border-top:1px solid var(--line)}
-details.fold:first-of-type{border-top:0}
-details.fold summary{
-  cursor:pointer;padding:12px 2px;font-size:15px;font-weight:600;list-style:none;
-  display:flex;gap:8px;align-items:baseline;-webkit-tap-highlight-color:transparent;
-}
+.chapter{padding:34px 0 10px;border-top:1px solid var(--rule);scroll-margin-top:56px}
+.chapter:first-child{border-top:0;padding-top:26px}
+.chapter-head{display:flex;align-items:baseline;gap:12px;margin:0 0 14px}
+.chapter-head::before{content:"";width:11px;height:11px;flex:none;background:var(--crimson);transform:rotate(45deg) translateY(-1px)}
+.chapter-head h2{margin:0;font-family:var(--display);font-weight:600;font-size:var(--t3);line-height:1.2;letter-spacing:.01em;color:var(--crimson)}
+@media (prefers-color-scheme:dark){.chapter-head h2{color:var(--cream)}}
+.chapter p{margin:0 0 12px;font-size:var(--t1)}
+.chapter p.lead{font-size:var(--t2);line-height:1.45;font-weight:400}
+.quiet{color:var(--ink-2)}
+.src{margin:18px 0 0;font-size:var(--t0);color:var(--ink-3);line-height:1.5}
+ul.marks,ol.marks{margin:0 0 14px;padding-left:0;list-style:none}
+ul.marks li,ol.marks li{position:relative;padding-left:22px;margin:6px 0}
+ul.marks li::before{content:"";position:absolute;left:4px;top:.62em;width:7px;height:7px;background:var(--crimson);transform:rotate(45deg)}
+ol.marks{counter-reset:n}
+ol.marks li{counter-increment:n;padding-left:34px}
+ol.marks li::before{content:counter(n);position:absolute;left:0;top:0;font-family:var(--display);font-weight:600;font-size:.9rem;color:var(--crimson);width:24px;text-align:right}
+@media (prefers-color-scheme:dark){ol.marks li::before{color:var(--cream)}}
+blockquote.motto-q{margin:0 0 16px;padding:18px 22px;background:var(--paper-2);border-left:3px solid var(--crimson);
+  font-family:var(--display);font-weight:600;font-size:var(--t2);line-height:1.4;letter-spacing:.01em;color:var(--crimson)}
+@media (prefers-color-scheme:dark){blockquote.motto-q{color:var(--cream)}}
+
+/* folds */
+details.fold{border-top:1px solid var(--rule)}
+details.fold:last-of-type{border-bottom:1px solid var(--rule)}
+details.fold summary{cursor:pointer;list-style:none;display:flex;align-items:baseline;gap:12px;padding:12px 2px;
+  font-weight:600;font-size:var(--t1);-webkit-tap-highlight-color:transparent}
 details.fold summary::-webkit-details-marker{display:none}
-details.fold summary::before{content:"+";color:var(--crimson);font-weight:600;flex:none;width:14px}
-details.fold[open] summary::before{content:"\2212"}
-details.fold .a{padding:0 2px 12px 22px;font-size:15px;white-space:pre-line}
+details.fold summary::before{content:"+";flex:none;width:14px;color:var(--crimson);font-weight:700;font-size:1.1rem;line-height:1;transition:transform .15s}
+details.fold[open] summary::before{transform:rotate(45deg)}
+@media (prefers-color-scheme:dark){details.fold summary::before{color:var(--cream)}}
+details.fold .a{padding:0 2px 14px 26px;white-space:pre-line;color:var(--ink);font-size:var(--t1);line-height:1.55}
+details.fold .a .tag{display:inline-block;font-size:var(--t0);color:var(--ink-3);border:1px solid var(--rule);border-radius:999px;padding:1px 9px;margin-top:6px;white-space:normal}
 
-.check{list-style:none;margin:6px 0 0;padding:0}
-.check li{margin:2px 0}
-.check label{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:9px;
-  font-size:15px;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.check label:active{background:var(--tint)}
-.check input{width:19px;height:19px;flex:none;margin-top:2px;accent-color:var(--crimson)}
-.check input:checked+span{color:var(--muted)}
+/* founders grid */
+.founders{display:grid;grid-template-columns:1fr;gap:0}
+@media (min-width:640px){.founders{grid-template-columns:1fr 1fr;column-gap:28px}.founders details.fold:nth-of-type(2){border-top:1px solid var(--rule)}}
+.founders summary .nick{color:var(--ink-3);font-weight:400;font-style:italic}
 
-table.fees{width:100%;border-collapse:collapse;margin-top:8px;font-size:15px}
-table.fees td{padding:8px 2px;border-bottom:1px solid var(--line);vertical-align:top}
-table.fees td:last-child{text-align:right;font-weight:600;white-space:nowrap}
-table.fees tr.total td{border-bottom:0;border-top:2px solid var(--crimson);
-  font-weight:700;color:var(--crimson);font-size:16.5px}
-blockquote{margin:10px 0 0;padding:10px 14px;background:var(--tint);border-radius:10px;font-size:14.5px}
-.pnote{background:var(--tint);border-radius:10px;padding:10px 12px;font-size:13.5px;color:var(--muted);margin-top:12px}
-.pnote b{color:var(--ink)}
-.contact{margin-top:10px;font-size:15px}
-.contact b{display:block}
-.contact a{color:var(--crimson)}
-footer{max-width:640px;margin:0 auto;padding:0 20px 30px;font-size:12px;color:var(--muted);text-align:center;line-height:1.6}
+/* greek */
+.greek{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:0 0 14px}
+@media (min-width:640px){.greek{grid-template-columns:repeat(6,1fr)}}
+.greek div{background:var(--paper-2);border:1px solid var(--rule);padding:10px 4px 8px;text-align:center}
+.greek b{display:block;font-family:var(--display);font-weight:600;font-size:1.35rem;line-height:1.1;color:var(--crimson)}
+@media (prefers-color-scheme:dark){.greek b{color:var(--cream)}}
+.greek span{display:block;font-size:var(--t0);color:var(--ink-2);margin-top:4px}
 
-.greek{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
-.greek div{background:var(--tint);border:1px solid var(--line);border-radius:10px;padding:10px 4px;text-align:center}
-.greek b{display:block;font-size:22px;line-height:1.1;color:var(--crimson)}
-.greek span{display:block;font-size:12px;color:var(--muted);margin-top:4px}
-@media (max-width:380px){.greek{grid-template-columns:repeat(3,1fr)}}
+/* timeline */
+.timeline{list-style:none;margin:0 0 14px;padding:0 0 0 22px;border-left:2px solid var(--rule-strong)}
+.timeline li{position:relative;padding:0 0 18px 16px}
+.timeline li::before{content:"";position:absolute;left:-28px;top:7px;width:9px;height:9px;background:var(--crimson);transform:rotate(45deg);outline:3px solid var(--paper)}
+.timeline .when{display:block;font-family:var(--display);font-weight:600;font-size:.95rem;color:var(--crimson);letter-spacing:.01em}
+@media (prefers-color-scheme:dark){.timeline .when{color:var(--cream)}}
+.timeline .what{display:block;margin-top:2px}
+.timeline .what small{display:block;color:var(--ink-2);font-size:var(--t0);margin-top:2px}
 
-.fc{background:var(--tint);border-radius:12px;min-height:240px;display:flex;flex-direction:column;
-  cursor:pointer;position:relative;-webkit-tap-highlight-color:transparent;margin-top:12px;
-  border:1px solid var(--line)}
-.fc:focus-visible{outline:3px solid var(--crimson);outline-offset:2px}
-.fc-face{flex:1;display:flex;flex-direction:column;justify-content:center;padding:22px 20px;overflow-y:auto}
-.fc-count{font-size:12px;color:var(--muted);margin-bottom:10px}
-.fc-front{font-size:20px;font-weight:600;line-height:1.3;color:var(--crimson)}
-.fc-back{font-size:15px;line-height:1.55;white-space:pre-line}
-.fc-hint{text-align:center;font-size:12px;color:var(--muted);padding:0 0 10px}
-.fc-tag{position:absolute;top:10px;right:12px;font-size:12px;color:#2e6b45;border:1px solid #2e6b45;
-  border-radius:99px;padding:2px 9px;display:none}
-.fc.is-known .fc-tag{display:block}
-.fc-row{display:flex;gap:8px;margin-top:10px}
-.fc-row button{font:inherit;font-size:14px;border:0;border-radius:10px;padding:11px 0;cursor:pointer;flex:1;
-  background:var(--tint);color:var(--crimson);border:1px solid var(--line)}
-.fc-row button.primary{background:var(--crimson);color:var(--cream);border-color:var(--crimson);font-weight:600}
-.fc-row button:active{opacity:.8}
+/* checklists */
+ul.check{list-style:none;margin:0 0 14px;padding:0}
+ul.check li{margin:0;border-top:1px solid var(--rule)}
+ul.check li:last-child{border-bottom:1px solid var(--rule)}
+ul.check label{display:flex;gap:12px;align-items:flex-start;padding:11px 4px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+ul.check input{appearance:none;-webkit-appearance:none;width:20px;height:20px;flex:none;margin:2px 0 0;border:2px solid var(--crimson);transform:rotate(45deg) scale(.82);background:transparent;cursor:pointer;position:relative}
+ul.check input:checked{background:var(--crimson)}
+ul.check input:checked+span{color:var(--ink-3);text-decoration:line-through;text-decoration-color:var(--rule-strong)}
+@media (prefers-color-scheme:dark){ul.check input{border-color:var(--cream)}ul.check input:checked{background:var(--cream)}}
+.check-meta{font-size:var(--t0);color:var(--ink-3);margin:-6px 0 12px}
+
+/* ---------- flash cards ---------- */
+.decks{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.decks button{font-size:var(--t0);font-weight:600;color:var(--ink-2);background:transparent;border:1px solid var(--rule-strong);
+  border-radius:999px;padding:6px 12px;cursor:pointer}
+.decks button[aria-pressed="true"]{background:var(--crimson);color:var(--cream);border-color:var(--crimson)}
+.fc-stage{perspective:1400px}
+.fc{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent;display:grid;min-height:270px;
+  transform-style:preserve-3d;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.fc.flipped{transform:rotateY(180deg)}
+.face{grid-area:1/1;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;
+  justify-content:center;padding:28px 24px;background:var(--paper-2);border:1px solid var(--rule-strong);min-height:270px}
+.face.back{transform:rotateY(180deg)}
+.face .count{font-size:var(--t0);color:var(--ink-3);margin-bottom:12px}
+.face .front-text{font-family:var(--display);font-weight:600;font-size:var(--t3);line-height:1.25;color:var(--crimson)}
+@media (prefers-color-scheme:dark){.face .front-text{color:var(--cream)}}
+.face .back-text{white-space:pre-line;font-size:var(--t1);line-height:1.5}
+.face .known{position:absolute;top:12px;right:14px;font-size:var(--t0);font-weight:600;color:var(--known);background:var(--known-bg);
+  border-radius:999px;padding:2px 10px;display:none}
+.fc.is-known .face .known{display:block}
+.fc-hint{text-align:center;font-size:var(--t0);color:var(--ink-3);margin:10px 0 0}
+.fc-row{display:flex;gap:8px;margin-top:12px}
+.fc-row button{flex:1;font-size:var(--t1);font-weight:600;padding:12px 0;border:1px solid var(--rule-strong);background:transparent;color:var(--crimson);cursor:pointer}
+.fc-row button.primary{background:var(--crimson);color:var(--cream);border-color:var(--crimson)}
+.fc-row button:active{opacity:.85}
+@media (prefers-color-scheme:dark){.fc-row button{color:var(--cream)}}
 .fc-row2{display:flex;gap:8px;margin-top:8px}
-.fc-row2 button{font:inherit;font-size:13px;border:1px solid var(--line);border-radius:99px;padding:7px 0;
-  cursor:pointer;flex:1;background:none;color:var(--muted)}
-.fc-row2 button[aria-pressed="true"]{background:var(--crimson);color:var(--cream);border-color:var(--crimson)}
-.fc-score{font-size:13px;color:var(--muted);margin-top:10px;text-align:center}
+.fc-row2 button{flex:1;font-size:var(--t0);font-weight:600;padding:8px 0;border:1px solid var(--rule);background:transparent;color:var(--ink-2);cursor:pointer;border-radius:999px}
+.fc-row2 button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.fc-score{display:flex;justify-content:space-between;font-size:var(--t0);color:var(--ink-2);margin-top:14px}
+.bar{height:4px;background:var(--rule);margin-top:6px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--known);width:0}
+.keys{display:none;margin-top:14px;font-size:var(--t0);color:var(--ink-3)}
+.keys kbd{font-family:var(--body);font-size:.75rem;border:1px solid var(--rule-strong);border-radius:4px;padding:0 5px;margin:0 2px}
 
-@media print{nav,.reveal-btn{display:none}.hidden-block{display:block}section{box-shadow:none;break-inside:avoid}}
+/* ---------- tab bar (mobile) ---------- */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:1fr 1fr 1fr;
+  background:var(--crimson-ink);padding:6px 8px calc(6px + env(safe-area-inset-bottom));border-top:1px solid rgba(0,0,0,.3)}
+.tabbar button{background:transparent;border:0;color:var(--on-crimson-3);font-size:.78rem;font-weight:600;padding:6px 0 4px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:3px}
+.tabbar button svg{width:22px;height:22px;display:block}
+.tabbar button[aria-selected="true"]{color:var(--cream)}
+
+footer{max-width:42rem;margin:28px auto 0;padding:18px 0 0;border-top:1px solid var(--rule);font-size:var(--t0);color:var(--ink-3);line-height:1.6}
+
+/* ---------- desktop ---------- */
+@media (min-width:900px){
+  body{display:grid;grid-template-columns:var(--side) 1fr}
+  .side{position:sticky;top:0;height:100vh;overflow:hidden;padding:26px 24px 22px;display:flex;flex-direction:column;gap:18px}
+  .side-inner{display:block;max-width:none;margin:0}
+  .badge{width:92px;height:92px;margin:0 0 14px}
+  .identity .org{font-size:.74rem}
+  .identity h1{font-size:1.18rem;margin-top:6px}
+  .identity .mta{font-size:.92rem;margin-top:8px}
+  .motto{display:block;margin-top:10px;padding-top:12px;border-top:1px solid var(--on-crimson-3)}
+  .toc{display:block;flex:1;min-height:0;overflow-y:auto;scrollbar-width:thin;margin-right:-10px;padding-right:10px;
+    mask-image:linear-gradient(180deg,#000 calc(100% - 28px),transparent);-webkit-mask-image:linear-gradient(180deg,#000 calc(100% - 28px),transparent)}
+  .toc .grp{margin:0 0 10px}
+  .toc .grp-name{font-family:var(--display);font-weight:600;font-size:.66rem;letter-spacing:.08em;color:var(--on-crimson-3);margin:0 0 2px;padding-left:10px}
+  .toc a{display:block;color:var(--on-crimson-2);text-decoration:none;font-size:.86rem;line-height:1.35;padding:4px 10px;border-left:2px solid transparent}
+  .toc a:hover{color:var(--cream)}
+  .toc a.active{color:var(--cream);border-left-color:var(--cream);background:rgba(242,235,215,.07)}
+  .ring-wrap{display:flex;align-items:center;gap:14px;padding-top:16px;border-top:1px solid var(--on-crimson-3)}
+  .ring{width:58px;height:58px;flex:none}
+  .ring circle{fill:none;stroke-width:5}
+  .ring .bg{stroke:rgba(242,235,215,.18)}
+  .ring .fg{stroke:var(--cream);stroke-linecap:butt;transform:rotate(-90deg);transform-origin:50% 50%;transition:stroke-dasharray .4s}
+  .ring-text{font-size:.85rem;line-height:1.4;color:var(--on-crimson-2)}
+  .ring-text b{display:block;color:var(--cream);font-size:1.05rem;font-family:var(--display);font-weight:600}
+  .strip{display:none}
+  main{padding:0 56px 72px}
+  .col{margin:0}
+  .view{display:block}
+  .chapter{padding:46px 0 14px;scroll-margin-top:0}
+  .chapter:first-child{padding-top:44px}
+  .tabbar{display:none}
+  .keys{display:block}
+  footer{margin-left:0}
+}
+@media (min-width:900px) and (max-height:820px){
+  .side{padding-top:18px;gap:12px}
+  .badge{width:64px;height:64px;margin-bottom:10px}
+  .motto{display:none}
+  .identity .mta{display:none}
+  .toc a{padding:3px 10px;font-size:.84rem}
+  .toc .grp{margin-bottom:7px}
+}
+@media print{.side,.strip,.tabbar,.decks,.fc-row,.fc-row2,.keys{display:none}.view{display:block}details.fold{display:block}details.fold .a{display:block}}
 </style>
 </head>
 <body>
 
-<div class="hero">
-  <div class="hero-inner">
-    <div class="diamond" aria-hidden="true"></div>
-    <h1>Kappa Alpha Psi Fraternity, Inc.&reg;<br>Los Angeles (CA) Alumni Chapter</h1>
-    <p>Membership Training Academy (MTA) &mdash; Spring 2027</p>
+<aside class="side">
+  <div class="side-inner">
+    <div class="badge" aria-hidden="true">
+      <svg viewBox="0 0 100 100">
+        <path d="M50 3 L97 50 L50 97 L3 50 Z" fill="#F2EBD7"/>
+        <path d="M50 15 L85 50 L50 85 L15 50 Z" fill="none" stroke="#70110C" stroke-width="1.6"/>
+        <text x="50" y="57" text-anchor="middle" font-family="Cinzel,'Trajan Pro',Palatino,serif" font-weight="700" font-size="21" fill="#70110C">&Kappa;&Alpha;&Psi;</text>
+      </svg>
+    </div>
+    <div class="identity">
+      <p class="org">Kappa Alpha Psi Fraternity, Inc.&reg;</p>
+      <h1>Los Angeles (CA) Alumni Chapter</h1>
+      <p class="mta">Membership Training Academy<br>Spring 2027</p>
+      <p class="motto">Achievement in Every Field of Human Endeavor</p>
+    </div>
   </div>
-</div>
 
-<nav aria-label="Sections">
-  <a href="#history">Kappa History</a><a href="#founders">Founders</a><a href="#purpose">Purpose</a><a href="#objectives">Objectives</a><a href="#conduct">Intake Policy</a><a href="#governance">Governance</a><a href="#province">Western Province</a><a href="#chapter">LA Alumni</a><a href="#programs">Programs</a><a href="#greek">Greek Alphabet</a><a href="#mta">MTA</a><a href="#requirements">Requirements</a><a href="#packet">Application</a><a href="#fees">Fees</a><a href="#dates">Dates</a><a href="#aspirants">Aspirants</a><a href="#cards">Flash Cards</a>
+  <nav class="toc" aria-label="Contents">
+    <div class="grp"><p class="grp-name">The Fraternity</p>
+      <a href="#history">Kappa History</a><a href="#founders">The Founders</a><a href="#purpose">Purpose and Motto</a><a href="#objectives">The 5 Objectives</a><a href="#conduct">Intake Policy</a><a href="#governance">Governance</a><a href="#programs">Programs</a>
+    </div>
+    <div class="grp"><p class="grp-name">The Province</p>
+      <a href="#province">Western Province</a>
+    </div>
+    <div class="grp"><p class="grp-name">The Chapter</p>
+      <a href="#chapter">Los Angeles Alumni</a>
+    </div>
+    <div class="grp"><p class="grp-name">Spring 2027</p>
+      <a href="#mta">The MTA</a><a href="#requirements">Requirements</a><a href="#fees">Fees</a><a href="#dates">Dates</a><a href="#packet">Application Packet</a><a href="#aspirants">What to Do</a>
+    </div>
+    <div class="grp"><p class="grp-name">Study</p>
+      <a href="#greek">Greek Alphabet</a><a href="#cards">Flash Cards</a>
+    </div>
+  </nav>
+
+  <div class="ring-wrap" aria-live="polite">
+    <svg class="ring" viewBox="0 0 60 60" aria-hidden="true"><circle class="bg" cx="30" cy="30" r="25"></circle><circle class="fg" id="ring" cx="30" cy="30" r="25" stroke-dasharray="0 999"></circle></svg>
+    <div class="ring-text"><b id="ring-pct">0%</b><span id="ring-sub">0 of 0 cards learned</span></div>
+  </div>
+</aside>
+
+<nav class="strip" id="strip" aria-label="Sections">
+  <a href="#history">History</a><a href="#founders">Founders</a><a href="#purpose">Purpose</a><a href="#objectives">Objectives</a><a href="#conduct">Intake Policy</a><a href="#governance">Governance</a><a href="#programs">Programs</a><a href="#province">Western Province</a><a href="#chapter">LA Alumni</a><a href="#mta">MTA</a><a href="#requirements">Requirements</a><a href="#fees">Fees</a><a href="#dates">Dates</a><a href="#greek">Greek</a>
 </nav>
 
 <main>
+<div class="col">
 
-<section id="history">
-  <div class="sec-head"><h2>Kappa History</h2></div>
-  <div class="sec-body">
-    <ul class="plain">
-      <li>Founded on January 5, 1911 at Indiana University Bloomington</li>
-      <li>10 Founders</li>
-      <li>Colors &ndash; Crimson &amp; Cream</li>
-      <li>Over 150,000 members with 700 undergraduate and alumni chapters in every state of the United States</li>
-      <li>Fraternity website: www.kappaalphapsi1911.com</li>
-    </ul>
-    <details class="fold"><summary>Alpha Omega, Kappa Alpha Nu, Kappa Alpha Psi</summary><div class="a">The group was first called Alpha Omega while its formation continued. Alpha and Omega, the Greek alphabet's first and last letters, correlate to Christ and the Founder's relationship and connection to the church.
+<!-- ================= GUIDE ================= -->
+<div class="view active" id="view-guide">
+
+<section class="chapter" id="history">
+  <div class="chapter-head"><h2>Kappa History</h2></div>
+  <p class="lead">Founded on January 5, 1911 at Indiana University Bloomington.</p>
+  <ul class="marks">
+    <li>10 Founders</li>
+    <li>Colors &ndash; Crimson &amp; Cream</li>
+    <li>Over 150,000 members with 700 undergraduate and alumni chapters in every state of the United States</li>
+    <li>www.kappaalphapsi1911.com</li>
+  </ul>
+  <details class="fold"><summary>Alpha Omega, Kappa Alpha Nu, Kappa Alpha Psi</summary><div class="a">The group was first called Alpha Omega while its formation continued. Alpha and Omega, the Greek alphabet's first and last letters, correlate to Christ and the Founder's relationship and connection to the church.
 
 On January 5, 1911, the fraternity was originally known as Kappa Alpha Nu, possibly as a tribute to the Black students of 1903 (the Alpha Kappa Nu Fraternity) who preceded them at Indiana University.
 
 Kappa Alpha Nu became the first incorporated Black fraternity in the United States once granted a charter by the Indiana Secretary of State on May 15, 1911.
 
 The Greek letter &Psi; replaced N. The name was officially changed to Kappa Alpha Psi&reg; on a resolution adopted at the Grand Chapter Meeting in December 1914. This change became effective on April 15, 1915.</div></details>
-    <details class="fold"><summary>Firsts</summary><div class="a">Second-oldest existing collegiate historically Black Greek letter fraternity and the first intercollegiate fraternity incorporated as a national body.
+  <details class="fold"><summary>Firsts</summary><div class="a">Second-oldest existing collegiate historically Black Greek letter fraternity and the first intercollegiate fraternity incorporated as a national body.
 
 It is the first Greek letter organization to establish its Alpha Chapter on Indiana University's campus.
 
 It would be the only Greek letter organization founded with the concept of achievement.</div></details>
-    <details class="fold"><summary>The Journal</summary><div class="a">The inaugural edition of The Kappa Alpha Nu Journal debuted in April 1914, and it has been printed uninterrupted, except for 1918 and 1919, due to WWI.
+  <details class="fold"><summary>The Journal</summary><div class="a">The inaugural edition of The Kappa Alpha Nu Journal debuted in April 1914, and it has been printed uninterrupted, except for 1918 and 1919, due to WWI.
 
 A frontrunner among Black Greek lettered collegiate organizations to issue a monthly publication.
 
 In Memoriam to Brothers who have passed away and transitioned into a place, we refer to as the Chapter Invisible.</div></details>
-    <p class="src">Source: kappaalphapsi1911.com (Home, Historical Brief, Journal)</p>
-  </div>
+  <p class="src">Source: kappaalphapsi1911.com (Home, Historical Brief, Journal)</p>
 </section>
 
-<section id="founders">
-  <div class="sec-head"><h2>The Founders of KA&Psi;</h2></div>
-  <div class="sec-body">
-    <p>Diggs, Armstrong, John M. Lee, Henry T. Asher, Marcus P. Blakemore, Guy L. Grant, Paul W. Caine, George W. Edmonds, Ezra D. Alexander, and Edward G. Irvin.</p>
-    <button class="reveal-btn" data-target="founders-list" aria-expanded="false">Show</button>
-    <div class="hidden-block" id="founders-list">
-      <ol class="plain">
-        <li>Elder Watson Diggs</li>
-        <li>Byron Kenneth Armstrong</li>
-        <li>John Milton Lee</li>
-        <li>Henry Tourner Asher</li>
-        <li>Marcus Peter Blakemore</li>
-        <li>Guy Levis Grant</li>
-        <li>Paul Waymond Caine</li>
-        <li>George Wesley Edmonds</li>
-        <li>Ezra Dee Alexander</li>
-        <li>Edward Giles Irvin</li>
-      </ol>
-    </div>
-    <details class="fold"><summary>Founding roles</summary><div class="a">Diggs presided as president, while Irvin was assigned as interim secretary of Alpha Omega.
+<section class="chapter" id="founders">
+  <div class="chapter-head"><h2>The Founders</h2></div>
+  <p>Diggs, Armstrong, John M. Lee, Henry T. Asher, Marcus P. Blakemore, Guy L. Grant, Paul W. Caine, George W. Edmonds, Ezra D. Alexander, and Edward G. Irvin.</p>
+  <details class="fold"><summary>Founding roles</summary><div class="a">Diggs presided as president, while Irvin was assigned as interim secretary of Alpha Omega.
 
 Diggs was named permanent chairman; Lee was designated as secretary, and Armstrong as sergeant-at-arms.
 
 Irvin served on the fraternity's Incorporation Committee. Edmonds was listed as the Corresponding Secretary in the articles of incorporation of the Grand Chapter of Kappa Alpha Nu.
 
 The three freshmen, Asher, Blakemore and Edmonds, were the first initiates of the Alpha of Kappa Alpha Nu.</div></details>
-    <details class="fold"><summary>Elder Watson Diggs</summary><div class="a">Born in Christian County, Kentucky, on December 23, 1883. Eldest son of three children.
+  <div class="founders">
+    <details class="fold"><summary>Elder Watson Diggs <span class="nick">the Dreamer</span></summary><div class="a">Born in Christian County, Kentucky, on December 23, 1883. Eldest son of three children.
 Initially referred to as &ldquo;the Father of Kappa,&rdquo; he became affectionately known as &ldquo;the Dreamer&rdquo; due to his profound vision to create the fraternity.
 Was a quiet, polished, scholarly, and prolific writer.
 Following graduation from Indiana State Normal School in the spring of 1908, Diggs enrolled at Howard University in 1909.
 1st Grand Polemarch, 1911&ndash;1917.
-Occupation: not stated on the national site.</div></details>
-    <details class="fold"><summary>Byron Kenneth Armstrong</summary><div class="a">Born April 8, 1892, Westfield, Hamilton County, Indiana. The cousin of 2nd Grand Polemarch, Irven Armstrong.
-Known as &ldquo;Boomski.&rdquo; Was a scholar, imaginative and outspoken.
+<span class="tag">Occupation not stated on the national site</span></div></details>
+    <details class="fold"><summary>Byron Kenneth Armstrong <span class="nick">Boomski</span></summary><div class="a">Born April 8, 1892, Westfield, Hamilton County, Indiana. The cousin of 2nd Grand Polemarch, Irven Armstrong.
+Was a scholar, imaginative and outspoken.
 Held teaching positions as a professor at universities in Florida, Indiana, Kansas, Maryland, and Michigan. Served as Dean in Maryland and Oklahoma.
 Earned an M.A. degree from Columbia University in 1914. Was decreed a Doctor of Philosophy by the University of Michigan in 1940.</div></details>
     <details class="fold"><summary>John Milton Lee</summary><div class="a">Born in Danville, Indiana, on September 7, 1890. Third of four children.
 Founder John Milton Lee was a scholar, loyal, and tireless worker for the growth of the fraternity. Commonly referred to as &ldquo;a dreamer&rdquo; during the fraternity's early years.
 Completed three years of pre-medical work before leaving the university.
-Occupation: not stated on the national site.</div></details>
+<span class="tag">Occupation not stated on the national site</span></div></details>
     <details class="fold"><summary>Henry Tourner Asher</summary><div class="a">Born June 30, 1890, Owensboro, Kentucky. Eldest of seven; the son of a Baptist Minister.
 He became an instructor at Lincoln Institute in Jefferson City, Missouri, from 1914-1915.
 Received the degree of LL.B. at the Detroit College of Law in 1928.
 An unassuming, dependable supporter of Negro youth, equal rights, higher education, and religious affairs.</div></details>
-    <details class="fold"><summary>Marcus Peter Blakemore</summary><div class="a">Born in Franklin, Indiana, on January 3, 1889. Eldest of four children.
-Affectionately known as &ldquo;Blakie.&rdquo;
+    <details class="fold"><summary>Marcus Peter Blakemore <span class="nick">Blakie</span></summary><div class="a">Born in Franklin, Indiana, on January 3, 1889. Eldest of four children.
 He organized the Electric Engineering Company, which he operated until he enlisted. Served in the U.S. Army as the rank of Private with the 30th Company, 154th Depot Brigade.</div></details>
     <details class="fold"><summary>Guy Levis Grant</summary><div class="a">Born April 9, 1891, New Albany, Indiana. The third of thirteen children, five of whom became members of the fraternity.
 In 1920, he received a D.D.S. degree from Indiana Dental School, then a part of Indiana University. He practiced dentistry in Indianapolis for over 50 years.
@@ -221,70 +353,58 @@ Was the consummate entrepreneur and chef before his time. He was a fine caterer 
     <details class="fold"><summary>George Wesley Edmonds</summary><div class="a">Born in Knight Township, Vanderburgh County, Indiana, on August 13, 1890. Eldest of two sons.
 Was witty and an enigma to most in the fraternity.
 Edmonds was listed as the Corresponding Secretary in the articles of incorporation of the Grand Chapter of Kappa Alpha Nu.
-Occupation: not stated on the national site.</div></details>
-    <details class="fold"><summary>Ezra Dee Alexander</summary><div class="a">Born in Bloomington, Indiana, on July 18, 1891. Second eldest of seven children.
-Fondly known as &ldquo;Dee.&rdquo;
+<span class="tag">Occupation not stated on the national site</span></div></details>
+    <details class="fold"><summary>Ezra Dee Alexander <span class="nick">Dee</span></summary><div class="a">Born in Bloomington, Indiana, on July 18, 1891. Second eldest of seven children.
 He held positions as a teacher and principal at Indiana public schools. M.D., Indiana University Medical School, 1919. He practiced medicine in Indianapolis for nearly 50 years. Served in the Army Medical Corps during WWI and as a medical examiner during WWII.</div></details>
-    <details class="fold"><summary>Edward Giles Irvin</summary><div class="a">Born August 13, 1893, in Spencer, Indiana, and was the seventh of nine children of an African Methodist Episcopal minister.
+    <details class="fold"><summary>Edward Giles Irvin <span class="nick">youngest, 17</span></summary><div class="a">Born August 13, 1893, in Spencer, Indiana, and was the seventh of nine children of an African Methodist Episcopal minister.
 At only 17 years of age, Irvin was the youngest of ten Black students who founded Kappa Alpha Psi&reg; Fraternity.
 Was a civic and religious leader, journalist, and entrepreneur.</div></details>
-    <p class="src">Source: kappaalphapsi1911.com (Founders, Historical Brief, Past Grand Polemarchs)</p>
   </div>
+  <p class="src">Source: kappaalphapsi1911.com (Founders, Historical Brief, Past Grand Polemarchs)</p>
 </section>
 
-<section id="purpose">
-  <div class="sec-head"><h2>The Purpose of Kappa Alpha Psi</h2></div>
-  <div class="sec-body">
-    <blockquote>&ldquo;Achievement in Every Field of Human Endeavor.&rdquo;</blockquote>
-    <p>Reliance would be placed upon high Christian ideals and the purpose of ACHIEVEMENT.</p>
-    <p>Kappa Alpha Psi&reg; proudly boasts of members who epitomize the essence of &ldquo;Achievement in Every Field of Human Endeavor.&rdquo;</p>
-    <details class="fold"><summary>Motto</summary><div class="a">Diggs and Armstrong created the fraternity's ritual and ceremonial forms, constitution, hymn, and motto.
-
-Under the motto &ldquo;Training for Leadership in Every Field of Human Endeavor&rdquo;</div></details>
-    <p class="src">Source: kappaalphapsi1911.com (Historical Brief; July 28, 2023 press release)</p>
-  </div>
+<section class="chapter" id="purpose">
+  <div class="chapter-head"><h2>Purpose and Motto</h2></div>
+  <blockquote class="motto-q">Achievement in Every Field of Human Endeavor</blockquote>
+  <p>Reliance would be placed upon high Christian ideals and the purpose of ACHIEVEMENT.</p>
+  <p>Kappa Alpha Psi&reg; proudly boasts of members who epitomize the essence of &ldquo;Achievement in Every Field of Human Endeavor.&rdquo;</p>
+  <p>Diggs and Armstrong created the fraternity's ritual and ceremonial forms, constitution, hymn, and motto.</p>
+  <p class="src">Source: kappaalphapsi1911.com (Historical Brief)</p>
 </section>
 
-<section id="objectives">
-  <div class="sec-head"><h2>The 5 Objectives of Kappa Alpha Psi</h2></div>
-  <div class="sec-body">
-    <p class="sub">Each member of Kappa Alpha Psi commits to these core objectives</p>
-    <button class="reveal-btn" data-target="obj-list" aria-expanded="false">Show</button>
-    <div class="hidden-block" id="obj-list">
-      <ol class="plain">
-        <li>To unite college men of culture, patriotism and honor in a bond of fraternity.</li>
-        <li>To encourage honorable achievement in every field of human endeavor.</li>
-        <li>To promote the spiritual, social, intellectual, and moral welfare of its members.</li>
-        <li>To aid the aims and purposes of colleges and universities.</li>
-        <li>To inspire service in the public interest.</li>
-      </ol>
-    </div>
-    <p class="src">Source: kappaalphapsi1911.com (Media Kit)</p>
-  </div>
+<section class="chapter" id="objectives">
+  <div class="chapter-head"><h2>The 5 Objectives</h2></div>
+  <p class="quiet">Each member of Kappa Alpha Psi commits to these core objectives</p>
+  <ol class="marks">
+    <li>To unite college men of culture, patriotism and honor in a bond of fraternity.</li>
+    <li>To encourage honorable achievement in every field of human endeavor.</li>
+    <li>To promote the spiritual, social, intellectual, and moral welfare of its members.</li>
+    <li>To aid the aims and purposes of colleges and universities.</li>
+    <li>To inspire service in the public interest.</li>
+  </ol>
+  <p class="src">Source: kappaalphapsi1911.com (Media Kit)</p>
 </section>
 
-<section id="conduct">
-  <div class="sec-head"><h2>Intake Policy</h2></div>
-  <div class="sec-body">
-    <p>Membership is a solemn commitment. A lifelong dedication to the ideas and lofty purposes of Kappa Alpha Psi&reg;.</p>
-    <p>Kappa Alpha Psi&reg; is not interested in the simple accumulation of members and chapters. Its emphasis, however, is in the quality and integrity of its membership.</p>
-    <p>Stands firm in its commitment to achievement, brotherhood, leadership, and service&mdash;without the need for hazing.</p>
-    <details class="fold"><summary>Membership Intake Policy (Code of Conduct)</summary><div class="a">&ldquo;It is the goal of the Fraternity to see that all individuals committing acts of hazing and other unlawful and Prohibited Acts are punished &hellip; to the full extent of the rules of the fraternity, college and the criminal law.&rdquo;
+<section class="chapter" id="conduct">
+  <div class="chapter-head"><h2>Intake Policy</h2></div>
+  <p>Membership is a solemn commitment. A lifelong dedication to the ideas and lofty purposes of Kappa Alpha Psi&reg;.</p>
+  <p>Kappa Alpha Psi&reg; is not interested in the simple accumulation of members and chapters. Its emphasis, however, is in the quality and integrity of its membership.</p>
+  <p>Stands firm in its commitment to achievement, brotherhood, leadership, and service&mdash;without the need for hazing.</p>
+  <details class="fold"><summary>Membership Intake Policy (Code of Conduct)</summary><div class="a">&ldquo;It is the goal of the Fraternity to see that all individuals committing acts of hazing and other unlawful and Prohibited Acts are punished &hellip; to the full extent of the rules of the fraternity, college and the criminal law.&rdquo;
 
 &ldquo;The Fraternity has outlawed pledging and dispensed with the customary practice of having pledges or a protracted probationary period prior to one's initiation into full membership into the fraternity.&rdquo;
 
 &ldquo;The Fraternity has not only outlawed pledging, but bans from its membership those who submit to such a vile process &hellip;&rdquo;</div></details>
-    <p class="src">Source: kappaalphapsi1911.com (Membership; ug.kappaalphapsi1911.com); Membership Intake Policy excerpts</p>
-  </div>
+  <p class="src">Source: kappaalphapsi1911.com (Membership; ug.kappaalphapsi1911.com); Membership Intake Policy excerpts</p>
 </section>
 
-<section id="governance">
-  <div class="sec-head"><h2>Kappa Governance</h2></div>
-  <div class="sec-body">
-    <p>35th Grand Polemarch<br>Jimmy McMikle<br><span class="sub">Spring 1991 initiate of the Indiana University Chapter, the Alpha of Kappa Alpha Psi&reg; Fraternity, Inc. Sworn in as Grand Polemarch at the 86th Grand Chapter Meeting.</span></p>
-    <p>International Headquarters<br>2322-24 North Broad Street<br>Philadelphia, PA 19132-4590</p>
-    <p>Kappa Alpha Psi&reg; Fraternity, Inc., now has 12 Provinces that the following 12 Province Polemarchs govern</p>
-    <details class="fold"><summary>The 12 Provinces</summary><div class="a">Northern &ndash; Gregory Thomas
+<section class="chapter" id="governance">
+  <div class="chapter-head"><h2>Governance</h2></div>
+  <p class="lead">35th Grand Polemarch, Jimmy McMikle.</p>
+  <p class="quiet">Spring 1991 initiate of the Indiana University Chapter, the Alpha of Kappa Alpha Psi&reg; Fraternity, Inc. Sworn in as Grand Polemarch at the 86th Grand Chapter Meeting.</p>
+  <p>International Headquarters<br>2322-24 North Broad Street, Philadelphia, PA 19132-4590</p>
+  <p>Kappa Alpha Psi&reg; Fraternity, Inc., now has 12 Provinces that the following 12 Province Polemarchs govern.</p>
+  <details class="fold"><summary>The 12 Provinces</summary><div class="a">Northern &ndash; Gregory Thomas
 Eastern &ndash; Richard B. Mattox
 Southern &ndash; Jason M. Jones, Esq.
 Western &ndash; Frederic S. Roots II
@@ -296,12 +416,12 @@ Southeastern &ndash; Brian C. Mock, MPA
 Middle Eastern &ndash; Lascel A. Webley, Jr.
 Northeastern &ndash; Theodore Sanchious, III
 Middle Western &ndash; Shannon L. Armstrong, Sr.</div></details>
-    <details class="fold"><summary>How the Provinces came to be</summary><div class="a">1920 &ndash; 3rd Grand Polemarch George F. David, II created a hierarchy modeled on the AME Church: three districts.
+  <details class="fold"><summary>How the Provinces came to be</summary><div class="a">1920 &ndash; 3rd Grand Polemarch George F. David, II created a hierarchy modeled on the AME Church: three districts.
 1923 &ndash; 4th Grand Polemarch W. Ellis Stewart renamed them regions, led by Regional Directors.
 1926 &ndash; 5th Grand Polemarch Earl B. Dickerson renamed regions provinces. The title of &ldquo;Regional Director&rdquo; changed to &ldquo;Province Polemarch.&rdquo;
 
 Province Polemarchs serve as chief administrative officers for each region.</div></details>
-    <details class="fold"><summary>Grand Chapter officers</summary><div class="a">Grand Polemarch &ndash; Jimmy McMikle
+  <details class="fold"><summary>Grand Chapter officers</summary><div class="a">Grand Polemarch &ndash; Jimmy McMikle
 Senior Grand Vice Polemarch &ndash; Robert L. Jenkins, Jr., Esq.
 Junior Grand Vice Polemarch &ndash; Victor L. Mattison
 Grand Keeper of Records &ndash; Kevin D. Kyles
@@ -310,20 +430,66 @@ Grand Strategus &ndash; Lorenza A. Russell, Jr.
 Grand Lt. Strategus &ndash; Justin I. Alexis
 Grand Historian &ndash; Kevin P. Scott
 Executive Director &ndash; John F. Burrell</div></details>
-    <details class="fold"><summary>Grand Chapter dues</summary><div class="a">Alumni &ndash; $200 per year. Fiscal year starts October 1.
+  <details class="fold"><summary>Grand Chapter dues</summary><div class="a">Alumni &ndash; $200 per year. Fiscal year starts October 1.
 Life Membership &ndash; $3,500 paid in full, or $5,000 subscribing (4 &times; $1,250).</div></details>
-    <p class="src">Source: kappaalphapsi1911.com (Grand Chapter Leadership, Grand Polemarch, Province Polemarchs, IHQ, Dues &amp; Life Membership)</p>
-  </div>
+  <p class="src">Source: kappaalphapsi1911.com (Grand Chapter Leadership, Grand Polemarch, Province Polemarchs, IHQ, Dues &amp; Life Membership)</p>
 </section>
 
-<section id="province">
-  <div class="sec-head"><h2>The Western Province</h2></div>
-  <div class="sec-body">
-    <p>One of the original provinces established in 1923, the Western Province of Kappa Alpha Psi includes members in Alaska, Arizona, California, Hawaii, Idaho, Nevada, Oregon, Utah, Washington, Japan and South Korea.</p>
-    <p>57 active chapters across 9 Western U.S. States and two international chapters (Japan and South Korea).</p>
-    <p>The province manages its operations by breaking the area up into functional &ldquo;clusters&rdquo;: the Pacific Northwest, Northern California, Southern California, and the Southwest.</p>
-    <p>Province website: www.wp1911.com</p>
-    <details class="fold"><summary>Province history</summary><div class="a">The Provinces were formally called Regions.
+<section class="chapter" id="programs">
+  <div class="chapter-head"><h2>Programs</h2></div>
+  <details class="fold"><summary>Guide Right</summary><div class="a">Guide Right is our National Service Initiative and includes all our youth oriented programs.
+
+Conceived in 1922 by Leon W. Stewart, and suggested at the twelfth Grand Chapter of Kappa Alpha Psi&reg;. Soon after the St. Louis Alumni Chapter's beginning in 1921.
+
+A program of the educational and occupational guidance of youth, primarily inspirational and informative in character. To place the training, experience and interest of successful men at the disposal of youth.
+
+WE ARE THE OLDEST, MOST SUCCESSFUL MENTORING PROGRAM FOR YOUNG PEOPLE OF COLOR!
+
+The Flagship Initiative of the Guide Right Service Program is the Kappa Leadership Development League.</div></details>
+  <details class="fold"><summary>Kappa League</summary><div class="a">Kappa League was founded on Thursday, February 12, 1969, by the Los Angeles Alumni Chapter at Alain LeRoy Locke High School.
+
+The founders of the Kappa Instructional Leadership League were Mel L. Davis and Edgar H. Bishop.
+
+Adopted by the Grand Chapter at the 56th Grand Chapter, which was held August 12-15, 1970.
+
+Kappa League is a program for the educational, occupational and social guidance of male students in grades 6th-12th. Kappa League is a subset of the Guide Right, our National Service Initiative.
+
+Five study areas:
+SELF-IDENTITY | Discipline, assurance, awareness and Fraternity.
+TRAINING | Academic, career choice, preparation and organization.
+COMPETITION | Politics and sports
+SOCIAL | Religion, the arts, entertainment, conversation, communication, etiquette, and manner.
+HEALTH EDUCATION | Physical fitness. And sex education, drugs, health and safety.</div></details>
+  <details class="fold"><summary>Kappa Alpha Psi Foundation</summary><div class="a">Established in 1981 as a non-profit, tax-exempt, publicly supported organization as described in Section 501(c)(3).
+
+Programs: Diamonds in the Rough, Guide Right, Kappa Kamp, ULI/LEAD Kappa, Foundation Scholarships, Hiliary H. Holloway Scholarship, iKare: Disaster Relief, Senior Kappa Affairs Endowment Fund Grants.</div></details>
+  <details class="fold"><summary>Leadership and other programs</summary><div class="a">Achievement Academy &ndash; collegiate mentoring in eight cohorts: Business, Education, Government, Law, Health, STEM, Social Science, Military Science
+Undergraduate Leadership Institute (ULI) &ndash; rigorous 7-day curriculum
+LEAD Kappa &ndash; a highly-structured and intense leadership experience held during the year of a conclave
+G.L.A.D. &ndash; Greeks Learning to Avoid Debt
+Learn 2 Live &ndash; youth 14-24, Fourth Amendment rights
+Are You OK? &ndash; mental health
+Senior Kappa Affairs &ndash; Senior Kappa = 60+
+
+Western Province:
+C. Rodger Wilson Leadership Conference &ndash; Statutory Program
+Edgar H. Bishop Polemarch's Summit
+Western Province Kappa League Conference
+St. Jude Children's Research Hospital fundraising team</div></details>
+  <details class="fold"><summary>Famous Kappas</summary><div class="a">Ralph Abernathy, Wilt Chamberlain, Montell Jordan, Benjamin Jealous, Oscar Robertson, Cedric the Entertainer, Arthur Ashe, Mike Tomlin, Gayle Sayers, Adrian Fenty, Robert S. Abbott, Bennie Thompson, Donald Byrd, Johnnie Cochran, Ed Gardner, Smokie Norful, John Singleton, Tom Bradley, Bob Johnson, John Conyers, Alcee Hastings, Lerone Bennett Jr., Kwame Jackson, Bill Russell, Tavis Smiley, Marvin Sapp, Colin Kaepernick
+
+Thomas Bradley &ndash; 18th Grand Polemarch (1964-1967)</div></details>
+  <p class="src">Source: kappaalphapsi1911.com (Guide Right, Kappa League, Foundation, Commissions &amp; Committees, Historical Brief); lakappas1938.com (Kappa League); wp1911.com</p>
+</section>
+
+<section class="chapter" id="province">
+  <div class="chapter-head"><h2>The Western Province</h2></div>
+  <p class="lead">One of the original provinces established in 1923.</p>
+  <p>The Western Province of Kappa Alpha Psi includes members in Alaska, Arizona, California, Hawaii, Idaho, Nevada, Oregon, Utah, Washington, Japan and South Korea.</p>
+  <p>57 active chapters across 9 Western U.S. States and two international chapters (Japan and South Korea).</p>
+  <p>The province manages its operations by breaking the area up into functional &ldquo;clusters&rdquo;: the Pacific Northwest, Northern California, Southern California, and the Southwest.</p>
+  <p>www.wp1911.com</p>
+  <details class="fold"><summary>Province history</summary><div class="a">The Provinces were formally called Regions.
 
 The fraternity held its 15th Grand Chapter Meeting December 26th thru 30th, 1925 in New York City. Grand Polemarch Earl B. Dickerson and the members assembled changed the designation of Regional Director to Province Polemarch.
 
@@ -334,7 +500,7 @@ During those early years of the fraternity's history, the Western Region extende
 On April 25, 1923 the fraternity chartered the Upsilon chapter on the campus of the University of California Los Angeles, the first chapter of the current Western Province.
 
 From 1923 to 1938, brothers who attended UCLA and remained in Los Angeles meet regularly and established the Los Angeles Alumni, chartered on August 8, 1938. The Los Angeles Alumni chapter continued to induct brothers through the Upsilon Chapter at both Undergraduate and Alumni levels.</div></details>
-    <details class="fold"><summary>Province leadership</summary><div class="a">Frederic S. Roots &ndash; Polemarch (Berkeley/Seattle Alumni) &ndash; 30th Province Polemarch
+  <details class="fold"><summary>Province leadership</summary><div class="a">Frederic S. Roots &ndash; Polemarch (Berkeley/Seattle Alumni) &ndash; 30th Province Polemarch
 Timothy Lankford &ndash; Senior Vice-Polemarch (San Fernando/Santa Clarita Alumni)
 Jullan Shearin-Sewell &ndash; Junior Vice-Polemarch (Delta Omicron)
 Reginald Simmons &ndash; Keeper of Records (Berkeley Alumni)
@@ -346,16 +512,16 @@ Richard Chandler &ndash; Lieutenant Strategus (Lambda Nu)
 Edward Vickers &ndash; Historian (Long Beach/Inglewood/South Bay Alumni)
 Darryll Holmes &ndash; Reporter (Los Angeles/Las Vegas Alumni)
 Pastor Patrick L. Campbell Sr. &ndash; Chaplain (Lancaster/Palmdale Alumni)</div></details>
-    <details class="fold"><summary>Grand Polemarchs from the Western Province</summary><div class="a">Thomas J. Bradley &ndash; 1964-1967
+  <details class="fold"><summary>Grand Polemarchs from the Western Province</summary><div class="a">Thomas J. Bradley &ndash; 1964-1967
 Randall C. Bacon &ndash; 1985-1988
 Robert L. Harris &ndash; 1991-1995</div></details>
-    <details class="fold"><summary>Laurel Wreath Laureates</summary><div class="a">Thomas J. Bradley (LA Alumni) &ndash; 1974
+  <details class="fold"><summary>Laurel Wreath Laureates</summary><div class="a">Thomas J. Bradley (LA Alumni) &ndash; 1974
 Arthur R. Ashe (LA Alumni) &ndash; 1986
 Johnnie L. Cochran Jr. (LA Alumni) &ndash; 1999
 Randall C. Bacon (LA Alumni) &ndash; 2001
 Robert L. Harris (Berkeley) &ndash; 2005
 Vice Adm. Edward Moore Jr., USN, Ret. (LA Alumni) &ndash; 2023</div></details>
-    <details class="fold"><summary>Western Province Polemarchs</summary><div class="a">4. Carl R. Johnson &ndash; 1926&ndash;1931 &ndash; Kansas City (MO) Alumni
+  <details class="fold"><summary>Western Province Polemarchs</summary><div class="a">4. Carl R. Johnson &ndash; 1926&ndash;1931 &ndash; Kansas City (MO) Alumni
 5. J.S. Hunnicutt &ndash; 1932 &ndash; Topeka (KS) Alumni
 6. William H.J. Beckett &ndash; 1933 &ndash; St. Louis (MO) Alumni
 7. Percy H. Lee &ndash; 1933&ndash;1934 &ndash; Kansas City (MO) Alumni
@@ -382,41 +548,39 @@ Vice Adm. Edward Moore Jr., USN, Ret. (LA Alumni) &ndash; 2023</div></details>
 28. Gilbert D. Brown, III &ndash; 2014&ndash;2019 &ndash; Los Angeles
 29. Timothy C. Woods &ndash; 2019&ndash;2024 &ndash; Phoenix (AZ) Alumni
 30. Frederick Roots &ndash; 2024 to current &ndash; Berkeley (CA) Alumni/Seattle (WA) Alumni</div></details>
-    <details class="fold"><summary>Southern California Cluster</summary><div class="a">Alumni: Bakersfield; Beverly Hills-Century City; Carlsbad-Laguna-Temecula; Irvine-Anaheim; Lancaster-Palmdale; Long Beach-Inglewood-South Bay; Los Angeles; Pasadena; Riverside; San Bernardino; San Diego; San Fernando Valley-Santa Clarita; Ventura
+  <details class="fold"><summary>Southern California Cluster</summary><div class="a">Alumni: Bakersfield; Beverly Hills-Century City; Carlsbad-Laguna-Temecula; Irvine-Anaheim; Lancaster-Palmdale; Long Beach-Inglewood-South Bay; Los Angeles; Pasadena; Riverside; San Bernardino; San Diego; San Fernando Valley-Santa Clarita; Ventura
 
 Undergraduate: Upsilon (UCLA, Cal State LA); Beta Omega (USC); Delta Epsilon (San Diego State); Epsilon Kappa (CSU Long Beach); Eta Zeta (UC Riverside); Kappa Omicron (Cal Poly Pomona); Lambda Beta (UC Irvine); Lambda Rho (Occidental College); Pi Alpha (UC Santa Barbara)</div></details>
-    <details class="fold"><summary>Province Council</summary><div class="a">The Western Province of Kappa Alpha Psi Fraternity, Inc. will hold its annual conference (Province Council). Province Training &amp; Certification, Undergraduate &amp; Alumni Workshops, Council business sessions, formal banquet and awards, community service, Legacy Luncheon, golf tournament.
+  <details class="fold"><summary>Province Council</summary><div class="a">The Western Province of Kappa Alpha Psi Fraternity, Inc. will hold its annual conference (Province Council). Province Training &amp; Certification, Undergraduate &amp; Alumni Workshops, Council business sessions, formal banquet and awards, community service, Legacy Luncheon, golf tournament.
 
 79th Western Province Council &ndash; April 1-5, 2026, in Las Vegas, Nevada.</div></details>
-    <details class="fold"><summary>Province dues</summary><div class="a">The Province collects annual dues of $50.00 per member.
+  <details class="fold"><summary>Province dues</summary><div class="a">The Province collects annual dues of $50.00 per member.
 Your Province dues are a formal invoice, not a voluntary donation.</div></details>
-    <p class="src">Source: wp1911.com (Who We Are, Leadership, 79th Western Province Council, Keeper of Exchequer, Western Province Chapter Map)</p>
-  </div>
+  <p class="src">Source: wp1911.com (Who We Are, Leadership, 79th Western Province Council, Keeper of Exchequer, Western Province Chapter Map)</p>
 </section>
 
-<section id="chapter">
-  <div class="sec-head"><h2>Los Angeles (CA) Alumni Chapter</h2></div>
-  <div class="sec-body">
-    <p>The Los Angeles Alumni Chapter was chartered August 8, 1938. We are the very first alumni chapter established in the great Western Province.</p>
-    <p>Greetings from The Jewel of the West!</p>
-    <p>We are the home of various notable Brothers including three Past Grand Polemarchs, eleven Past Western Province Polemarchs, three Laurel Wreath Laureates, and five Elder Watson Diggs Awardees.</p>
-    <p>Chapter website: www.lakappas1938.com</p>
-    <details class="fold"><summary>The Kappa Kastle</summary><div class="a">The LA Nupes are also proud owners of the Kappa Kastle, a stunning fraternity house at 1846 Crenshaw Boulevard.
+<section class="chapter" id="chapter">
+  <div class="chapter-head"><h2>Los Angeles (CA) Alumni Chapter</h2></div>
+  <p class="lead">Chartered August 8, 1938. The very first alumni chapter established in the great Western Province.</p>
+  <p>Greetings from The Jewel of the West!</p>
+  <p>We are the home of various notable Brothers including three Past Grand Polemarchs, eleven Past Western Province Polemarchs, three Laurel Wreath Laureates, and five Elder Watson Diggs Awardees.</p>
+  <p>www.lakappas1938.com</p>
+  <details class="fold"><summary>The Kappa Kastle</summary><div class="a">The LA Nupes are also proud owners of the Kappa Kastle, a stunning fraternity house at 1846 Crenshaw Boulevard.
 
 A beautifully landscaped and gated home with front and back yards, meeting rooms, game room, offices, bar area, living room, full professional kitchen, and private parking lot.
 
 1846 Crenshaw Boulevard, Los Angeles, California 90019</div></details>
-    <details class="fold"><summary>Birthplace of Kappa League</summary><div class="a">Under the chairmanship of Brother Mel Davis and with the able assistance of Brother Edgar H. Bishop, the Los Angeles Alumni Chapter's Social Action/Guide Right Program took the form of a training activity for young men of the Alain Le Roy Locke High School in the late 1960's. The program was adopted by all chapters at the 56th Grand Chapter meeting in 1970.
+  <details class="fold"><summary>Birthplace of Kappa League</summary><div class="a">Under the chairmanship of Brother Mel Davis and with the able assistance of Brother Edgar H. Bishop, the Los Angeles Alumni Chapter's Social Action/Guide Right Program took the form of a training activity for young men of the Alain Le Roy Locke High School in the late 1960's. The program was adopted by all chapters at the 56th Grand Chapter meeting in 1970.
 
 Brothers Mel Davis &amp; Edgar Bishop presented the Kappa League Program at the 56th Grand Chapter Meeting in Charlotte, NC in 1970 for adoption by all chapters.
 
 The Congressman congratulated the Los Angeles Alumni Chapter for having started the Kappa League and the Kappa Alpha Psi Fraternity for having adopted the idea as a national program. The entire proceedings were printed in the Congressional Record.
 
 Presently, the Kappa League/Guide Right Program is Los Angeles Alumni Chapter's major national community service project.</div></details>
-    <details class="fold"><summary>Birthplace of the Black &amp; White Ball</summary><div class="a">We are honored to be the birthplace of the annual Black &amp; White Ball - one of the most elegant social affairs in the nation. Brothers, visitors, and their guests from throughout the nation attend and offer rave reviews.
+  <details class="fold"><summary>Birthplace of the Black &amp; White Ball</summary><div class="a">We are honored to be the birthplace of the annual Black &amp; White Ball - one of the most elegant social affairs in the nation. Brothers, visitors, and their guests from throughout the nation attend and offer rave reviews.
 
 Our annual Black &amp; White Ball &amp; Scholarship Fundraiser. This elegant evening supports our scholarship program while celebrating our rich legacy.</div></details>
-    <details class="fold"><summary>Chapter Officers</summary><div class="a">Gregory Black &ndash; Polemarch
+  <details class="fold"><summary>Chapter Officers</summary><div class="a">Gregory Black &ndash; Polemarch
 Steve Bayne &ndash; Vice Polemarch
 Keith Lewis, Jr. &ndash; Keeper of Records
 Frederick Braggs &ndash; Keeper of Exchequer
@@ -429,118 +593,33 @@ Frank Matthews &ndash; Board of Directors
 Dr. Robert Farrar &ndash; Board of Directors
 Sinclair Dickerson &ndash; Board of Directors
 Derek S. Hamilton, Sr. &ndash; House Director</div></details>
-    <details class="fold"><summary>Membership Training Academy</summary><div class="a">Darryll Holmes &ndash; MTA Chairman
+  <details class="fold"><summary>Membership Training Academy</summary><div class="a">Darryll Holmes &ndash; MTA Chairman
 Marcellus Mayberry &ndash; MTA Co Chairman
 The Los Angeles (CA) Alumni Chapter MTA Committee
 
 Questions: MTA@lakappas1938.com</div></details>
-    <details class="fold"><summary>Chapter dues</summary><div class="a">Financial dues are payable at the beginning of each fraternal year (October 1).
+  <details class="fold"><summary>Chapter dues</summary><div class="a">Financial dues are payable at the beginning of each fraternal year (October 1).
 
 2026-2027 Western Province dues are $100. 2026-2027 Local Chapter Dues &ndash; $350.
 
 You will not show as financial until you are financial on all three levels: Grand Chapter, Province, and Chapter.</div></details>
-    <p class="src">Source: lakappas1938.com (Home, Brief History, Chapter Officers, Kappa League, 2025 Black &amp; White Ball, Dues, General Inquiry); MTA emails</p>
-  </div>
+  <p class="src">Source: lakappas1938.com (Home, Brief History, Chapter Officers, Kappa League, 2025 Black &amp; White Ball, Dues, General Inquiry); MTA emails</p>
 </section>
 
-<section id="programs">
-  <div class="sec-head"><h2>Programs &amp; Leadership</h2></div>
-  <div class="sec-body">
-    <details class="fold"><summary>Guide Right</summary><div class="a">Guide Right is our National Service Initiative and includes all our youth oriented programs.
-
-Conceived in 1922 by Leon W. Stewart, and suggested at the twelfth Grand Chapter of Kappa Alpha Psi&reg;. Soon after the St. Louis Alumni Chapter's beginning in 1921.
-
-A program of the educational and occupational guidance of youth, primarily inspirational and informative in character. To place the training, experience and interest of successful men at the disposal of youth.
-
-WE ARE THE OLDEST, MOST SUCCESSFUL MENTORING PROGRAM FOR YOUNG PEOPLE OF COLOR!
-
-The Flagship Initiative of the Guide Right Service Program is the Kappa Leadership Development League.</div></details>
-    <details class="fold"><summary>Kappa League</summary><div class="a">Kappa League was founded on Thursday, February 12, 1969, by the Los Angeles Alumni Chapter at Alain LeRoy Locke High School.
-
-The founders of the Kappa Instructional Leadership League were Mel L. Davis and Edgar H. Bishop.
-
-Adopted by the Grand Chapter at the 56th Grand Chapter, which was held August 12-15, 1970.
-
-Kappa League is a program for the educational, occupational and social guidance of male students in grades 6th-12th. Kappa League is a subset of the Guide Right, our National Service Initiative.
-
-Five study areas:
-SELF-IDENTITY | Discipline, assurance, awareness and Fraternity.
-TRAINING | Academic, career choice, preparation and organization.
-COMPETITION | Politics and sports
-SOCIAL | Religion, the arts, entertainment, conversation, communication, etiquette, and manner.
-HEALTH EDUCATION | Physical fitness. And sex education, drugs, health and safety.</div></details>
-    <details class="fold"><summary>Kappa Alpha Psi Foundation</summary><div class="a">Established in 1981 as a non-profit, tax-exempt, publicly supported organization as described in Section 501(c)(3).
-
-Programs: Diamonds in the Rough, Guide Right, Kappa Kamp, ULI/LEAD Kappa, Foundation Scholarships, Hiliary H. Holloway Scholarship, iKare: Disaster Relief, Senior Kappa Affairs Endowment Fund Grants.</div></details>
-    <details class="fold"><summary>Leadership &amp; other programs</summary><div class="a">Achievement Academy &ndash; collegiate mentoring in eight cohorts: Business, Education, Government, Law, Health, STEM, Social Science, Military Science
-Undergraduate Leadership Institute (ULI) &ndash; rigorous 7-day curriculum
-LEAD Kappa &ndash; a highly-structured and intense leadership experience held during the year of a conclave
-G.L.A.D. &ndash; Greeks Learning to Avoid Debt
-Learn 2 Live &ndash; youth 14-24, Fourth Amendment rights
-Are You OK? &ndash; mental health
-Senior Kappa Affairs &ndash; Senior Kappa = 60+
-
-Western Province:
-C. Rodger Wilson Leadership Conference &ndash; Statutory Program
-Edgar H. Bishop Polemarch's Summit
-Western Province Kappa League Conference
-St. Jude Children's Research Hospital fundraising team</div></details>
-    <details class="fold"><summary>Famous Kappas</summary><div class="a">Ralph Abernathy, Wilt Chamberlain, Montell Jordan, Benjamin Jealous, Oscar Robertson, Cedric the Entertainer, Arthur Ashe, Mike Tomlin, Gayle Sayers, Adrian Fenty, Robert S. Abbott, Bennie Thompson, Donald Byrd, Johnnie Cochran, Ed Gardner, Smokie Norful, John Singleton, Tom Bradley, Bob Johnson, John Conyers, Alcee Hastings, Lerone Bennett Jr., Kwame Jackson, Bill Russell, Tavis Smiley, Marvin Sapp, Colin Kaepernick
-
-Thomas Bradley &ndash; 18th Grand Polemarch (1964-1967)</div></details>
-    <p class="src">Source: kappaalphapsi1911.com (Guide Right, Kappa League, Foundation, Commissions &amp; Committees, Historical Brief); lakappas1938.com (Kappa League); wp1911.com</p>
-  </div>
-</section>
-
-<section id="greek">
-  <div class="sec-head"><h2>The Greek Alphabet</h2></div>
-  <div class="sec-body">
-    <div class="greek">
-      <div><b>&Alpha; &alpha;</b><span>Alpha</span></div>
-      <div><b>&Beta; &beta;</b><span>Beta</span></div>
-      <div><b>&Gamma; &gamma;</b><span>Gamma</span></div>
-      <div><b>&Delta; &delta;</b><span>Delta</span></div>
-      <div><b>&Epsilon; &epsilon;</b><span>Epsilon</span></div>
-      <div><b>&Zeta; &zeta;</b><span>Zeta</span></div>
-      <div><b>&Eta; &eta;</b><span>Eta</span></div>
-      <div><b>&Theta; &theta;</b><span>Theta</span></div>
-      <div><b>&Iota; &iota;</b><span>Iota</span></div>
-      <div><b>&Kappa; &kappa;</b><span>Kappa</span></div>
-      <div><b>&Lambda; &lambda;</b><span>Lambda</span></div>
-      <div><b>&Mu; &mu;</b><span>Mu</span></div>
-      <div><b>&Nu; &nu;</b><span>Nu</span></div>
-      <div><b>&Xi; &xi;</b><span>Xi</span></div>
-      <div><b>&Omicron; &omicron;</b><span>Omicron</span></div>
-      <div><b>&Pi; &pi;</b><span>Pi</span></div>
-      <div><b>&Rho; &rho;</b><span>Rho</span></div>
-      <div><b>&Sigma; &sigma;</b><span>Sigma</span></div>
-      <div><b>&Tau; &tau;</b><span>Tau</span></div>
-      <div><b>&Upsilon; &upsilon;</b><span>Upsilon</span></div>
-      <div><b>&Phi; &phi;</b><span>Phi</span></div>
-      <div><b>&Chi; &chi;</b><span>Chi</span></div>
-      <div><b>&Psi; &psi;</b><span>Psi</span></div>
-      <div><b>&Omega; &omega;</b><span>Omega</span></div>
-    </div>
-    <p class="sub">Alpha and Omega, the Greek alphabet's first and last letters. The Greek letter &Psi; replaced N.</p>
-    <p class="src">Assigned at the October 14 touch base. Letter names are the standard 24-letter Greek alphabet.</p>
-  </div>
-</section>
-
-<section id="mta">
-  <div class="sec-head"><h2>Membership Training Academy</h2></div>
-  <div class="sec-body">
-    <p class="sub">In the chapter's words</p>
-    <details class="fold" open><summary>Everything is voluntary</summary><div class="a">Nothing in this process is mandatory or required. Every step toward membership is your choice and completely up to you. We will only ever offer advice and recommendations. The decision is always yours.</div></details>
-    <details class="fold"><summary>Membership is earned, not given</summary><div class="a">Part of earning it is your own effort to get to know the members of our chapter and to support the public events the chapter hosts. Showing up benefits you. It demonstrates dedication and commitment, which are qualities we look for in potential members. It also gives the Brothers of the chapter a real opportunity to get to know you.</div></details>
-    <details class="fold"><summary>Relationships matter</summary><div class="a">If we do not know you, you will not have the support needed to become a member. Brothers will not vouch or vote for someone they have never met, and that support is crucial to the membership process.
+<section class="chapter" id="mta">
+  <div class="chapter-head"><h2>The Membership Training Academy</h2></div>
+  <p class="quiet">In the chapter's words</p>
+  <details class="fold" open><summary>Everything is voluntary</summary><div class="a">Nothing in this process is mandatory or required. Every step toward membership is your choice and completely up to you. We will only ever offer advice and recommendations. The decision is always yours.</div></details>
+  <details class="fold"><summary>Membership is earned, not given</summary><div class="a">Part of earning it is your own effort to get to know the members of our chapter and to support the public events the chapter hosts. Showing up benefits you. It demonstrates dedication and commitment, which are qualities we look for in potential members. It also gives the Brothers of the chapter a real opportunity to get to know you.</div></details>
+  <details class="fold"><summary>Relationships matter</summary><div class="a">If we do not know you, you will not have the support needed to become a member. Brothers will not vouch or vote for someone they have never met, and that support is crucial to the membership process.
 
 It is your responsibility to make the effort to get to know members of the Los Angeles (CA) Alumni Chapter of Kappa Alpha Psi Fraternity, Inc. We will be sharing a list of MTA certified Brothers you can reach out to, but in the meantime, you should be making every effort to meet Brothers on your own. While some of you may already know members of the Fraternity, your focus should be on members of the Los Angeles Alumni Chapter, as these are the men who will be voting on your membership. You should also be getting to know each other. Some of you may very well become line brothers, and the better you know one another now, the stronger that bond will be.</div></details>
-    <details class="fold"><summary>What to expect</summary><div class="a">Communication from the chapter will become more frequent from here on, and we ask that you respond and acknowledge messages in a timely manner.
+  <details class="fold"><summary>What to expect</summary><div class="a">Communication from the chapter will become more frequent from here on, and we ask that you respond and acknowledge messages in a timely manner.
 
 Meet chapter leadership, get to know your fellow interests, and learn about the requirements for membership and the next steps in the process. Make every effort to attend, be on time, and have your camera on. This is your opportunity to be seen.
 
 Please look for a separate email containing the calendar invite for our bi-weekly Zoom touch base meeting. When you receive it, please accept the invite so we can confirm it reached you.</div></details>
-    <details class="fold"><summary>From the October 14 touch base</summary><div class="a">Pass a 100-question test with 70% accuracy.
+  <details class="fold"><summary>From the October 14 touch base</summary><div class="a">Pass a 100-question test with 70% accuracy.
 Obtain the necessary documentation within two weeks of the informational meeting; a two-week period to complete applications and prepare for interviews.
 Members must respond to communications promptly. Missing more than two sessions or being late would result in dismissal from the process.
 Act, feel, and be as one within a line. All members equally knowledgeable about Kappa's information, including founders, Greek alphabet, and history.
@@ -550,252 +629,383 @@ The distinction between founders and charter members.
 Dress professionally. Avoid the word &ldquo;brother.&rdquo; The organization does not haze.
 Importance of humility. New members should be willing to follow established traditions and processes before making changes.
 Attempts to join multiple chapters would be discovered through the portal system.</div></details>
-    <p class="src">Source: MTA emails of September 24, September 29 and October 9, 2026; Zoom summary of the October 14, 2026 Bi-Weekly Touch Base</p>
-  </div>
+  <p class="src">Source: MTA emails of September 24, September 29 and October 9, 2026; Zoom summary of the October 14, 2026 Bi-Weekly Touch Base</p>
 </section>
 
-<section id="requirements">
-  <div class="sec-head"><h2>Membership Requirements</h2></div>
-  <div class="sec-body">
-    <p class="sub">Spring 2027 Membership Intake process. Please note: this information is for informational purposes only at this time.</p>
-    <details class="fold" open><summary>Degree Requirement</summary><div class="a">Must have received a bachelor's degree (four-year degree) from an accredited college or university recognized by the U.S. Department of Education
+<section class="chapter" id="requirements">
+  <div class="chapter-head"><h2>Membership Requirements</h2></div>
+  <p class="quiet">Spring 2027 Membership Intake process. Please note: this information is for informational purposes only at this time.</p>
+  <details class="fold" open><summary>Degree Requirement</summary><div class="a">Must have received a bachelor's degree (four-year degree) from an accredited college or university recognized by the U.S. Department of Education
 The institution must have official status and be listed by one of the Regional Accrediting Organizations</div></details>
-    <details class="fold"><summary>Moral Character</summary><div class="a">Must demonstrate good moral character</div></details>
-    <details class="fold"><summary>Official Transcripts</summary><div class="a">Two (2) copies of your official college/university transcript, each sealed in a separate envelope (this is the only item not submitted electronically)
+  <details class="fold"><summary>Moral Character</summary><div class="a">Must demonstrate good moral character</div></details>
+  <details class="fold"><summary>Official Transcripts</summary><div class="a">Two (2) copies of your official college/university transcript, each sealed in a separate envelope (this is the only item not submitted electronically)
 One (1) uploaded digital copy of your transcript
 Alumni applicants must submit the transcript from the institution where they received their undergraduate degree</div></details>
-    <details class="fold"><summary>Passport Photo</summary><div class="a">2x2 current color official passport-size photo dressed in a shirt, tie, and jacket
+  <details class="fold"><summary>Passport Photo</summary><div class="a">2x2 current color official passport-size photo dressed in a shirt, tie, and jacket
 Photo must be taken within two (2) weeks of the informational meeting date, from CVS, Walgreens, Walmart, or the U.S. Post Office</div></details>
-    <details class="fold"><summary>Voter Registration</summary><div class="a">Voter registration verification documentation</div></details>
-    <details class="fold"><summary>Letters of Recommendation</summary><div class="a">Three (3) letters from current financial members in good standing with Kappa Alpha Psi Fraternity, Inc. Each recommending Brother must be financial on all three levels (Grand, Province, and Local Chapter) and must include a verifiable Kappa Alpha Psi membership number
+  <details class="fold"><summary>Voter Registration</summary><div class="a">Voter registration verification documentation</div></details>
+  <details class="fold"><summary>Letters of Recommendation</summary><div class="a">Three (3) letters from current financial members in good standing with Kappa Alpha Psi Fraternity, Inc. Each recommending Brother must be financial on all three levels (Grand, Province, and Local Chapter) and must include a verifiable Kappa Alpha Psi membership number
 Two (2) signed letters from community sponsors on their official letterhead or corporate stationery</div></details>
-    <details class="fold"><summary>Fees</summary><div class="a">Application Fee, Membership Intake Fees, and any Additional Fees will be discussed at the Spring 2027 informational meeting. Date to be announced.</div></details>
-    <p class="src">Source: &ldquo;Thank You for Attending | Spring 2027 Membership Interest Next Steps,&rdquo; October 9, 2026</p>
-  </div>
+  <details class="fold"><summary>Fees</summary><div class="a">Application Fee, Membership Intake Fees, and any Additional Fees will be discussed at the Spring 2027 informational meeting. Date to be announced.</div></details>
+  <p class="src">Source: &ldquo;Thank You for Attending | Spring 2027 Membership Interest Next Steps,&rdquo; October 9, 2026</p>
 </section>
 
-<section id="packet">
-  <div class="sec-head"><h2>Application Packet</h2></div>
-  <div class="sec-body">
-    <p class="sub">Due within two weeks of the informational meeting</p>
-    <ul class="check" data-list="packet">
-      <li><label><input type="checkbox"><span>Two (2) copies of your official college/university transcript, each sealed in a separate envelope</span></label></li>
-      <li><label><input type="checkbox"><span>One (1) uploaded digital copy of your transcript</span></label></li>
-      <li><label><input type="checkbox"><span>2x2 current color official passport-size photo dressed in a shirt, tie, and jacket &mdash; taken within two (2) weeks of the informational meeting date</span></label></li>
-      <li><label><input type="checkbox"><span>Voter registration verification documentation</span></label></li>
-      <li><label><input type="checkbox"><span>Three (3) letters from current financial members in good standing, each with a verifiable Kappa Alpha Psi membership number</span></label></li>
-      <li><label><input type="checkbox"><span>Two (2) signed letters from community sponsors on their official letterhead or corporate stationery</span></label></li>
-      <li><label><input type="checkbox"><span>Background check</span></label></li>
-      <li><label><input type="checkbox"><span>Application Fee</span></label></li>
-    </ul>
-    <p class="src">Source: October 9, 2026 email; October 14, 2026 touch base</p>
-  </div>
-</section>
-
-<section id="fees">
-  <div class="sec-head"><h2>Membership Intake Fees</h2></div>
-  <div class="sec-body">
-    <p>Application Fee, Membership Intake Fees, and any Additional Fees will be discussed at the Spring 2027 informational meeting. Date to be announced.</p>
-    <details class="fold"><summary>From the October 14 touch base</summary><div class="a">The initial two-year membership fee is approximately $5,200 and includes a blazer, official pin, and coverage across local, provincial, and national levels.
+<section class="chapter" id="fees">
+  <div class="chapter-head"><h2>Fees</h2></div>
+  <p>Application Fee, Membership Intake Fees, and any Additional Fees will be discussed at the Spring 2027 informational meeting. Date to be announced.</p>
+  <details class="fold"><summary>From the October 14 touch base</summary><div class="a">The initial two-year membership fee is approximately $5,200 and includes a blazer, official pin, and coverage across local, provincial, and national levels.
 
 The fraternal year structure and associated dues.</div></details>
-    <details class="fold"><summary>The three levels</summary><div class="a">You will not show as financial until you are financial on all three levels: Grand Chapter, Province, and Chapter.
+  <details class="fold"><summary>The three levels</summary><div class="a">You will not show as financial until you are financial on all three levels: Grand Chapter, Province, and Chapter.
 
 Grand Chapter &ndash; Alumni $200 per year. Fiscal year starts October 1.
 Western Province &ndash; annual dues of $50.00 per member.
 Los Angeles Alumni &ndash; Financial dues are payable at the beginning of each fraternal year (October 1).</div></details>
-    <p class="src">Source: October 9, 2026 email; October 14, 2026 touch base; kappaalphapsi1911.com; wp1911.com; lakappas1938.com</p>
-  </div>
+  <p class="src">Source: October 9, 2026 email; October 14, 2026 touch base; kappaalphapsi1911.com; wp1911.com; lakappas1938.com</p>
 </section>
 
-<section id="dates">
-  <div class="sec-head"><h2>Dates</h2></div>
-  <div class="sec-body">
-    <details class="fold" open><summary>Bi-Weekly Touch Base</summary><div class="a">Spring 2027 Membership Interest Bi-Weekly Touch Base &ndash; Zoom, hosted by Darryll Holmes</div></details>
-    <details class="fold"><summary>October 24, 2026</summary><div class="a">Ballot party</div></details>
-    <details class="fold"><summary>November 6&ndash;7, 2026</summary><div class="a">2026 C. Rodger Wilson Leadership Conference &ndash; Occidental College, 1600 Campus Rd, Los Angeles, CA 90041
-Theme: Leading for Life: Empowering Brothers for Leadership, Life and Legacy</div></details>
-    <details class="fold"><summary>November 14, 2026</summary><div class="a">The 87th Annual Black &amp; White Ball, hosted by the Upsilon and Los Angeles Alumni Chapters of Kappa Alpha Psi Fraternity, Inc., takes place Saturday, November 14, 2026, at The Ritz-Carlton, Marina del Rey.</div></details>
-    <details class="fold"><summary>April 2027</summary><div class="a">Western Province Council &ndash; Oakland, second week of April. Province meetings and the National Convention typically run Tuesday through Sunday. Mandatory for new members.</div></details>
-    <details class="fold"><summary>2027</summary><div class="a">88th Grand Chapter Meeting (Conclave) &ndash; Baltimore</div></details>
-    <details class="fold"><summary>Spring 2027</summary><div class="a">Informational meeting. Date to be announced.</div></details>
-    <p class="src">Source: October 9 and October 14, 2026 (MTA); wp1911.com (C. Rodger Wilson Leadership Conference)</p>
-  </div>
+<section class="chapter" id="dates">
+  <div class="chapter-head"><h2>Dates</h2></div>
+  <ul class="timeline">
+    <li><span class="when">Every other week</span><span class="what">Spring 2027 Membership Interest Bi-Weekly Touch Base<small>Zoom, hosted by Darryll Holmes</small></span></li>
+    <li><span class="when">October 24, 2026</span><span class="what">Ballot party</span></li>
+    <li><span class="when">November 6&ndash;7, 2026</span><span class="what">2026 C. Rodger Wilson Leadership Conference<small>Occidental College, 1600 Campus Rd, Los Angeles, CA 90041. Theme: Leading for Life: Empowering Brothers for Leadership, Life and Legacy</small></span></li>
+    <li><span class="when">November 14, 2026</span><span class="what">The 87th Annual Black &amp; White Ball<small>Hosted by the Upsilon and Los Angeles Alumni Chapters of Kappa Alpha Psi Fraternity, Inc. The Ritz-Carlton, Marina del Rey</small></span></li>
+    <li><span class="when">Spring 2027</span><span class="what">Informational meeting<small>Date to be announced. Application packet due within two weeks</small></span></li>
+    <li><span class="when">April 2027</span><span class="what">Western Province Council<small>Oakland, second week of April. Province meetings and the National Convention typically run Tuesday through Sunday. Mandatory for new members</small></span></li>
+    <li><span class="when">2027</span><span class="what">88th Grand Chapter Meeting (Conclave)<small>Baltimore</small></span></li>
+  </ul>
+  <p class="src">Source: October 9 and October 14, 2026 (MTA); wp1911.com (C. Rodger Wilson Leadership Conference)</p>
 </section>
 
-<section id="cards">
-  <div class="sec-head"><h2>Flash Cards</h2></div>
-  <div class="sec-body">
+<section class="chapter" id="greek">
+  <div class="chapter-head"><h2>The Greek Alphabet</h2></div>
+  <div class="greek">
+    <div><b>&Alpha; &alpha;</b><span>Alpha</span></div>
+    <div><b>&Beta; &beta;</b><span>Beta</span></div>
+    <div><b>&Gamma; &gamma;</b><span>Gamma</span></div>
+    <div><b>&Delta; &delta;</b><span>Delta</span></div>
+    <div><b>&Epsilon; &epsilon;</b><span>Epsilon</span></div>
+    <div><b>&Zeta; &zeta;</b><span>Zeta</span></div>
+    <div><b>&Eta; &eta;</b><span>Eta</span></div>
+    <div><b>&Theta; &theta;</b><span>Theta</span></div>
+    <div><b>&Iota; &iota;</b><span>Iota</span></div>
+    <div><b>&Kappa; &kappa;</b><span>Kappa</span></div>
+    <div><b>&Lambda; &lambda;</b><span>Lambda</span></div>
+    <div><b>&Mu; &mu;</b><span>Mu</span></div>
+    <div><b>&Nu; &nu;</b><span>Nu</span></div>
+    <div><b>&Xi; &xi;</b><span>Xi</span></div>
+    <div><b>&Omicron; &omicron;</b><span>Omicron</span></div>
+    <div><b>&Pi; &pi;</b><span>Pi</span></div>
+    <div><b>&Rho; &rho;</b><span>Rho</span></div>
+    <div><b>&Sigma; &sigma;</b><span>Sigma</span></div>
+    <div><b>&Tau; &tau;</b><span>Tau</span></div>
+    <div><b>&Upsilon; &upsilon;</b><span>Upsilon</span></div>
+    <div><b>&Phi; &phi;</b><span>Phi</span></div>
+    <div><b>&Chi; &chi;</b><span>Chi</span></div>
+    <div><b>&Psi; &psi;</b><span>Psi</span></div>
+    <div><b>&Omega; &omega;</b><span>Omega</span></div>
+  </div>
+  <p class="quiet">Alpha and Omega, the Greek alphabet's first and last letters. The Greek letter &Psi; replaced N.</p>
+  <p class="src">Assigned at the October 14 touch base. Letter names are the standard 24-letter Greek alphabet.</p>
+</section>
+
+</div><!-- /guide -->
+
+<!-- ================= CARDS ================= -->
+<div class="view" id="view-cards">
+<section class="chapter" id="cards">
+  <div class="chapter-head"><h2>Flash Cards</h2></div>
+  <div class="decks" id="decks" role="group" aria-label="Decks"></div>
+  <div class="fc-stage">
     <div class="fc" id="fc" tabindex="0" role="button" aria-label="Flash card, tap to flip">
-      <span class="fc-tag">Got it</span>
-      <div class="fc-face" id="fc-face"></div>
-      <div class="fc-hint" id="fc-hint">Tap to flip</div>
+      <div class="face front"><span class="known">Learned</span><div class="count" id="fc-count"></div><div class="front-text" id="fc-front"></div></div>
+      <div class="face back"><span class="known">Learned</span><div class="count" id="fc-title"></div><div class="back-text" id="fc-back"></div></div>
     </div>
-    <div class="fc-row">
-      <button id="fc-prev">Back</button>
-      <button class="primary" id="fc-got">Got it</button>
-      <button id="fc-next">Next</button>
-    </div>
-    <div class="fc-row2">
-      <button id="fc-shuffle">Shuffle</button>
-      <button id="fc-unknown" aria-pressed="false">Not yet only</button>
-      <button id="fc-reset">Start over</button>
-    </div>
-    <div class="fc-score" id="fc-score"></div>
   </div>
+  <p class="fc-hint" id="fc-hint">Tap to flip</p>
+  <div class="fc-row">
+    <button type="button" id="fc-prev">Back</button>
+    <button type="button" class="primary" id="fc-got">Learned</button>
+    <button type="button" id="fc-next">Next</button>
+  </div>
+  <div class="fc-row2">
+    <button type="button" id="fc-shuffle">Shuffle</button>
+    <button type="button" id="fc-unknown" aria-pressed="false">Unlearned only</button>
+    <button type="button" id="fc-reset">Start over</button>
+  </div>
+  <div class="fc-score"><span id="fc-score"></span><span id="fc-deckscore"></span></div>
+  <div class="bar"><i id="fc-bar"></i></div>
+  <p class="keys"><kbd>Space</kbd> flip &nbsp; <kbd>&larr;</kbd><kbd>&rarr;</kbd> move &nbsp; <kbd>L</kbd> learned &nbsp; <kbd>S</kbd> shuffle</p>
+</section>
+</div><!-- /cards -->
+
+<!-- ================= CHECKLIST ================= -->
+<div class="view" id="view-check">
+<section class="chapter" id="packet">
+  <div class="chapter-head"><h2>Application Packet</h2></div>
+  <p class="quiet">Due within two weeks of the informational meeting</p>
+  <ul class="check" data-list="packet">
+    <li><label><input type="checkbox"><span>Two (2) copies of your official college/university transcript, each sealed in a separate envelope</span></label></li>
+    <li><label><input type="checkbox"><span>One (1) uploaded digital copy of your transcript</span></label></li>
+    <li><label><input type="checkbox"><span>2x2 current color official passport-size photo dressed in a shirt, tie, and jacket &mdash; taken within two (2) weeks of the informational meeting date</span></label></li>
+    <li><label><input type="checkbox"><span>Voter registration verification documentation</span></label></li>
+    <li><label><input type="checkbox"><span>Three (3) letters from current financial members in good standing, each with a verifiable Kappa Alpha Psi membership number</span></label></li>
+    <li><label><input type="checkbox"><span>Two (2) signed letters from community sponsors on their official letterhead or corporate stationery</span></label></li>
+    <li><label><input type="checkbox"><span>Background check</span></label></li>
+    <li><label><input type="checkbox"><span>Application Fee</span></label></li>
+  </ul>
+  <p class="check-meta" id="packet-meta"></p>
+  <p class="src">Source: October 9, 2026 email; October 14, 2026 touch base</p>
 </section>
 
-<section id="aspirants">
-  <div class="sec-head"><h2>What Aspirants Need to Do</h2></div>
-  <div class="sec-body">
-    <ul class="check" data-list="todo">
-      <li><label><input type="checkbox"><span>Complete the Spring 2027 L.A. Alumni Membership Interest Info Form</span></label></li>
-      <li><label><input type="checkbox"><span>Accept the calendar invite for the bi-weekly Zoom touch base meeting</span></label></li>
-      <li><label><input type="checkbox"><span>Respond and acknowledge messages in a timely manner</span></label></li>
-      <li><label><input type="checkbox"><span>Make every effort to meet Brothers of the Los Angeles Alumni Chapter on your own</span></label></li>
-      <li><label><input type="checkbox"><span>Get to know your fellow interests</span></label></li>
-      <li><label><input type="checkbox"><span>Support the public events the chapter hosts</span></label></li>
-      <li><label><input type="checkbox"><span>Learn the 10 founders and their occupations</span></label></li>
-      <li><label><input type="checkbox"><span>Learn the Greek alphabet</span></label></li>
-      <li><label><input type="checkbox"><span>Learn the organization's history</span></label></li>
-      <li><label><input type="checkbox"><span>Review www.kappaalphapsi1911.com, www.wp1911.com, and www.lakappas1938.com</span></label></li>
-      <li><label><input type="checkbox"><span>Register to vote</span></label></li>
-      <li><label><input type="checkbox"><span>Order two sealed official transcripts and one digital copy</span></label></li>
-      <li><label><input type="checkbox"><span>Line up three financial members and two community sponsors for letters of recommendation</span></label></li>
-      <li><label><input type="checkbox"><span>Plan for the Province Council in Oakland, second week of April</span></label></li>
-    </ul>
-    <p class="src">Source: October 9 and October 14, 2026 (MTA)</p>
-  </div>
+<section class="chapter" id="aspirants">
+  <div class="chapter-head"><h2>What Aspirants Need to Do</h2></div>
+  <ul class="check" data-list="todo">
+    <li><label><input type="checkbox"><span>Complete the Spring 2027 L.A. Alumni Membership Interest Info Form</span></label></li>
+    <li><label><input type="checkbox"><span>Accept the calendar invite for the bi-weekly Zoom touch base meeting</span></label></li>
+    <li><label><input type="checkbox"><span>Respond and acknowledge messages in a timely manner</span></label></li>
+    <li><label><input type="checkbox"><span>Make every effort to meet Brothers of the Los Angeles Alumni Chapter on your own</span></label></li>
+    <li><label><input type="checkbox"><span>Get to know your fellow interests</span></label></li>
+    <li><label><input type="checkbox"><span>Support the public events the chapter hosts</span></label></li>
+    <li><label><input type="checkbox"><span>Learn the 10 founders and their occupations</span></label></li>
+    <li><label><input type="checkbox"><span>Learn the Greek alphabet</span></label></li>
+    <li><label><input type="checkbox"><span>Learn the organization's history</span></label></li>
+    <li><label><input type="checkbox"><span>Review www.kappaalphapsi1911.com, www.wp1911.com, and www.lakappas1938.com</span></label></li>
+    <li><label><input type="checkbox"><span>Register to vote</span></label></li>
+    <li><label><input type="checkbox"><span>Order two sealed official transcripts and one digital copy</span></label></li>
+    <li><label><input type="checkbox"><span>Line up three financial members and two community sponsors for letters of recommendation</span></label></li>
+    <li><label><input type="checkbox"><span>Plan for the Province Council in Oakland, second week of April</span></label></li>
+  </ul>
+  <p class="check-meta" id="todo-meta"></p>
+  <p class="src">Source: October 9 and October 14, 2026 (MTA)</p>
 </section>
+</div><!-- /check -->
 
+<footer>Sources: kappaalphapsi1911.com, wp1911.com, lakappas1938.com, and emails from the Los Angeles (CA) Alumni Chapter MTA (September 24, September 29, October 9, and October 14, 2026).<br>Works offline once loaded. Checklist and flash card progress save on this device.</footer>
+
+</div><!-- /col -->
 </main>
 
-<footer>Sources: kappaalphapsi1911.com &middot; wp1911.com &middot; lakappas1938.com &middot; emails from the Los Angeles (CA) Alumni Chapter MTA (September 24, September 29, October 9, October 14, 2026).<br>Works offline; checklist and flash card progress save in this browser.</footer>
+<nav class="tabbar" role="tablist" aria-label="Views">
+  <button type="button" role="tab" data-view="guide" aria-selected="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5h7a2 2 0 0 1 2 2v13a1.5 1.5 0 0 0-1.5-1.5H4z"/><path d="M20 5h-7a2 2 0 0 0-2 2v13a1.5 1.5 0 0 1 1.5-1.5H20z"/></svg>Guide</button>
+  <button type="button" role="tab" data-view="cards" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="15" height="12" rx="1.5"/><path d="M8 4h13v12"/></svg>Cards</button>
+  <button type="button" role="tab" data-view="check" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h3M4 12h3M4 17h3M10 7h10M10 12h10M10 17h10"/></svg>Checklist</button>
+</nav>
 
 <script>
-// reveal buttons
-document.querySelectorAll('.reveal-btn').forEach(b=>{
-  b.onclick=()=>{
-    const t=document.getElementById(b.dataset.target);
-    const open=t.classList.toggle('show');
-    b.setAttribute('aria-expanded',String(open));
-    b.textContent=open?'Hide':'Show';
-  };
-});
+(function(){
+'use strict';
+var $=function(id){return document.getElementById(id)};
+var store={get:function(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},
+           set:function(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 
-// checklist persistence; degrades quietly if storage unavailable
-const KEY='mta.guide.la.v1';
-let state={};
-try{state=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){}
-function saveState(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
-document.querySelectorAll('ul.check').forEach(ul=>{
-  const list=ul.dataset.list;
-  ul.querySelectorAll('input').forEach((cb,i)=>{
-    const id=list+'.'+i;
-    cb.checked=!!state[id];
-    cb.addEventListener('change',()=>{state[id]=cb.checked;saveState()});
+/* ---------- views (mobile tabs) ---------- */
+var views={guide:$('view-guide'),cards:$('view-cards'),check:$('view-check')};
+var VKEY='mta.la.view';
+function setView(name,scroll){
+  Object.keys(views).forEach(function(k){views[k].classList.toggle('active',k===name)});
+  document.querySelectorAll('.tabbar button').forEach(function(b){b.setAttribute('aria-selected',String(b.dataset.view===name))});
+  $('strip').style.display=(name==='guide')?'':'none';
+  store.set(VKEY,name);
+  if(scroll!==false)window.scrollTo(0,0);
+}
+document.querySelectorAll('.tabbar button').forEach(function(b){b.addEventListener('click',function(){setView(b.dataset.view)})});
+var isDesktop=function(){return window.matchMedia('(min-width:900px)').matches};
+if(!isDesktop()){
+  var h=location.hash.replace('#','');
+  var start=store.get(VKEY)||'guide';
+  if(h==='cards')start='cards';else if(h==='packet'||h==='aspirants')start='check';else if(h)start='guide';
+  setView(start,false);
+}
+window.matchMedia('(min-width:900px)').addEventListener('change',function(e){
+  if(e.matches){Object.keys(views).forEach(function(k){views[k].classList.add('active')});$('strip').style.display='none'}
+  else setView(store.get(VKEY)||'guide',false);
+});
+/* in-page links to a section in another view (mobile) */
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(){
+    if(isDesktop())return;
+    var id=a.getAttribute('href').slice(1);
+    var v=(id==='cards')?'cards':(id==='packet'||id==='aspirants')?'check':'guide';
+    if(!views[v].classList.contains('active'))setView(v,false);
   });
 });
-const FC=[
-["Founding","Founded on January 5, 1911 at Indiana University Bloomington\n10 Founders\nColors – Crimson & Cream"],
-["Alpha Omega → Kappa Alpha Nu → Kappa Alpha Psi","The group was first called Alpha Omega while its formation continued.\nOn January 5, 1911, the fraternity was originally known as Kappa Alpha Nu.\nThe Greek letter Ψ replaced N. The name was officially changed to Kappa Alpha Psi on a resolution adopted at the Grand Chapter Meeting in December 1914. This change became effective on April 15, 1915."],
-["Incorporation","Kappa Alpha Nu became the first incorporated Black fraternity in the United States once granted a charter by the Indiana Secretary of State on May 15, 1911."],
-["Firsts","Second-oldest existing collegiate historically Black Greek letter fraternity and the first intercollegiate fraternity incorporated as a national body.\nThe first Greek letter organization to establish its Alpha Chapter on Indiana University's campus.\nThe only Greek letter organization founded with the concept of achievement."],
-["The Ten Founders","Elder Watson Diggs\nByron Kenneth Armstrong\nJohn Milton Lee\nHenry Tourner Asher\nMarcus Peter Blakemore\nGuy Levis Grant\nPaul Waymond Caine\nGeorge Wesley Edmonds\nEzra Dee Alexander\nEdward Giles Irvin"],
-["Founding roles","Diggs – permanent chairman (president of Alpha Omega)\nLee – secretary\nArmstrong – sergeant-at-arms\nIrvin – interim secretary of Alpha Omega; Incorporation Committee\nEdmonds – Corresponding Secretary in the articles of incorporation"],
-["First initiates of the Alpha of Kappa Alpha Nu","The three freshmen: Asher, Blakemore and Edmonds"],
-["Elder Watson Diggs","“the Father of Kappa” – “the Dreamer”\nBorn Christian County, Kentucky, December 23, 1883\nA quiet, polished, scholarly, and prolific writer\nIndiana State Normal School, 1908; Howard University, 1909\n1st Grand Polemarch, 1911–1917\n(Occupation not stated on the national site)"],
-["Byron Kenneth Armstrong","“Boomski”\nWestfield, Indiana\nHeld teaching positions as a professor at universities in Florida, Indiana, Kansas, Maryland, and Michigan. Served as Dean in Maryland and Oklahoma.\nM.A. Columbia 1914; Ph.D. Michigan 1940\nCousin of 2nd Grand Polemarch Irven Armstrong"],
-["John Milton Lee","Danville, Indiana, September 7, 1890\nA scholar, loyal, and tireless worker for the growth of the fraternity\nCommonly referred to as “a dreamer”\nThree years of pre-medical work\n(Occupation not stated on the national site)"],
-["Henry Tourner Asher","Owensboro, Kentucky, June 30, 1890; son of a Baptist Minister\nInstructor at Lincoln Institute, Jefferson City, Missouri, 1914-1915\nLL.B., Detroit College of Law, 1928\nOne of the three freshman first initiates"],
-["Marcus Peter Blakemore","“Blakie”\nFranklin, Indiana, January 3, 1889\nOrganized the Electric Engineering Company, which he operated until he enlisted\nU.S. Army Private, 30th Company, 154th Depot Brigade\nOne of the three freshman first initiates"],
-["Guy Levis Grant","New Albany, Indiana, April 9, 1891\nThird of thirteen children, five of whom became members of the fraternity\nD.D.S., Indiana Dental School, 1920\nPracticed dentistry in Indianapolis for over 50 years"],
-["Paul Waymond Caine","Greencastle, Indiana, May 17, 1890\nBusiness major\nThe consummate entrepreneur and chef before his time\nA fine caterer"],
-["George Wesley Edmonds","Vanderburgh County, Indiana, August 13, 1890\nWitty and an enigma to most in the fraternity\nCorresponding Secretary in the articles of incorporation\nOne of the three freshman first initiates\n(Occupation not stated on the national site)"],
-["Ezra Dee Alexander","“Dee”\nBloomington, Indiana, July 18, 1891\nTeacher and principal at Indiana public schools\nM.D., Indiana University Medical School, 1919\nPracticed medicine in Indianapolis for nearly 50 years\nArmy Medical Corps, WWI"],
-["Edward Giles Irvin","Spencer, Indiana, August 13, 1893; seventh of nine children of an AME minister\nAt only 17 years of age, the youngest of the ten Founders\nA civic and religious leader, journalist, and entrepreneur"],
-["The Purpose of Kappa Alpha Psi","“Achievement in Every Field of Human Endeavor.”\n\nReliance would be placed upon high Christian ideals and the purpose of ACHIEVEMENT."],
-["The 5 Objectives of Kappa Alpha Psi","To unite college men of culture, patriotism and honor in a bond of fraternity.\nTo encourage honorable achievement in every field of human endeavor.\nTo promote the spiritual, social, intellectual, and moral welfare of its members.\nTo aid the aims and purposes of colleges and universities.\nTo inspire service in the public interest."],
-["The Journal","The inaugural edition of The Kappa Alpha Nu Journal debuted in April 1914, printed uninterrupted except for 1918 and 1919, due to WWI.\nChapter Invisible – In Memoriam to Brothers who have passed away."],
-["Intake Policy","The Fraternity has outlawed pledging and dispensed with the customary practice of having pledges or a protracted probationary period prior to one's initiation into full membership into the fraternity.\n\nStands firm in its commitment to achievement, brotherhood, leadership, and service—without the need for hazing."],
-["Grand Polemarch & Headquarters","35th Grand Polemarch – Jimmy McMikle\nSpring 1991 initiate of the Alpha of Kappa Alpha Psi\n\nInternational Headquarters\n2322-24 North Broad Street\nPhiladelphia, PA 19132-4590"],
-["Districts, Regions, Provinces","1920 – 3rd Grand Polemarch George F. David, II: three districts\n1923 – 4th Grand Polemarch W. Ellis Stewart: regions, Regional Directors\n1926 – 5th Grand Polemarch Earl B. Dickerson: provinces, Province Polemarchs"],
-["The 12 Provinces","Northern\nEastern\nSouthern\nWestern\nNorth Central\nEast Central\nSouth Central\nSouthwestern\nSoutheastern\nMiddle Eastern\nNortheastern\nMiddle Western"],
-["The Western Province","One of the original provinces established in 1923\nAlaska, Arizona, California, Hawaii, Idaho, Nevada, Oregon, Utah, Washington, Japan and South Korea\n57 active chapters across 9 Western U.S. States and two international chapters\nFour clusters: Pacific Northwest, Northern California, Southern California, Southwest"],
-["Western Province firsts","April 25, 1923 – Upsilon chapter chartered at UCLA, the first chapter of the current Western Province\nAugust 8, 1938 – Los Angeles Alumni chartered\nFirst Polemarch of the Western Region – Judge Carl R. Johnson of Kansas City, 1925 until 1931"],
-["Western Province leadership","Frederic S. Roots – 30th Province Polemarch (Berkeley/Seattle Alumni)\nTimothy Lankford – Senior Vice-Polemarch\nJullan Shearin-Sewell – Junior Vice-Polemarch\nGregory Black – Keeper of Exchequer (Los Angeles Alumni)\nDarryll Holmes – Reporter (Los Angeles/Las Vegas Alumni)"],
-["Grand Polemarchs from the Western Province","Thomas J. Bradley – 1964-1967 (18th Grand Polemarch)\nRandall C. Bacon – 1985-1988\nRobert L. Harris – 1991-1995"],
-["Los Angeles (CA) Alumni Chapter","Chartered August 8, 1938\nThe very first alumni chapter established in the great Western Province\n“The Jewel of the West”\nBrothers who attended UCLA and remained in Los Angeles met regularly and established the Los Angeles Alumni"],
-["The Kappa Kastle","1846 Crenshaw Boulevard, Los Angeles, California 90019\nA stunning two-story fraternity house – gated home with front and back yards, meeting rooms, game room, offices, bar area, living room, full professional kitchen, and private parking lot"],
-["LA Alumni honors","Three Past Grand Polemarchs\nEleven Past Western Province Polemarchs\nThree Laurel Wreath Laureates\nFive Elder Watson Diggs Awardees"],
-["LA Alumni Chapter Officers","Gregory Black – Polemarch\nSteve Bayne – Vice Polemarch\nKeith Lewis, Jr. – Keeper of Records\nFrederick Braggs – Keeper of Exchequer\nChristopher Henderson – Assistant Keeper of Records\nEric Fitzpatrick – Strategus\nRobert Joiner – Lt. Strategus\nMarques Gunn – Reporter\nTerrance Lark – Historian\nDerek S. Hamilton, Sr. – House Director"],
-["LA Alumni MTA","Darryll Holmes – MTA Chairman\nMarcellus Mayberry – MTA Co Chairman\nMTA@lakappas1938.com"],
-["Guide Right","Our National Service Initiative; includes all our youth oriented programs\nConceived in 1922 by Leon W. Stewart, and suggested at the twelfth Grand Chapter\nA program of the educational and occupational guidance of youth\nThe oldest, most successful mentoring program for young people of color"],
-["Kappa League","Founded on Thursday, February 12, 1969, by the Los Angeles Alumni Chapter at Alain LeRoy Locke High School\nFounders of the Kappa Instructional Leadership League: Mel L. Davis and Edgar H. Bishop\nAdopted at the 56th Grand Chapter, August 12-15, 1970 (Charlotte, NC)\nMale students in grades 6th-12th; a subset of Guide Right"],
-["Kappa League – five study areas","SELF-IDENTITY | Discipline, assurance, awareness and Fraternity.\nTRAINING | Academic, career choice, preparation and organization.\nCOMPETITION | Politics and sports\nSOCIAL | Religion, the arts, entertainment, conversation, communication, etiquette, and manner.\nHEALTH EDUCATION | Physical fitness. And sex education, drugs, health and safety."],
-["The Black & White Ball","Los Angeles Alumni is the birthplace of the annual Black & White Ball – one of the most elegant social affairs in the nation\n87th Annual Black & White Ball – Saturday, November 14, 2026, The Ritz-Carlton, Marina del Rey – hosted by the Upsilon and Los Angeles Alumni Chapters\nSupports the scholarship program"],
-["Kappa Alpha Psi Foundation","Established in 1981 as a non-profit, tax-exempt, publicly supported organization as described in Section 501(c)(3)\nDiamonds in the Rough, Guide Right, Kappa Kamp, ULI/LEAD Kappa, Foundation Scholarships"],
-["Greek Alphabet 1–6","Α α Alpha\nΒ β Beta\nΓ γ Gamma\nΔ δ Delta\nΕ ε Epsilon\nΖ ζ Zeta"],
-["Greek Alphabet 7–12","Η η Eta\nΘ θ Theta\nΙ ι Iota\nΚ κ Kappa\nΛ λ Lambda\nΜ μ Mu"],
-["Greek Alphabet 13–18","Ν ν Nu\nΞ ξ Xi\nΟ ο Omicron\nΠ π Pi\nΡ ρ Rho\nΣ σ Sigma"],
-["Greek Alphabet 19–24","Τ τ Tau\nΥ υ Upsilon\nΦ φ Phi\nΧ χ Chi\nΨ ψ Psi\nΩ ω Omega"],
-["MTA – three principles","Everything is voluntary. The decision is always yours.\nMembership is earned, not given. Showing up benefits you.\nRelationships matter. Brothers will not vouch or vote for someone they have never met."],
-["Membership Requirements","Bachelor's degree (four-year degree) from an accredited college or university recognized by the U.S. Department of Education\nGood moral character\nOfficial transcripts – two sealed + one digital\n2x2 passport photo in shirt, tie, and jacket, within two weeks of the informational meeting\nVoter registration verification\nFive letters of recommendation"],
-["Letters of Recommendation","Three (3) letters from current financial members in good standing – financial on all three levels (Grand, Province, and Local Chapter) – with a verifiable Kappa Alpha Psi membership number\nTwo (2) signed letters from community sponsors on their official letterhead or corporate stationery"],
-["The three levels","Grand Chapter, Province, and Chapter\nYou will not show as financial until you are financial on all three levels\nFraternal year begins October 1"],
-["The test","100 questions – 70% to pass\nFounders and their occupations, the Greek alphabet, and the organization's history\nDocuments due within two weeks of the informational meeting\nMissing more than two sessions or being late – dismissal from the process"],
-["Fees","Application Fee, Membership Intake Fees, and any Additional Fees will be discussed at the Spring 2027 informational meeting.\n\nOctober 14 touch base: approximately $5,200 for initial membership covering two years – includes blazer, official pin, and all three levels"],
-["Mandatory for new members","Western Province Council – Oakland, second week of April 2027\n88th Grand Chapter Meeting (Conclave) – Baltimore, 2027"]
-];
-const fcKey='mta.fc.la.v1';
-let fcKnown=new Set();
-try{const s=JSON.parse(localStorage.getItem(fcKey));if(s)fcKnown=new Set(s)}catch(e){}
-function fcSave(){try{localStorage.setItem(fcKey,JSON.stringify([...fcKnown]))}catch(e){}}
-let fcOrder=FC.map((_,i)=>i), fcPos=0, fcFlip=false, fcOnly=false;
-const fcEl=document.getElementById('fc'), fcFace=document.getElementById('fc-face'),
-      fcHint=document.getElementById('fc-hint');
-function fcVis(){return fcOnly?fcOrder.filter(i=>!fcKnown.has(i)):fcOrder}
-function fcEsc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
-function fcRender(){
-  const v=fcVis();
-  document.getElementById('fc-score').textContent=fcKnown.size+' of '+FC.length+' marked Got it';
-  if(!v.length){
-    fcFace.innerHTML='<div class="fc-front">All cards marked Got it</div>';
-    fcHint.textContent='';fcEl.classList.remove('is-known');return;
-  }
-  if(fcPos>=v.length)fcPos=0;
-  const c=FC[v[fcPos]];
-  fcEl.classList.toggle('is-known',fcKnown.has(v[fcPos]));
-  document.getElementById('fc-got').textContent=fcKnown.has(v[fcPos])?'Unmark':'Got it';
-  if(!fcFlip){
-    fcFace.innerHTML='<div class="fc-count">'+(fcPos+1)+' of '+v.length+'</div><div class="fc-front">'+fcEsc(c[0])+'</div>';
-    fcHint.textContent='Tap to flip';
-  }else{
-    fcFace.innerHTML='<div class="fc-count">'+fcEsc(c[0])+'</div><div class="fc-back">'+fcEsc(c[1])+'</div>';
-    fcHint.textContent='Tap for front';
-  }
+
+/* ---------- scroll-spy ---------- */
+var links=[].slice.call(document.querySelectorAll('.toc a, .strip a'));
+var secs=[].slice.call(document.querySelectorAll('section.chapter'));
+var current=null;
+function markActive(id){
+  if(id===current)return;current=id;
+  links.forEach(function(a){
+    var on=a.getAttribute('href')==='#'+id;a.classList.toggle('active',on);
+    if(on&&a.closest('.strip'))a.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});
+  });
 }
-function fcMove(d){const v=fcVis();if(!v.length)return;fcPos=(fcPos+d+v.length)%v.length;fcFlip=false;fcRender()}
-fcEl.addEventListener('click',()=>{fcFlip=!fcFlip;fcRender()});
-fcEl.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();fcFlip=!fcFlip;fcRender()}});
-document.getElementById('fc-prev').onclick=()=>fcMove(-1);
-document.getElementById('fc-next').onclick=()=>fcMove(1);
-document.getElementById('fc-got').onclick=()=>{
-  const v=fcVis();if(!v.length)return;const i=v[fcPos];
-  fcKnown.has(i)?fcKnown.delete(i):fcKnown.add(i);fcSave();
-  if(fcOnly&&fcKnown.has(i)){fcFlip=false;fcRender()}else{fcMove(1)}
-};
-document.getElementById('fc-shuffle').onclick=()=>{
-  for(let i=fcOrder.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[fcOrder[i],fcOrder[j]]=[fcOrder[j],fcOrder[i]]}
-  fcPos=0;fcFlip=false;fcRender();
-};
-document.getElementById('fc-unknown').onclick=e=>{
-  fcOnly=!fcOnly;e.target.setAttribute('aria-pressed',String(fcOnly));fcPos=0;fcFlip=false;fcRender();
-};
-document.getElementById('fc-reset').onclick=()=>{
-  if(confirm('Clear all Got it marks?')){fcKnown.clear();fcSave();fcPos=0;fcFlip=false;fcRender()}
-};
-fcRender();
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting)markActive(e.target.id)});
+  },{rootMargin:'-20% 0px -70% 0px',threshold:0});
+  secs.forEach(function(s){io.observe(s)});
+}
+
+/* ---------- checklists ---------- */
+var CKEY='mta.guide.la.v1';
+var cstate=store.get(CKEY)||{};
+function checkMeta(){
+  ['packet','todo'].forEach(function(list){
+    var ul=document.querySelector('ul.check[data-list="'+list+'"]');
+    var all=ul.querySelectorAll('input'),done=ul.querySelectorAll('input:checked');
+    var m=$(list+'-meta');if(m)m.textContent=done.length+' of '+all.length+' done';
+  });
+  ring();
+}
+document.querySelectorAll('ul.check').forEach(function(ul){
+  var list=ul.dataset.list;
+  ul.querySelectorAll('input').forEach(function(cb,i){
+    var id=list+'.'+i;cb.checked=!!cstate[id];
+    cb.addEventListener('change',function(){cstate[id]=cb.checked;store.set(CKEY,cstate);checkMeta()});
+  });
+});
+
+/* ---------- flash cards ---------- */
+var DECKS=[['all','All'],['history','History'],['founders','Founders'],['national','Fraternity'],['province','Province'],['chapter','LA Alumni'],['programs','Programs'],['greek','Greek'],['mta','Spring 2027']];
+var FC=[
+['history','Founding','Founded on January 5, 1911 at Indiana University Bloomington\n10 Founders\nColors – Crimson & Cream'],
+['history','Alpha Omega → Kappa Alpha Nu → Kappa Alpha Psi','The group was first called Alpha Omega while its formation continued.\nOn January 5, 1911, the fraternity was originally known as Kappa Alpha Nu.\nThe Greek letter Ψ replaced N. The name was officially changed to Kappa Alpha Psi on a resolution adopted at the Grand Chapter Meeting in December 1914. This change became effective on April 15, 1915.'],
+['history','Incorporation','Kappa Alpha Nu became the first incorporated Black fraternity in the United States once granted a charter by the Indiana Secretary of State on May 15, 1911.'],
+['history','Firsts','Second-oldest existing collegiate historically Black Greek letter fraternity and the first intercollegiate fraternity incorporated as a national body.\nThe first Greek letter organization to establish its Alpha Chapter on Indiana University\'s campus.\nThe only Greek letter organization founded with the concept of achievement.'],
+['history','The Journal','The inaugural edition of The Kappa Alpha Nu Journal debuted in April 1914, printed uninterrupted except for 1918 and 1919, due to WWI.\nChapter Invisible – In Memoriam to Brothers who have passed away.'],
+['founders','The Ten Founders','Elder Watson Diggs\nByron Kenneth Armstrong\nJohn Milton Lee\nHenry Tourner Asher\nMarcus Peter Blakemore\nGuy Levis Grant\nPaul Waymond Caine\nGeorge Wesley Edmonds\nEzra Dee Alexander\nEdward Giles Irvin'],
+['founders','Founding roles','Diggs – permanent chairman (president of Alpha Omega)\nLee – secretary\nArmstrong – sergeant-at-arms\nIrvin – interim secretary of Alpha Omega; Incorporation Committee\nEdmonds – Corresponding Secretary in the articles of incorporation'],
+['founders','First initiates of the Alpha of Kappa Alpha Nu','The three freshmen: Asher, Blakemore and Edmonds'],
+['founders','Elder Watson Diggs','“the Father of Kappa” – “the Dreamer”\nBorn Christian County, Kentucky, December 23, 1883\nA quiet, polished, scholarly, and prolific writer\nIndiana State Normal School, 1908; Howard University, 1909\n1st Grand Polemarch, 1911–1917\n(Occupation not stated on the national site)'],
+['founders','Byron Kenneth Armstrong','“Boomski”\nWestfield, Indiana\nHeld teaching positions as a professor at universities in Florida, Indiana, Kansas, Maryland, and Michigan. Served as Dean in Maryland and Oklahoma.\nM.A. Columbia 1914; Ph.D. Michigan 1940\nCousin of 2nd Grand Polemarch Irven Armstrong'],
+['founders','John Milton Lee','Danville, Indiana, September 7, 1890\nA scholar, loyal, and tireless worker for the growth of the fraternity\nCommonly referred to as “a dreamer”\nThree years of pre-medical work\n(Occupation not stated on the national site)'],
+['founders','Henry Tourner Asher','Owensboro, Kentucky, June 30, 1890; son of a Baptist Minister\nInstructor at Lincoln Institute, Jefferson City, Missouri, 1914-1915\nLL.B., Detroit College of Law, 1928\nOne of the three freshman first initiates'],
+['founders','Marcus Peter Blakemore','“Blakie”\nFranklin, Indiana, January 3, 1889\nOrganized the Electric Engineering Company, which he operated until he enlisted\nU.S. Army Private, 30th Company, 154th Depot Brigade\nOne of the three freshman first initiates'],
+['founders','Guy Levis Grant','New Albany, Indiana, April 9, 1891\nThird of thirteen children, five of whom became members of the fraternity\nD.D.S., Indiana Dental School, 1920\nPracticed dentistry in Indianapolis for over 50 years'],
+['founders','Paul Waymond Caine','Greencastle, Indiana, May 17, 1890\nBusiness major\nThe consummate entrepreneur and chef before his time\nA fine caterer'],
+['founders','George Wesley Edmonds','Vanderburgh County, Indiana, August 13, 1890\nWitty and an enigma to most in the fraternity\nCorresponding Secretary in the articles of incorporation\nOne of the three freshman first initiates\n(Occupation not stated on the national site)'],
+['founders','Ezra Dee Alexander','“Dee”\nBloomington, Indiana, July 18, 1891\nTeacher and principal at Indiana public schools\nM.D., Indiana University Medical School, 1919\nPracticed medicine in Indianapolis for nearly 50 years\nArmy Medical Corps, WWI'],
+['founders','Edward Giles Irvin','Spencer, Indiana, August 13, 1893; seventh of nine children of an AME minister\nAt only 17 years of age, the youngest of the ten Founders\nA civic and religious leader, journalist, and entrepreneur'],
+['national','The Motto','Achievement in Every Field of Human Endeavor'],
+['national','The Purpose','Reliance would be placed upon high Christian ideals and the purpose of ACHIEVEMENT.\nThe only Greek letter organization founded with the concept of achievement.'],
+['national','The 5 Objectives','To unite college men of culture, patriotism and honor in a bond of fraternity.\nTo encourage honorable achievement in every field of human endeavor.\nTo promote the spiritual, social, intellectual, and moral welfare of its members.\nTo aid the aims and purposes of colleges and universities.\nTo inspire service in the public interest.'],
+['national','Intake Policy','The Fraternity has outlawed pledging and dispensed with the customary practice of having pledges or a protracted probationary period prior to one\'s initiation into full membership into the fraternity.\n\nStands firm in its commitment to achievement, brotherhood, leadership, and service—without the need for hazing.'],
+['national','Grand Polemarch and Headquarters','35th Grand Polemarch – Jimmy McMikle\nSpring 1991 initiate of the Alpha of Kappa Alpha Psi\n\nInternational Headquarters\n2322-24 North Broad Street\nPhiladelphia, PA 19132-4590'],
+['national','Districts, Regions, Provinces','1920 – 3rd Grand Polemarch George F. David, II: three districts\n1923 – 4th Grand Polemarch W. Ellis Stewart: regions, Regional Directors\n1926 – 5th Grand Polemarch Earl B. Dickerson: provinces, Province Polemarchs'],
+['national','The 12 Provinces','Northern\nEastern\nSouthern\nWestern\nNorth Central\nEast Central\nSouth Central\nSouthwestern\nSoutheastern\nMiddle Eastern\nNortheastern\nMiddle Western'],
+['province','The Western Province','One of the original provinces established in 1923\nAlaska, Arizona, California, Hawaii, Idaho, Nevada, Oregon, Utah, Washington, Japan and South Korea\n57 active chapters across 9 Western U.S. States and two international chapters\nFour clusters: Pacific Northwest, Northern California, Southern California, Southwest'],
+['province','Western Province firsts','April 25, 1923 – Upsilon chapter chartered at UCLA, the first chapter of the current Western Province\nAugust 8, 1938 – Los Angeles Alumni chartered\nFirst Polemarch of the Western Region – Judge Carl R. Johnson of Kansas City, 1925 until 1931'],
+['province','Western Province leadership','Frederic S. Roots – 30th Province Polemarch (Berkeley/Seattle Alumni)\nTimothy Lankford – Senior Vice-Polemarch\nJullan Shearin-Sewell – Junior Vice-Polemarch\nGregory Black – Keeper of Exchequer (Los Angeles Alumni)\nDarryll Holmes – Reporter (Los Angeles/Las Vegas Alumni)'],
+['province','Grand Polemarchs from the Western Province','Thomas J. Bradley – 1964-1967 (18th Grand Polemarch)\nRandall C. Bacon – 1985-1988\nRobert L. Harris – 1991-1995'],
+['province','Province Council','The Western Province\'s annual conference\nProvince Training & Certification, workshops, Council business sessions, formal banquet and awards, community service\n79th – April 1-5, 2026, Las Vegas\n80th – Oakland, second week of April 2027 – mandatory for new members'],
+['chapter','Los Angeles (CA) Alumni Chapter','Chartered August 8, 1938\nThe very first alumni chapter established in the great Western Province\n“The Jewel of the West”\nBrothers who attended UCLA and remained in Los Angeles met regularly and established the Los Angeles Alumni'],
+['chapter','The Kappa Kastle','1846 Crenshaw Boulevard, Los Angeles, California 90019\nA stunning two-story fraternity house – gated home with front and back yards, meeting rooms, game room, offices, bar area, living room, full professional kitchen, and private parking lot'],
+['chapter','LA Alumni honors','Three Past Grand Polemarchs\nEleven Past Western Province Polemarchs\nThree Laurel Wreath Laureates\nFive Elder Watson Diggs Awardees'],
+['chapter','LA Alumni Chapter Officers','Gregory Black – Polemarch\nSteve Bayne – Vice Polemarch\nKeith Lewis, Jr. – Keeper of Records\nFrederick Braggs – Keeper of Exchequer\nChristopher Henderson – Assistant Keeper of Records\nEric Fitzpatrick – Strategus\nRobert Joiner – Lt. Strategus\nMarques Gunn – Reporter\nTerrance Lark – Historian\nDerek S. Hamilton, Sr. – House Director'],
+['chapter','LA Alumni MTA','Darryll Holmes – MTA Chairman\nMarcellus Mayberry – MTA Co Chairman\nMTA@lakappas1938.com'],
+['chapter','The Black & White Ball','Los Angeles Alumni is the birthplace of the annual Black & White Ball – one of the most elegant social affairs in the nation\n87th Annual Black & White Ball – Saturday, November 14, 2026, The Ritz-Carlton, Marina del Rey – hosted by the Upsilon and Los Angeles Alumni Chapters\nSupports the scholarship program'],
+['programs','Guide Right','Our National Service Initiative; includes all our youth oriented programs\nConceived in 1922 by Leon W. Stewart, and suggested at the twelfth Grand Chapter\nA program of the educational and occupational guidance of youth\nThe oldest, most successful mentoring program for young people of color'],
+['programs','Kappa League','Founded on Thursday, February 12, 1969, by the Los Angeles Alumni Chapter at Alain LeRoy Locke High School\nFounders of the Kappa Instructional Leadership League: Mel L. Davis and Edgar H. Bishop\nAdopted at the 56th Grand Chapter, August 12-15, 1970 (Charlotte, NC)\nMale students in grades 6th-12th; a subset of Guide Right'],
+['programs','Kappa League – five study areas','SELF-IDENTITY | Discipline, assurance, awareness and Fraternity.\nTRAINING | Academic, career choice, preparation and organization.\nCOMPETITION | Politics and sports\nSOCIAL | Religion, the arts, entertainment, conversation, communication, etiquette, and manner.\nHEALTH EDUCATION | Physical fitness. And sex education, drugs, health and safety.'],
+['programs','Kappa Alpha Psi Foundation','Established in 1981 as a non-profit, tax-exempt, publicly supported organization as described in Section 501(c)(3)\nDiamonds in the Rough, Guide Right, Kappa Kamp, ULI/LEAD Kappa, Foundation Scholarships'],
+['greek','Greek Alphabet 1–6','Α α Alpha\nΒ β Beta\nΓ γ Gamma\nΔ δ Delta\nΕ ε Epsilon\nΖ ζ Zeta'],
+['greek','Greek Alphabet 7–12','Η η Eta\nΘ θ Theta\nΙ ι Iota\nΚ κ Kappa\nΛ λ Lambda\nΜ μ Mu'],
+['greek','Greek Alphabet 13–18','Ν ν Nu\nΞ ξ Xi\nΟ ο Omicron\nΠ π Pi\nΡ ρ Rho\nΣ σ Sigma'],
+['greek','Greek Alphabet 19–24','Τ τ Tau\nΥ υ Upsilon\nΦ φ Phi\nΧ χ Chi\nΨ ψ Psi\nΩ ω Omega'],
+['mta','MTA – three principles','Everything is voluntary. The decision is always yours.\nMembership is earned, not given. Showing up benefits you.\nRelationships matter. Brothers will not vouch or vote for someone they have never met.'],
+['mta','Membership Requirements','Bachelor\'s degree (four-year degree) from an accredited college or university recognized by the U.S. Department of Education\nGood moral character\nOfficial transcripts – two sealed + one digital\n2x2 passport photo in shirt, tie, and jacket, within two weeks of the informational meeting\nVoter registration verification\nFive letters of recommendation'],
+['mta','Letters of Recommendation','Three (3) letters from current financial members in good standing – financial on all three levels (Grand, Province, and Local Chapter) – with a verifiable Kappa Alpha Psi membership number\nTwo (2) signed letters from community sponsors on their official letterhead or corporate stationery'],
+['mta','The three levels','Grand Chapter, Province, and Chapter\nYou will not show as financial until you are financial on all three levels\nFraternal year begins October 1'],
+['mta','The test','100 questions – 70% to pass\nFounders and their occupations, the Greek alphabet, and the organization\'s history\nDocuments due within two weeks of the informational meeting\nMissing more than two sessions or being late – dismissal from the process'],
+['mta','Fees','Application Fee, Membership Intake Fees, and any Additional Fees will be discussed at the Spring 2027 informational meeting.\n\nOctober 14 touch base: approximately $5,200 for initial membership covering two years – includes blazer, official pin, and all three levels'],
+['mta','Mandatory for new members','Western Province Council – Oakland, second week of April 2027\n88th Grand Chapter Meeting (Conclave) – Baltimore, 2027']
+];
+var FKEY='mta.fc.la.v2';
+var known=new Set(store.get(FKEY)||[]);
+function saveKnown(){store.set(FKEY,Array.from(known))}
+var deck='all',order=[],pos=0,flipped=false,onlyUnknown=false;
+var fcEl=$('fc');
+function deckIdx(){return FC.map(function(c,i){return i}).filter(function(i){return deck==='all'||FC[i][0]===deck})}
+function visible(){return order.filter(function(i){return !onlyUnknown||!known.has(i)})}
+function rebuild(keep){
+  order=deckIdx();if(!keep)pos=0;flipped=false;fcEl.classList.remove('flipped');render();
+}
+function render(){
+  var v=visible();
+  var all=deckIdx(),learned=all.filter(function(i){return known.has(i)}).length;
+  $('fc-deckscore').textContent=learned+' of '+all.length+' learned in this deck';
+  $('fc-score').textContent=known.size+' of '+FC.length+' learned';
+  $('fc-bar').style.width=(all.length?Math.round(learned/all.length*100):0)+'%';
+  if(!v.length){
+    $('fc-count').textContent='';$('fc-front').textContent='Every card in this deck is learned';
+    $('fc-title').textContent='';$('fc-back').textContent='';
+    $('fc-hint').textContent='';fcEl.classList.remove('is-known');$('fc-got').textContent='Learned';return;
+  }
+  if(pos>=v.length)pos=0;
+  var c=FC[v[pos]];
+  fcEl.classList.toggle('is-known',known.has(v[pos]));
+  $('fc-got').textContent=known.has(v[pos])?'Unlearn':'Learned';
+  $('fc-count').textContent=(pos+1)+' of '+v.length;
+  $('fc-front').textContent=c[1];
+  $('fc-title').textContent=c[1];
+  $('fc-back').textContent=c[2];
+  $('fc-hint').textContent=flipped?'Tap for the question':'Tap to reveal';
+  ring();
+}
+function flip(){flipped=!flipped;fcEl.classList.toggle('flipped',flipped);$('fc-hint').textContent=flipped?'Tap for the question':'Tap to reveal'}
+function move(d){var v=visible();if(!v.length)return;pos=(pos+d+v.length)%v.length;flipped=false;fcEl.classList.remove('flipped');render()}
+function toggleKnown(){
+  var v=visible();if(!v.length)return;var i=v[pos];
+  known.has(i)?known.delete(i):known.add(i);saveKnown();
+  if(onlyUnknown&&known.has(i)){flipped=false;fcEl.classList.remove('flipped');render()}else move(1);
+}
+function shuffle(){for(var i=order.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=order[i];order[i]=order[j];order[j]=t}pos=0;flipped=false;fcEl.classList.remove('flipped');render()}
+/* deck chips */
+var decksEl=$('decks');
+DECKS.forEach(function(d){
+  var b=document.createElement('button');b.type='button';b.textContent=d[1];b.setAttribute('aria-pressed',String(d[0]===deck));
+  b.addEventListener('click',function(){deck=d[0];decksEl.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed','false')});b.setAttribute('aria-pressed','true');rebuild()});
+  decksEl.appendChild(b);
+});
+fcEl.addEventListener('click',flip);
+fcEl.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();flip()}});
+$('fc-prev').addEventListener('click',function(){move(-1)});
+$('fc-next').addEventListener('click',function(){move(1)});
+$('fc-got').addEventListener('click',toggleKnown);
+$('fc-shuffle').addEventListener('click',shuffle);
+$('fc-unknown').addEventListener('click',function(e){onlyUnknown=!onlyUnknown;e.currentTarget.setAttribute('aria-pressed',String(onlyUnknown));pos=0;flipped=false;fcEl.classList.remove('flipped');render()});
+$('fc-reset').addEventListener('click',function(){if(confirm('Clear every Learned mark?')){known.clear();saveKnown();pos=0;flipped=false;fcEl.classList.remove('flipped');render()}});
+document.addEventListener('keydown',function(e){
+  if(e.target.matches('input,textarea,select,summary'))return;
+  if(!isDesktop()&&!views.cards.classList.contains('active'))return;
+  if(e.key===' '&&document.activeElement!==fcEl){e.preventDefault();flip()}
+  else if(e.key==='ArrowLeft')move(-1);
+  else if(e.key==='ArrowRight')move(1);
+  else if(e.key==='l'||e.key==='L')toggleKnown();
+  else if(e.key==='s'||e.key==='S')shuffle();
+});
+
+/* ---------- progress ring ---------- */
+function ring(){
+  var r=$('ring');if(!r)return;
+  var pct=FC.length?Math.round(known.size/FC.length*100):0;
+  var circ=2*Math.PI*25;
+  r.setAttribute('stroke-dasharray',(circ*pct/100).toFixed(1)+' 999');
+  $('ring-pct').textContent=pct+'%';
+  var done=document.querySelectorAll('ul.check input:checked').length,all=document.querySelectorAll('ul.check input').length;
+  $('ring-sub').textContent=known.size+' of '+FC.length+' cards learned, '+done+' of '+all+' tasks done';
+}
+rebuild();checkMeta();
+
+/* ---------- offline ---------- */
+if('serviceWorker' in navigator&&location.protocol==='https:'){
+  navigator.serviceWorker.register('sw.js').catch(function(){});
+}
+})();
 </script>
 </body>
 </html>
