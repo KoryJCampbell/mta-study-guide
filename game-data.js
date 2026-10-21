@@ -57,12 +57,12 @@ q('h-concept', 'history', 'Kappa is the only Greek letter organization founded w
 q('h-alpha-chapter', 'history', 'Kappa was the first Greek letter organization to establish its Alpha Chapter on the campus of…', 'Indiana University', ['Howard University', 'UCLA']);
 q('h-journal', 'history', 'The Kappa Alpha Nu Journal first appeared in…', 'April 1914', ['December 1914', 'May 1911']);
 q('h-journal-gap', 'history', 'The Journal printed uninterrupted except for 1918 and 1919, due to…', 'World War I', ['The name change', 'The Great Depression']);
-q('h-invisible', 'history', 'In The Journal, “Chapter Invisible” is…', 'In memoriam to Brothers who have passed', ['The list of new initiates', 'News from undergraduate chapters']);
+q('h-invisible', 'history', 'Brothers who have passed away have transitioned into the…', 'Chapter Invisible', ['Alpha Chapter', 'Grand Chapter']);
 
 /* ---------------- Founders ---------------- */
 f('f-father', 'Known as “the Father of Kappa”', 'diggs');
 f('f-dreamer', 'Called “the Dreamer”', 'diggs', ['lee'], 'Diggs is “the Dreamer.” Lee is commonly referred to as “a dreamer.”');
-f('f-a-dreamer', 'Commonly referred to as “a dreamer”; a scholar and tireless worker for the fraternity', 'lee', ['diggs']);
+f('f-a-dreamer', 'Commonly referred to as “a dreamer”; a scholar and tireless worker for the fraternity', 'lee', ['diggs', 'armstrong']);
 f('f-gp1', '1st Grand Polemarch, 1911–1917', 'diggs');
 f('f-chair', 'Permanent chairman (president of Alpha Omega)', 'diggs');
 f('f-boomski', 'Nickname “Boomski”', 'armstrong');
@@ -107,7 +107,7 @@ f('f-army', 'U.S. Army Private, 30th Company, 154th Depot Brigade', 'blakemore',
 f('f-medcorps', 'Army Medical Corps, WWI', 'alexander', ['blakemore']);
 f('f-thirteen', 'Third of thirteen children, five of whom became members of the fraternity', 'grant');
 f('f-enigma', 'Witty and an enigma to most in the fraternity', 'edmonds');
-f('f-writer', 'A quiet, polished, scholarly, and prolific writer', 'diggs');
+f('f-writer', 'A quiet, polished, scholarly, and prolific writer', 'diggs', ['armstrong', 'irvin']);
 p('f-which', 'founders', 'Which of these is one of the Ten Founders?', Object.values(FOUNDERS),
   ['Irven Armstrong', 'Leon W. Stewart', 'Earl B. Dickerson', 'W. Ellis Stewart', 'George F. David, II', 'Jimmy McMikle']);
 
@@ -136,11 +136,11 @@ q('n-hq-city', 'national', 'International Headquarters city', 'Philadelphia, PA'
 q('n-hq-street', 'national', 'International Headquarters street address', '2322-24 North Broad Street', ['1846 Crenshaw Boulevard', '2322-24 South Broad Street']);
 q('n-districts', 'national', 'In 1920, who set up three districts?', 'George F. David, II (3rd GP)', ['W. Ellis Stewart (4th GP)', 'Earl B. Dickerson (5th GP)']);
 q('n-regions', 'national', 'In 1923, who set up regions with Regional Directors?', 'W. Ellis Stewart (4th GP)', ['George F. David, II (3rd GP)', 'Earl B. Dickerson (5th GP)']);
-q('n-prov-who', 'national', 'In 1926, who set up provinces with Province Polemarchs?', 'Earl B. Dickerson (5th GP)', ['George F. David, II (3rd GP)', 'W. Ellis Stewart (4th GP)']);
+q('n-prov-who', 'national', 'Who changed regions to provinces and Regional Directors to Province Polemarchs?', 'Earl B. Dickerson (5th GP)', ['George F. David, II (3rd GP)', 'W. Ellis Stewart (4th GP)']);
 q('n-prov-count', 'national', 'How many provinces?', '12', ['10', '9']);
 const PROV = ['Northern', 'Eastern', 'Southern', 'Western', 'North Central', 'East Central', 'South Central',
   'Southwestern', 'Southeastern', 'Middle Eastern', 'Northeastern', 'Middle Western'];
-const NOT_PROV = ['Northwestern', 'West Central', 'Pacific', 'Midwestern', 'Mid-Atlantic', 'Central'];
+const NOT_PROV = ['Northwestern', 'West Central', 'Pacific', 'Rocky Mountain', 'Mid-Atlantic', 'Central'];
 p('n-prov-in', 'national', 'Which is one of the 12 provinces?', PROV, NOT_PROV);
 p('n-prov-out', 'national', 'Which is NOT one of the 12 provinces?', NOT_PROV, PROV);
 
@@ -162,7 +162,7 @@ q('p-koe', 'province', 'Western Province Keeper of Exchequer (from LA Alumni)', 
   'Gregory Black is Province Keeper of Exchequer and LA Alumni Polemarch. Frederick Braggs is the chapter’s Keeper of Exchequer.');
 q('p-reporter', 'province', 'Western Province Reporter', 'Darryll Holmes', ['Marques Gunn', 'Timothy Lankford'],
   'Darryll Holmes is Province Reporter and LA Alumni MTA Chairman. Marques Gunn is the chapter Reporter.');
-q('p-region', 'province', 'First Polemarch of the Western Region (1925–1931)', 'Judge Carl R. Johnson', ['Thomas J. Bradley', 'Earl B. Dickerson']);
+q('p-region', 'province', 'The first Polemarch of the Western Region', 'Judge Carl R. Johnson', ['Thomas J. Bradley', 'Earl B. Dickerson']);
 q('p-bradley', 'province', 'Grand Polemarch from the Western Province, 1964–1967', 'Thomas J. Bradley', ['Randall C. Bacon', 'Robert L. Harris']);
 q('p-bacon', 'province', 'Grand Polemarch from the Western Province, 1985–1988', 'Randall C. Bacon', ['Thomas J. Bradley', 'Robert L. Harris']);
 q('p-harris', 'province', 'Grand Polemarch from the Western Province, 1991–1995', 'Robert L. Harris', ['Thomas J. Bradley', 'Randall C. Bacon']);
@@ -178,19 +178,19 @@ q('c-first-alumni', 'chapter', 'Los Angeles Alumni was the very first ___ in the
 q('c-founded-by', 'chapter', 'Who established Los Angeles Alumni?', 'Brothers who attended UCLA and stayed in LA',
   ['Brothers sent by the Grand Chapter', 'Founders of the Alpha chapter']);
 q('c-kastle', 'chapter', 'The Kappa Kastle address', '1846 Crenshaw Boulevard', ['2322-24 North Broad Street', '1938 Crenshaw Boulevard']);
-q('c-pgp', 'chapter', 'LA Alumni Past Grand Polemarchs', 'Three', ['Five', 'Eleven']);
-q('c-ppp', 'chapter', 'LA Alumni Past Western Province Polemarchs', 'Eleven', ['Three', 'Five']);
-q('c-laurel', 'chapter', 'LA Alumni Laurel Wreath Laureates', 'Three', ['Five', 'Eleven']);
-q('c-ewd', 'chapter', 'LA Alumni Elder Watson Diggs Awardees', 'Five', ['Three', 'Eleven']);
+q('c-pgp', 'chapter', 'The chapter’s site says it is home to how many Past Grand Polemarchs?', 'Three', ['Five', 'Eleven']);
+q('c-ppp', 'chapter', 'The chapter’s site says it is home to how many Past Western Province Polemarchs?', 'Eleven', ['Three', 'Five']);
+q('c-laurel', 'chapter', 'The chapter’s site says it is home to how many Laurel Wreath Laureates?', 'Three', ['Seven', 'Eleven']);
+q('c-ewd', 'chapter', 'The chapter’s site says it is home to how many Elder Watson Diggs Awardees?', 'Five', ['Three', 'Eleven']);
 q('c-polemarch', 'chapter', 'LA Alumni Polemarch', 'Gregory Black', ['Steve Bayne', 'Darryll Holmes']);
 q('c-vp', 'chapter', 'LA Alumni Vice Polemarch', 'Steve Bayne', ['Gregory Black', 'Eric Fitzpatrick']);
 q('c-kor', 'chapter', 'LA Alumni Keeper of Records', 'Keith Lewis, Jr.', ['Christopher Henderson', 'Frederick Braggs']);
-q('c-koe', 'chapter', 'LA Alumni Keeper of Exchequer', 'Frederick Braggs', ['Gregory Black', 'Keith Lewis, Jr.'],
+q('c-koe', 'chapter', 'LA Alumni chapter Keeper of Exchequer', 'Frederick Braggs', ['Terrance Lark', 'Keith Lewis, Jr.'],
   'Frederick Braggs is the chapter’s Keeper of Exchequer. Gregory Black is the Province’s.');
 q('c-akor', 'chapter', 'LA Alumni Assistant Keeper of Records', 'Christopher Henderson', ['Keith Lewis, Jr.', 'Terrance Lark']);
 q('c-strategus', 'chapter', 'LA Alumni Strategus', 'Eric Fitzpatrick', ['Robert Joiner', 'Marques Gunn']);
 q('c-lt', 'chapter', 'LA Alumni Lt. Strategus', 'Robert Joiner', ['Eric Fitzpatrick', 'Derek S. Hamilton, Sr.']);
-q('c-reporter', 'chapter', 'LA Alumni Reporter', 'Marques Gunn', ['Terrance Lark', 'Darryll Holmes'],
+q('c-reporter', 'chapter', 'LA Alumni chapter Reporter', 'Marques Gunn', ['Terrance Lark', 'Robert Joiner'],
   'Marques Gunn is the chapter Reporter. Darryll Holmes is the Province Reporter.');
 q('c-historian', 'chapter', 'LA Alumni Historian', 'Terrance Lark', ['Marques Gunn', 'Christopher Henderson']);
 q('c-house', 'chapter', 'LA Alumni House Director', 'Derek S. Hamilton, Sr.', ['Robert Joiner', 'Steve Bayne']);
@@ -200,7 +200,7 @@ q('c-kl', 'chapter', 'Kappa League was founded by which chapter?', 'Los Angeles 
 q('c-bwb-birth', 'chapter', 'Los Angeles Alumni is the birthplace of which annual event?', 'The Black & White Ball', ['The Province Council', 'The Grand Chapter Meeting']);
 q('c-bwb-date', 'chapter', 'The 87th Annual Black & White Ball', 'Saturday, November 14, 2026', ['Saturday, November 7, 2026', 'Saturday, December 12, 2026']);
 q('c-bwb-venue', 'chapter', 'Where is the 87th Black & White Ball?', 'The Ritz-Carlton, Marina del Rey', ['The Kappa Kastle', 'The Beverly Hilton']);
-q('c-bwb-host', 'chapter', 'The Black & White Ball is hosted by Los Angeles Alumni and…', 'The Upsilon chapter', ['The Alpha chapter', 'The Western Province']);
+q('c-bwb-host', 'chapter', 'The 87th Black & White Ball is hosted by Los Angeles Alumni and…', 'The Upsilon chapter', ['The Alpha chapter', 'The Western Province']);
 q('c-bwb-supports', 'chapter', 'The Black & White Ball supports…', 'The scholarship program', ['Kappa Kamp', 'The Kappa Kastle']);
 
 /* ---------------- Programs ---------------- */
@@ -215,11 +215,11 @@ q('g-kl-date', 'programs', 'Kappa League was founded on…', 'February 12, 1969'
 q('g-kl-school', 'programs', 'Kappa League was founded at…', 'Alain LeRoy Locke High School', ['Crenshaw High School', 'Dorsey High School']);
 q('g-kl-founders', 'programs', 'Founders of the Kappa Instructional Leadership League', 'Mel L. Davis & Edgar H. Bishop',
   ['Leon W. Stewart & Mel L. Davis', 'Gregory Black & Steve Bayne']);
-q('g-kl-name', 'programs', 'Kappa League is short for the Kappa ___ Leadership League', 'Instructional', ['International', 'Intercollegiate']);
+q('g-kl-name', 'programs', 'Kappa League was founded as the Kappa ___ Leadership League', 'Instructional', ['International', 'Intercollegiate']);
 q('g-kl-adopted', 'programs', 'Kappa League was adopted nationally at the ___ Grand Chapter', '56th', ['Twelfth', '80th']);
 q('g-kl-charlotte', 'programs', 'The 56th Grand Chapter (August 12–15, 1970) was held in…', 'Charlotte, NC', ['Philadelphia, PA', 'Los Angeles, CA']);
 q('g-kl-grades', 'programs', 'Kappa League serves male students in grades…', '6th–12th', ['9th–12th', '3rd–8th']);
-q('g-kl-subset', 'programs', 'Kappa League is a subset of…', 'Guide Right', ['The Kappa Alpha Psi Foundation', 'The MTA']);
+q('g-kl-subset', 'programs', 'Kappa League is a subset of…', 'Guide Right', ['The Province Council', 'The MTA']);
 p('g-kl-area', 'programs', 'Which is one of Kappa League’s five study areas?',
   ['Self-Identity', 'Training', 'Competition', 'Social', 'Health Education'], ['Finance', 'Technology', 'Citizenship', 'Leadership']);
 q('g-kl-competition', 'programs', 'Kappa League study area: politics and sports', 'Competition', ['Social', 'Training']);
