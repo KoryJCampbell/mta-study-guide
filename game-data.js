@@ -10,11 +10,12 @@ export const DECKS = [
   ['greek', 'Greek'], ['mta', 'Spring 2027']
 ];
 
+// Diggs first, then by last name.
 export const FOUNDERS = {
-  diggs: 'Elder Watson Diggs', armstrong: 'Byron Kenneth Armstrong', lee: 'John Milton Lee',
-  asher: 'Henry Tourner Asher', blakemore: 'Marcus Peter Blakemore', grant: 'Guy Levis Grant',
-  caine: 'Paul Waymond Caine', edmonds: 'George Wesley Edmonds', alexander: 'Ezra Dee Alexander',
-  irvin: 'Edward Giles Irvin'
+  diggs: 'Elder Watson Diggs', alexander: 'Ezra Dee Alexander', armstrong: 'Byron Kenneth Armstrong',
+  asher: 'Henry Tourner Asher', blakemore: 'Marcus Peter Blakemore', caine: 'Paul Waymond Caine',
+  edmonds: 'George Wesley Edmonds', grant: 'Guy Levis Grant', irvin: 'Edward Giles Irvin',
+  lee: 'John Milton Lee'
 };
 
 export const GREEK = [

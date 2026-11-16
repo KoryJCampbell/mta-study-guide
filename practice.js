@@ -438,6 +438,8 @@ function fRender(flashLast) {
 }
 function fDone() {
   F.done = true; stopClock();
+  F.found.sort((x, y) => x.i - y.i); // the official order: Diggs first, then by last name
+  fRender();
   const ms = Date.now() - F.t0;
   $('f-clock').textContent = fmtClock(ms);
   $('f-in').disabled = true;
@@ -474,6 +476,7 @@ $('f-form').addEventListener('submit', (e) => {
 $('f-give').addEventListener('click', () => {
   if (F.done) return;
   for (let i = 0; i < 10; i++) if (!F.found.some((f) => f.i === i)) F.found.push({ i, shown: true });
+  F.found.sort((x, y) => x.i - y.i);
   F.done = true; stopClock();
   $('f-in').disabled = true;
   fRender();
