@@ -1,6 +1,7 @@
 // Diamond Run question bank.
 // Every fact here comes from the study guide (index.html), which takes its facts from
-// kappaalphapsi1911.com, wp1911.com, lakappas1938.com and the LA Alumni MTA emails.
+// kappaalphapsi1911.com, wp1911.com, lakappas1938.com, stjude.org, the 87th Black & White Ball
+// souvenir book and the LA Alumni MTA emails.
 // Wrong answers are either true facts that belong to something else, or plainly wrong options.
 
 export const DECKS = [
@@ -155,8 +156,9 @@ p('p-state-in', 'province', 'Which state is in the Western Province?',
   ['Alaska', 'Arizona', 'California', 'Hawaii', 'Idaho', 'Nevada', 'Oregon', 'Utah', 'Washington'],
   ['Colorado', 'New Mexico', 'Montana', 'Texas', 'Wyoming']);
 q('p-clusters', 'province', 'Western Province clusters: Pacific Northwest, Northern California, Southern California, and…', 'Southwest', ['Mountain West', 'Hawaii']);
-q('p-polemarch', 'province', '30th Western Province Polemarch', 'Frederic S. Roots', ['Timothy Lankford', 'Gregory Black']);
-q('p-svp', 'province', 'Western Province Senior Vice-Polemarch', 'Timothy Lankford', ['Jullan Shearin-Sewell', 'Frederic S. Roots']);
+q('p-polemarch', 'province', '30th Western Province Polemarch', 'Frederic S. Roots II', ['Timothy Lankford', 'Gregory Black'],
+  'He signs his name Frederic S. Roots II. The province’s Polemarch list spells it Frederick Roots.');
+q('p-svp', 'province', 'Western Province Senior Vice-Polemarch', 'Timothy Lankford', ['Jullan Shearin-Sewell', 'Frederic S. Roots II']);
 q('p-jvp', 'province', 'Western Province Junior Vice-Polemarch', 'Jullan Shearin-Sewell', ['Timothy Lankford', 'Steve Bayne']);
 q('p-koe', 'province', 'Western Province Keeper of Exchequer (from LA Alumni)', 'Gregory Black', ['Frederick Braggs', 'Darryll Holmes'],
   'Gregory Black is Province Keeper of Exchequer and LA Alumni Polemarch. Frederick Braggs is the chapter’s Keeper of Exchequer.');
@@ -193,15 +195,47 @@ q('c-lt', 'chapter', 'LA Alumni Lt. Strategus', 'Robert Joiner', ['Eric Fitzpatr
 q('c-reporter', 'chapter', 'LA Alumni chapter Reporter', 'Marques Gunn', ['Terrance Lark', 'Robert Joiner'],
   'Marques Gunn is the chapter Reporter. Darryll Holmes is the Province Reporter.');
 q('c-historian', 'chapter', 'LA Alumni Historian', 'Terrance Lark', ['Marques Gunn', 'Christopher Henderson']);
-q('c-house', 'chapter', 'LA Alumni House Director', 'Derek S. Hamilton, Sr.', ['Robert Joiner', 'Steve Bayne']);
+q('c-house', 'chapter', 'LA Alumni House Director', 'Derek S. Hamilton, Sr.', ['Robert Joiner', 'Steve Bayne'],
+  'The chapter site shows Derek S. Hamilton, Sr. The 87th Ball souvenir book prints Derek L. Hamilton, Sr.');
 q('c-mta-chair', 'chapter', 'LA Alumni MTA Chairman', 'Darryll Holmes', ['Marcellus Mayberry', 'Gregory Black']);
 q('c-mta-co', 'chapter', 'LA Alumni MTA Co-Chairman', 'Marcellus Mayberry', ['Darryll Holmes', 'Steve Bayne']);
 q('c-kl', 'chapter', 'Kappa League was founded by which chapter?', 'Los Angeles Alumni', ['Upsilon (UCLA)', 'The Alpha chapter']);
 q('c-bwb-birth', 'chapter', 'Los Angeles Alumni is the birthplace of which annual event?', 'The Black & White Ball', ['The Province Council', 'The Grand Chapter Meeting']);
 q('c-bwb-date', 'chapter', 'The 87th Annual Black & White Ball', 'Saturday, November 14, 2026', ['Saturday, November 7, 2026', 'Saturday, December 12, 2026']);
-q('c-bwb-venue', 'chapter', 'Where is the 87th Black & White Ball?', 'The Ritz-Carlton, Marina del Rey', ['The Kappa Kastle', 'The Beverly Hilton']);
-q('c-bwb-host', 'chapter', 'The 87th Black & White Ball is hosted by Los Angeles Alumni and…', 'The Upsilon chapter', ['The Alpha chapter', 'The Western Province']);
-q('c-bwb-supports', 'chapter', 'The Black & White Ball supports…', 'The scholarship program', ['Kappa Kamp', 'The Kappa Kastle']);
+q('c-bwb-venue', 'chapter', 'Where was the 87th Black & White Ball?', 'The Ritz-Carlton, Marina del Rey', ['The Kappa Kastle', 'The Beverly Hilton']);
+q('c-bwb-host', 'chapter', 'The 87th Black & White Ball was hosted by Los Angeles Alumni and…', 'The Upsilon chapter', ['The Alpha chapter', 'The Western Province']);
+q('c-bwb-supports', 'chapter', 'The Black & White Ball supports…', 'The scholarship program', ['Kappa Kamp', 'The Kappa Kastle'],
+  'Proceeds support scholarships for Upsilon brothers, the Kappa Kourt and Kappa League.');
+q('c-bwb-since', 'chapter', 'Los Angeles Alumni and Upsilon have hosted the Black & White Ball since…', '1936', ['1938', '1949'],
+  'Since 1936. The first Kappa Sweetheart was crowned Queen of the Ball in 1949.');
+q('c-bwb-theme', 'chapter', 'Theme of the 87th Black & White Ball', 'A Legacy of Scholarship & Excellence', ['Leading for Life', 'Achievement in Every Field'],
+  '“A Legacy of Scholarship & Excellence: 87 Years in Black & White.” Leading for Life was the C. Rodger Wilson Leadership Conference theme.');
+q('c-bwb-west', 'chapter', 'Polemarch Black calls the Black & White Ball the longest running affair of its kind…', 'On the West Coast', ['In the nation', 'In the Midwest']);
+q('c-queen-year', 'chapter', 'A Kappa Sweetheart was first crowned Queen of the Ball in…', '1949', ['1936', '1951'],
+  'Jean Cummings of UCLA, at the 14th Ball in 1949.');
+q('c-queen-first', 'chapter', 'The first Kappa Sweetheart crowned Queen of the Ball', 'Jean Cummings (UCLA)', ['Kendall Huddleston (UCLA)', 'Dolores Piper (UCLA)'],
+  'Jean Cummings, 1949. Dolores Piper was crowned in 1952. Kendall Huddleston was the 2025 Queen.');
+q('c-community', 'chapter', '2026 Community Service Award (87th Ball)', 'Danny J. Bakewell, Jr.', ['Kerman Maddox', 'Dr. Kyndall Brown'],
+  'Bakewell leads The Bakewell Company and the Los Angeles Sentinel and is a producer of Taste of Soul.');
+q('c-humanitarian', 'chapter', '2026 Humanitarian Award (87th Ball)', 'Kerman Maddox', ['Danny J. Bakewell, Jr.', 'Dr. Kyndall Brown']);
+q('c-lifetime-2026', 'chapter', '2026 Dr. Theodore T. Alexander, Jr. Lifetime Achievement Award', 'Dr. Kyndall Brown', ['Kerman Maddox', 'Shannon Faulk'],
+  'Dr. Kyndall Brown. Shannon Faulk received it in 2024.');
+q('c-lifetime-name', 'chapter', 'The chapter’s Lifetime Achievement Award is named for…', 'Dr. Theodore T. Alexander, Jr.', ['Randall C. Bacon', 'Edgar H. Bishop'],
+  'First presented in 1997, renamed in 2006 for the 2004 recipient.');
+q('c-lifetime-first', 'chapter', 'The Lifetime Achievement Award was first presented in…', '1997', ['2006', '2004'],
+  'First presented in 1997. Renamed in 2006 for Ted Alexander, its 2004 recipient.');
+q('c-laacf', 'chapter', 'The chapter’s charitable arm, its official charitable partner since 2010', 'LA Alumni Chapter Foundation', ['Kappa Alpha Psi Foundation', 'Guide Right'],
+  'The Los Angeles Alumni Chapter Foundation. The Kappa Alpha Psi Foundation (1981) is the national one.');
+q('c-laacf-pres', 'chapter', 'President of the Los Angeles Alumni Chapter Foundation', 'John Bowman, Jr.', ['Gregory Black', 'Shannon Faulk']);
+q('c-cochair', 'chapter', '87th Ball co-chairs: Shannon Faulk, Derek L. Hamilton, Sr., Robert Joiner and…', 'F. Brent Tilley', ['Darryll Holmes', 'Gregory Black']);
+q('c-pm-before', 'chapter', 'Polemarch 2023–2026, just before Gregory Black', 'Brent Tilley', ['Derek Hamilton', 'John Bowman, Jr.']);
+q('c-pm-2019', 'chapter', 'Polemarch 2019–2023', 'Derek Hamilton', ['Brent Tilley', 'James Batiste, Jr.']);
+q('c-pm-twice', 'chapter', 'Polemarch 1999–2001 and again 2014–2017', 'John Bowman, Jr.', ['Carlton W. Blanton', 'Leonard C. Ricks, III'],
+  'John Bowman, Jr. Carlton W. Blanton also served twice: 1976–1978 and 2004–2007.');
+q('c-pm-first', 'chapter', 'First name on the chapter’s list of past Polemarchs (1923–1929)', 'Dr. William Burlin Humphrey', ['Dr. Edgar J. Johnson', 'Robert F. Greene']);
+q('c-pm-greene', 'chapter', 'Polemarch 1948–1964, when the first Kappa Kastle was dedicated', 'Robert F. Greene', ['Edgar H. Bishop', 'John Brewer']);
+q('c-kastle-1951', 'chapter', 'The first Kappa Kastle (dedicated July 22, 1951) was at…', '2104 South Harvard Boulevard', ['1846 Crenshaw Boulevard', '2322-24 North Broad Street']);
+q('c-gcm', 'chapter', 'Grand Chapter Meetings hosted by LA Alumni (souvenir book)', '1947, 1957 and 1989', ['1938, 1951 and 1970', '1923, 1936 and 1969']);
 
 /* ---------------- Programs ---------------- */
 q('g-gr', 'programs', 'Our National Service Initiative, which includes all our youth programs', 'Guide Right', ['Kappa League', 'Diamonds in the Rough']);
@@ -229,6 +263,14 @@ q('g-kl-social', 'programs', 'Kappa League study area: religion, the arts, enter
 q('g-kl-health', 'programs', 'Kappa League study area: physical fitness, health and safety', 'Health Education', ['Competition', 'Training']);
 q('g-found-year', 'programs', 'The Kappa Alpha Psi Foundation was established in…', '1981', ['1969', '1922']);
 q('g-found-501', 'programs', 'The Foundation is a non-profit, tax-exempt organization under Section…', '501(c)(3)', ['501(c)(7)', '527']);
+q('g-stjude', 'programs', 'Kappa’s national philanthropic partner', 'St. Jude Children’s Research Hospital', ['Kappa Alpha Psi Foundation', 'March of Dimes'],
+  'St. Jude. Kappa has raised more than $3.1 million for St. Jude since 2003.');
+q('g-stjude-since', 'programs', 'Kappa has raised money for St. Jude since…', '2003', ['1981', '2010'],
+  'Since 2003. 1981 is when the Kappa Alpha Psi Foundation was set up; 2010 is when the LA Alumni Chapter Foundation became the chapter’s charitable partner.');
+q('g-stjude-goal', 'programs', 'In 2024 Kappa set a St. Jude goal of…', '$2 million more over three years', ['$1 million more over five years', '$3.1 million in one year'],
+  'Announced March 11, 2024, on top of the more than $3.1 million raised since 2003.');
+q('g-stjude-walk', 'programs', 'The St. Jude Walk is held each…', 'September', ['January', 'April'],
+  'Each September, during Childhood Cancer Awareness Month.');
 
 /* ---------------- Spring 2027 MTA ---------------- */
 q('m-voluntary', 'mta', 'MTA principle: Everything is…', 'Voluntary', ['Mandatory', 'Confidential'], 'Everything is voluntary. The decision is always yours.');
@@ -255,6 +297,15 @@ q('m-cost', 'mta', 'Approximate cost of initial membership (Oct 14 touch base)',
 q('m-includes', 'mta', 'The ~$5,200 includes…', 'Blazer, official pin, and all three levels', ['Local chapter dues only', 'Grand Chapter dues only']);
 q('m-council', 'mta', 'Mandatory for new members in April 2027', 'Western Province Council, Oakland', ['Western Province Council, Las Vegas', 'Grand Chapter, Philadelphia']);
 q('m-conclave', 'mta', 'The 88th Grand Chapter Meeting (Conclave), 2027, is in…', 'Baltimore', ['Philadelphia', 'Charlotte']);
+q('m-vote', 'mta', 'A vote to admit a new member needs…', 'A 75% majority', ['A simple majority', 'A unanimous vote'], 'From the October 28 touch base.');
+q('m-zoom-name', 'mta', 'Your Zoom display name should be…', 'Your full name as on your driver’s license', ['Your first name only', 'A nickname brothers know'],
+  'From the October 28 touch base.');
+q('m-recommenders', 'mta', 'Member recommenders should know you well, be financial on all three levels, and be willing to…', 'Attend your interviews', ['Pay your fees', 'Join the MTA committee']);
+q('m-contact', 'mta', 'Before passing along a brother’s contact info to other interests…', 'Ask him first', ['Post it in the group chat', 'Copy the MTA']);
+q('m-silent', 'mta', 'If you can’t make an event…', 'Tell the MTA ahead of time', ['Skip it quietly', 'Send someone in your place'],
+  'Communicate. Don’t go silent. (October 25 email)');
+q('m-souvenir', 'mta', 'At the Ball, the MTA said to use ___ to find and meet LA Alumni brothers', 'The souvenir book', ['The seating chart', 'The chapter website']);
+q('m-volunteer', 'mta', 'Volunteering at chapter events is…', 'Expected, but not mandatory', ['Required for every event', 'Not expected'], 'From the November 11 touch base.');
 
 /* ---------------- Greek ---------------- */
 q('k-kap', 'greek', 'Kappa Alpha Psi in Greek letters', 'ΚΑΨ', ['ΚΑΦ', 'ΚΑΝ']);
