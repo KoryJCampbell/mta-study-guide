@@ -7,6 +7,7 @@
 <meta name="color-scheme" content="light dark">
 <title>MTA Study Guide | Los Angeles (CA) Alumni Chapter</title>
 <meta name="description" content="Kappa Alpha Psi Membership Training Academy study guide for the Los Angeles (CA) Alumni Chapter, Spring 2027.">
+<meta name="robots" content="noindex, nofollow">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -78,7 +79,8 @@ main{padding:0 18px calc(var(--tabbar) + 24px + env(safe-area-inset-bottom))}
 .view.active{display:block}
 
 .chapter{padding:34px 0 10px;border-top:1px solid var(--rule);scroll-margin-top:56px}
-.chapter:first-child{border-top:0;padding-top:26px}
+.chapter:first-of-type{border-top:0;padding-top:26px}
+.search + .chapter{padding-top:20px}
 .chapter-head{display:flex;align-items:baseline;gap:12px;margin:0 0 14px}
 .chapter-head::before{content:"";width:11px;height:11px;flex:none;background:var(--crimson);transform:rotate(45deg) translateY(-1px)}
 .chapter-head h2{margin:0;font-family:var(--display);font-weight:600;font-size:var(--t3);line-height:1.2;letter-spacing:.01em;color:var(--crimson)}
@@ -179,11 +181,48 @@ ul.check input:checked+span{color:var(--ink-3);text-decoration:line-through;text
 .bar i{display:block;height:100%;background:var(--known);width:0}
 .keys{display:none;margin-top:14px;font-size:var(--t0);color:var(--ink-3)}
 .keys kbd{font-family:var(--body);font-size:.75rem;border:1px solid var(--rule-strong);border-radius:4px;padding:0 5px;margin:0 2px}
+.fc-row button.nav{flex:0 0 54px;font-size:1.5rem;line-height:1;padding:9px 0 11px}
+.fc-row button.miss{color:var(--ink-2)}
+@media (prefers-color-scheme:dark){.fc-row button.miss{color:var(--ink-2)}}
+.fc-how{font-size:var(--t0);color:var(--ink-3);margin:12px 0 0;line-height:1.5}
+.fc-how b{color:var(--ink-2)}
+.fc.listening .face{box-shadow:inset 0 0 0 2px var(--crimson)}
+@media (prefers-color-scheme:dark){.fc.listening .face{box-shadow:inset 0 0 0 2px var(--cream)}}
+.cta-stack{display:grid;gap:8px;margin:0 0 18px}
+.cta-stack .play-cta{margin:0}
+.play-cta.alt{background:var(--paper-2);color:var(--crimson);border:1px solid var(--rule-strong)}
+.play-cta.alt small{color:var(--ink-2)}
+.play-cta.alt:hover{background:var(--cream)}
+@media (prefers-color-scheme:dark){.play-cta.alt{color:var(--cream)}.play-cta.alt:hover{background:var(--rule)}}
+
+/* ---------- search ---------- */
+.search{position:relative;margin:24px 0 2px}
+.search .ic{position:absolute;left:14px;top:14px;width:18px;height:18px;color:var(--ink-3);pointer-events:none}
+.search input{width:100%;font-family:var(--body);font-size:1rem;color:var(--ink);background:var(--paper-2);border:1px solid var(--rule-strong);border-radius:12px;
+  padding:12px 44px 12px 42px;-webkit-appearance:none;appearance:none}
+.search input::placeholder{color:var(--ink-3)}
+.search input::-webkit-search-cancel-button{display:none}
+.search input:focus{outline:none;border-color:var(--crimson);box-shadow:0 0 0 3px rgba(112,17,12,.16)}
+@media (prefers-color-scheme:dark){.search input:focus{border-color:var(--cream);box-shadow:0 0 0 3px rgba(242,235,215,.14)}}
+.q-clear{position:absolute;right:5px;top:5px;width:36px;height:36px;border:0;border-radius:9px;background:transparent;color:var(--ink-3);font-size:1.35rem;line-height:1;cursor:pointer}
+.q-clear:hover{color:var(--ink)}
+.q-results{margin:8px 0 0;border:1px solid var(--rule);border-radius:12px;background:var(--paper);overflow:hidden}
+.q-meta{margin:0;font-size:var(--t0);color:var(--ink-3);padding:8px 14px}
+.q-hit{display:block;width:100%;text-align:left;font-family:var(--body);font-size:var(--t1);color:var(--ink);background:transparent;border:0;border-top:1px solid var(--rule);padding:10px 14px;cursor:pointer}
+.q-hit:hover{background:var(--paper-2)}
+.q-sec{display:block;font-size:var(--t0);color:var(--ink-3)}
+.q-title{display:block;font-weight:600;line-height:1.35}
+.q-snip{display:block;font-size:.92rem;color:var(--ink-2);line-height:1.42;margin-top:2px}
+mark{background:#F1D9A3;color:inherit;border-radius:2px;padding:0 1px}
+@media (prefers-color-scheme:dark){mark{background:#6E4E14}}
+.hit-flash{animation:hitflash 2s ease-out}
+@keyframes hitflash{0%{background:rgba(214,170,74,.38)}100%{background:transparent}}
+details.fold,.timeline li{scroll-margin-top:64px}
 
 /* ---------- tab bar (mobile) ---------- */
-.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:repeat(4,1fr);
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:repeat(5,1fr);
   background:var(--crimson-ink);padding:6px 8px calc(6px + env(safe-area-inset-bottom));border-top:1px solid rgba(0,0,0,.3)}
-.tabbar button,.tabbar a{background:transparent;border:0;color:var(--on-crimson-3);font-size:.78rem;font-weight:600;padding:6px 0 4px;cursor:pointer;text-decoration:none;
+.tabbar button,.tabbar a{background:transparent;border:0;color:var(--on-crimson-3);font-size:.78rem;font-weight:600;line-height:1.2;padding:6px 0 4px;cursor:pointer;text-decoration:none;
   display:flex;flex-direction:column;align-items:center;gap:3px}
 .tabbar button svg,.tabbar a svg{width:22px;height:22px;display:block}
 .play-cta{display:flex;align-items:center;gap:12px;margin:0 0 18px;padding:12px 16px;border-radius:12px;background:var(--crimson);color:var(--cream);text-decoration:none;font-weight:700;line-height:1.3}
@@ -224,7 +263,10 @@ footer{max-width:42rem;margin:28px auto 0;padding:18px 0 0;border-top:1px solid 
   .col{margin:0}
   .view{display:block}
   .chapter{padding:46px 0 14px;scroll-margin-top:0}
-  .chapter:first-child{padding-top:44px}
+  .chapter:first-of-type{padding-top:44px}
+  .search{margin-top:40px}
+  .search + .chapter{padding-top:26px}
+  details.fold,.timeline li{scroll-margin-top:16px}
   .tabbar{display:none}
   .keys{display:block}
   footer{margin-left:0}
@@ -237,7 +279,7 @@ footer{max-width:42rem;margin:28px auto 0;padding:18px 0 0;border-top:1px solid 
   .toc a{padding:3px 10px;font-size:.84rem}
   .toc .grp{margin-bottom:7px}
 }
-@media print{.side,.strip,.tabbar,.decks,.fc-row,.fc-row2,.keys{display:none}.view{display:block}details.fold{display:block}details.fold .a{display:block}}
+@media print{.side,.strip,.tabbar,.decks,.fc-row,.fc-row2,.keys,.search,.cta-stack{display:none}.view{display:block}details.fold{display:block}details.fold .a{display:block}}
 </style>
 </head>
 <body>
@@ -273,7 +315,7 @@ footer{max-width:42rem;margin:28px auto 0;padding:18px 0 0;border-top:1px solid 
       <a href="#mta">The MTA</a><a href="#requirements">Requirements</a><a href="#fees">Fees</a><a href="#dates">Dates</a><a href="#packet">Application Packet</a><a href="#aspirants">What to Do</a>
     </div>
     <div class="grp"><p class="grp-name">Study</p>
-      <a href="#greek">Greek Alphabet</a><a href="#cards">Flash Cards</a><a href="game.html">Diamond Run (3D game)</a>
+      <a href="#greek">Greek Alphabet</a><a href="#cards">Flash Cards</a><a href="practice.html">Practice Test and Drills</a><a href="practice.html#daily">Daily 10</a><a href="game.html">Diamond Run (3D game)</a>
     </div>
   </nav>
 
@@ -292,6 +334,13 @@ footer{max-width:42rem;margin:28px auto 0;padding:18px 0 0;border-top:1px solid 
 
 <!-- ================= GUIDE ================= -->
 <div class="view active" id="view-guide">
+
+<div class="search" role="search">
+  <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+  <input id="q" type="search" placeholder="Search the guide" aria-label="Search the guide" aria-controls="q-results" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search">
+  <button type="button" class="q-clear" id="q-clear" aria-label="Clear search" hidden>&times;</button>
+  <div class="q-results" id="q-results" hidden></div>
+</div>
 
 <section class="chapter" id="history">
   <div class="chapter-head"><h2>Kappa History</h2></div>
@@ -484,13 +533,13 @@ C. Rodger Wilson Leadership Conference &ndash; Statutory Program
 Edgar H. Bishop Polemarch's Summit
 Western Province Kappa League Conference
 St. Jude Children's Research Hospital fundraising team</div></details>
-  <details class="fold"><summary>St. Jude Children&rsquo;s Research Hospital</summary><div class="a">Kappa&rsquo;s national philanthropic partner, the October 28 touch base homework.
+  <details class="fold"><summary>St. Jude Children&rsquo;s Research Hospital</summary><div class="a">Kappa&rsquo;s national philanthropic partner.
 
 Kappa has supported St. Jude since 2003 and has raised more than $3.1 million. In February 2024 the fraternity set a goal of raising $2 million more over three years (announced March 11, 2024, under Grand Polemarch Jimmy McMikle).
 
 Programs: St. Jude Sunday of Hope, run through churches, and the St. Jude Walk, held each September during Childhood Cancer Awareness Month.
 
-The Western Province has a St. Jude fundraising team, and the Los Angeles Alumni Chapter runs its own St. Jude fundraiser (87th Ball souvenir book). The province site doesn&rsquo;t say who leads it for the province, the second half of the homework, so ask at a touch base.</div></details>
+The Western Province has a St. Jude fundraising team, and the Los Angeles Alumni Chapter runs its own St. Jude fundraiser (87th Ball souvenir book). The province site doesn&rsquo;t say who leads the province&rsquo;s St. Jude team.</div></details>
   <details class="fold"><summary>Famous Kappas</summary><div class="a">Ralph Abernathy, Wilt Chamberlain, Montell Jordan, Benjamin Jealous, Oscar Robertson, Cedric the Entertainer, Arthur Ashe, Mike Tomlin, Gayle Sayers, Adrian Fenty, Robert S. Abbott, Bennie Thompson, Donald Byrd, Johnnie Cochran, Ed Gardner, Smokie Norful, John Singleton, Tom Bradley, Bob Johnson, John Conyers, Alcee Hastings, Lerone Bennett Jr., Kwame Jackson, Bill Russell, Tavis Smiley, Marvin Sapp, Colin Kaepernick
 
 Thomas Bradley &ndash; 18th Grand Polemarch (1964-1967)</div></details>
@@ -734,35 +783,12 @@ It is your responsibility to make the effort to get to know members of the Los A
 Meet chapter leadership, get to know your fellow interests, and learn about the requirements for membership and the next steps in the process. Make every effort to attend, be on time, and have your camera on. This is your opportunity to be seen.
 
 Please look for a separate email containing the calendar invite for our bi-weekly Zoom touch base meeting. When you receive it, please accept the invite so we can confirm it reached you.</div></details>
-  <details class="fold"><summary>From the October 14 touch base</summary><div class="a">Pass a 100-question test with 70% accuracy.
-Obtain the necessary documentation within two weeks of the informational meeting; a two-week period to complete applications and prepare for interviews.
-Members must respond to communications promptly. Missing more than two sessions or being late would result in dismissal from the process.
-Act, feel, and be as one within a line. All members equally knowledgeable about Kappa's information, including founders, Greek alphabet, and history.
-Learn basic Kappa Alpha Psi information: the 10 founders, their occupations, the Greek alphabet, and the organization's history.
-Review the national website, Western Province website, and LA Alumni website to familiarize yourself with the three levels of the organization.
-The distinction between founders and charter members.
-Dress professionally. Avoid the word &ldquo;brother.&rdquo; The organization does not haze.
-Importance of humility. New members should be willing to follow established traditions and processes before making changes.
-Attempts to join multiple chapters would be discovered through the portal system.</div></details>
-  <details class="fold"><summary>From the October 25 email</summary><div class="a">None of these asks are required, but this process takes effort. If brothers don&rsquo;t know you, you won&rsquo;t have the votes.
-The asks: fill out the contact form, volunteer at Taste of Soul, come to the Ballot Party Lounge and the Black &amp; White Ball, and attend the bi-weekly Zoom.
-If you can&rsquo;t make something, communicate. Don&rsquo;t go silent.
-Attention to detail is crucial.
-If you are trying to go through another chapter, the chapter already knows.</div></details>
-  <details class="fold"><summary>From the October 28 touch base</summary><div class="a">Meet a few brothers every week over the next five months or so.
-Brothers won&rsquo;t vote for someone they don&rsquo;t know. A vote to admit needs a 75% majority.
-Choose recommenders who are financial on all three levels, know you well, and are willing to attend your interviews.
-Use your full name, as it appears on your driver&rsquo;s license, as your Zoom display name.
-Share what you learn about brothers with the other interests, but ask a brother before passing along his contact information.
-Homework: name Kappa&rsquo;s national philanthropic partner and who leads it for the Western Province. (See St. Jude under Programs.)
-An in-person event is planned before the holidays.</div></details>
-  <details class="fold"><summary>From the November 11 touch base</summary><div class="a">Be on time and pay attention to detail. The meetings will get more formal over time.
-At the Black &amp; White Ball, use the souvenir book to find Los Angeles Alumni brothers, introduce yourself, and check off the ones you&rsquo;ve met.
-Five letters: three from financial members and two from community members on letterhead.
-The informational meeting will cover the detailed requirements.
-Volunteering is expected, but not mandatory.
-A social gathering for interests is planned, possibly the first weekend of December.</div></details>
-  <p class="src">Source: MTA emails of September 24, September 29, October 9 and October 25, 2026; Zoom summaries of the October 14, October 28 and November 11, 2026 Bi-Weekly Touch Bases</p>
+  <details class="fold"><summary>The test</summary><div class="a">100 questions. 70% to pass.
+It covers the 10 Founders and their occupations, the Greek alphabet, and the organization&rsquo;s history.
+Know the three levels of the organization: the Grand Chapter (kappaalphapsi1911.com), the Western Province (wp1911.com) and the Los Angeles Alumni Chapter (lakappas1938.com).
+Know the difference between the Founders and charter members.
+The <a href="practice.html#test">Practice page</a> has a full 100-question practice test.</div></details>
+  <p class="src">Source: MTA emails of September 24, September 29 and October 9, 2026; October 14, 2026 touch base (test format)</p>
 </section>
 
 <section class="chapter" id="requirements">
@@ -786,21 +812,18 @@ Two (2) signed letters from community sponsors on their official letterhead or c
 <section class="chapter" id="fees">
   <div class="chapter-head"><h2>Fees</h2></div>
   <p>Application Fee, Membership Intake Fees, and any Additional Fees will be discussed at the Spring 2027 informational meeting. Date to be announced.</p>
-  <details class="fold"><summary>From the October 14 touch base</summary><div class="a">The initial two-year membership fee is approximately $5,200 and includes a blazer, official pin, and coverage across local, provincial, and national levels.
-
-The fraternal year structure and associated dues.</div></details>
   <details class="fold"><summary>The three levels</summary><div class="a">You will not show as financial until you are financial on all three levels: Grand Chapter, Province, and Chapter.
 
 Grand Chapter &ndash; Alumni $200 per year. Fiscal year starts October 1.
 Western Province &ndash; annual dues of $50.00 per member.
 Los Angeles Alumni &ndash; Financial dues are payable at the beginning of each fraternal year (October 1).</div></details>
-  <p class="src">Source: October 9, 2026 email; October 14, 2026 touch base; kappaalphapsi1911.com; wp1911.com; lakappas1938.com</p>
+  <p class="src">Source: October 9, 2026 email; kappaalphapsi1911.com; wp1911.com; lakappas1938.com</p>
 </section>
 
 <section class="chapter" id="dates">
   <div class="chapter-head"><h2>Dates</h2></div>
   <ul class="timeline">
-    <li><span class="when">Every other Wednesday</span><span class="what">Spring 2027 Membership Interest Bi-Weekly Touch Base<small>Zoom, 7:30 PM, hosted by Darryll Holmes</small></span></li>
+    <li><span class="when">Every other Wednesday</span><span class="what">Spring 2027 Membership Interest Bi-Weekly Touch Base<small>Zoom, hosted by Darryll Holmes</small></span></li>
     <li class="past"><span class="when">October 24, 2026</span><span class="what">Ballot party</span></li>
     <li class="past"><span class="when">November 6&ndash;7, 2026</span><span class="what">2026 C. Rodger Wilson Leadership Conference<small>Occidental College, 1600 Campus Rd, Los Angeles, CA 90041. Theme: Leading for Life: Empowering Brothers for Leadership, Life and Legacy</small></span></li>
     <li class="past"><span class="when">November 14, 2026</span><span class="what">The 87th Annual Black &amp; White Ball<small>Hosted by the Upsilon and Los Angeles Alumni Chapters of Kappa Alpha Psi Fraternity, Inc. The Ritz-Carlton, Marina del Rey</small></span></li>
@@ -850,7 +873,10 @@ Los Angeles Alumni &ndash; Financial dues are payable at the beginning of each f
 <div class="view" id="view-cards">
 <section class="chapter" id="cards">
   <div class="chapter-head"><h2>Flash Cards</h2></div>
-  <a class="play-cta" href="game.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 2.8 21.2 12 12 21.2 2.8 12z"/><path d="M10.2 9.2v5.6l4.6-2.8z" fill="currentColor" stroke="none"/></svg><span>Play Diamond Run<small>The same facts as a 3D game. Steer through the right answer.</small></span><span class="go" aria-hidden="true">→</span></a>
+  <div class="cta-stack">
+    <a class="play-cta" href="practice.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4.5V3h6v1.5"/><path d="m8.6 12.6 2.4 2.4 4.4-4.6"/></svg><span>Practice test, drills and the Daily 10<small>A full 100-question test, type-the-answer drills, and ten new questions every day.</small></span><span class="go" aria-hidden="true">→</span></a>
+    <a class="play-cta alt" href="game.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 2.8 21.2 12 12 21.2 2.8 12z"/><path d="M10.2 9.2v5.6l4.6-2.8z" fill="currentColor" stroke="none"/></svg><span>Play Diamond Run<small>The same facts as a 3D game. Steer through the right answer.</small></span><span class="go" aria-hidden="true">→</span></a>
+  </div>
   <div class="decks" id="decks" role="group" aria-label="Decks"></div>
   <div class="fc-stage">
     <div class="fc" id="fc" tabindex="0" role="button" aria-label="Flash card, tap to flip">
@@ -858,20 +884,23 @@ Los Angeles Alumni &ndash; Financial dues are payable at the beginning of each f
       <div class="face back"><span class="known">Learned</span><div class="count" id="fc-title"></div><div class="back-text" id="fc-back"></div></div>
     </div>
   </div>
-  <p class="fc-hint" id="fc-hint">Tap to flip</p>
+  <p class="fc-hint" id="fc-hint" aria-live="polite">Tap to flip</p>
   <div class="fc-row">
-    <button type="button" id="fc-prev">Back</button>
-    <button type="button" class="primary" id="fc-got">Learned</button>
-    <button type="button" id="fc-next">Next</button>
+    <button type="button" class="nav" id="fc-prev" aria-label="Previous card">&lsaquo;</button>
+    <button type="button" class="miss" id="fc-miss">Missed it</button>
+    <button type="button" class="primary" id="fc-got">Got it</button>
+    <button type="button" class="nav" id="fc-next" aria-label="Next card">&rsaquo;</button>
   </div>
   <div class="fc-row2">
+    <button type="button" id="fc-due" aria-pressed="true">Due only</button>
     <button type="button" id="fc-shuffle">Shuffle</button>
-    <button type="button" id="fc-unknown" aria-pressed="false">Unlearned only</button>
+    <button type="button" id="fc-listen" aria-pressed="false">Listen</button>
     <button type="button" id="fc-reset">Start over</button>
   </div>
   <div class="fc-score"><span id="fc-score"></span><span id="fc-deckscore"></span></div>
   <div class="bar"><i id="fc-bar"></i></div>
-  <p class="keys"><kbd>Space</kbd> flip &nbsp; <kbd>&larr;</kbd><kbd>&rarr;</kbd> move &nbsp; <kbd>L</kbd> learned &nbsp; <kbd>S</kbd> shuffle</p>
+  <p class="fc-how"><b>Got it</b> sends a card away for 1 day, then 3, 7, 14 and 30. <b>Missed it</b> brings it back a few cards later and starts it over. A card counts as learned after three Got its in a row. <b>Listen</b> reads each card aloud, pauses, then reads the answer.</p>
+  <p class="keys"><kbd>Space</kbd> flip &nbsp; <kbd>&larr;</kbd><kbd>&rarr;</kbd> move &nbsp; <kbd>G</kbd> got it &nbsp; <kbd>M</kbd> missed it &nbsp; <kbd>S</kbd> shuffle &nbsp; <kbd>R</kbd> listen &nbsp; <kbd>/</kbd> search</p>
 </section>
 </div><!-- /cards -->
 
@@ -914,7 +943,7 @@ Los Angeles Alumni &ndash; Financial dues are payable at the beginning of each f
     <li><label><input type="checkbox"><span>Set your Zoom display name to your full name as it appears on your driver&rsquo;s license</span></label></li>
     <li><label><input type="checkbox"><span>Meet a few Los Angeles Alumni brothers every week</span></label></li>
     <li><label><input type="checkbox"><span>Go through the member pages in the 87th Ball souvenir book and note who you&rsquo;ve met</span></label></li>
-    <li><label><input type="checkbox"><span>Know the touch base homework: Kappa&rsquo;s national philanthropic partner is St. Jude Children&rsquo;s Research Hospital</span></label></li>
+    <li><label><input type="checkbox"><span>Know Kappa&rsquo;s national philanthropic partner: St. Jude Children&rsquo;s Research Hospital</span></label></li>
     <li><label><input type="checkbox"><span>Choose recommenders who know you well, are financial on all three levels, and can attend your interviews</span></label></li>
     <li><label><input type="checkbox"><span>If you can&rsquo;t make an event, tell the MTA ahead of time</span></label></li>
   </ul>
@@ -932,6 +961,7 @@ Los Angeles Alumni &ndash; Financial dues are payable at the beginning of each f
   <button type="button" role="tab" data-view="guide" aria-selected="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5h7a2 2 0 0 1 2 2v13a1.5 1.5 0 0 0-1.5-1.5H4z"/><path d="M20 5h-7a2 2 0 0 0-2 2v13a1.5 1.5 0 0 1 1.5-1.5H20z"/></svg>Guide</button>
   <button type="button" role="tab" data-view="cards" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="15" height="12" rx="1.5"/><path d="M8 4h13v12"/></svg>Cards</button>
   <button type="button" role="tab" data-view="check" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h3M4 12h3M4 17h3M10 7h10M10 12h10M10 17h10"/></svg>Checklist</button>
+  <a href="practice.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4.5V3h6v1.5"/><path d="m8.6 12.6 2.4 2.4 4.4-4.6"/></svg>Practice</a>
   <a href="game.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 2.8 21.2 12 12 21.2 2.8 12z"/><path d="M10.2 9.2v5.6l4.6-2.8z" fill="currentColor" stroke="none"/></svg>Play</a>
 </nav>
 
@@ -949,6 +979,7 @@ function setView(name,scroll){
   Object.keys(views).forEach(function(k){views[k].classList.toggle('active',k===name)});
   document.querySelectorAll('.tabbar button').forEach(function(b){b.setAttribute('aria-selected',String(b.dataset.view===name))});
   $('strip').style.display=(name==='guide')?'':'none';
+  if(name!=='cards'&&listening)stopListen();
   store.set(VKEY,name);
   if(scroll!==false)window.scrollTo(0,0);
 }
@@ -1062,8 +1093,8 @@ var FC=[
 ['mta','Membership Requirements','Bachelor\'s degree (four-year degree) from an accredited college or university recognized by the U.S. Department of Education\nGood moral character\nOfficial transcripts – two sealed + one digital\n2x2 passport photo in shirt, tie, and jacket, within two weeks of the informational meeting\nVoter registration verification\nFive letters of recommendation'],
 ['mta','Letters of Recommendation','Three (3) letters from current financial members in good standing – financial on all three levels (Grand, Province, and Local Chapter) – with a verifiable Kappa Alpha Psi membership number\nTwo (2) signed letters from community sponsors on their official letterhead or corporate stationery'],
 ['mta','The three levels','Grand Chapter, Province, and Chapter\nYou will not show as financial until you are financial on all three levels\nFraternal year begins October 1'],
-['mta','The test','100 questions – 70% to pass\nFounders and their occupations, the Greek alphabet, and the organization\'s history\nDocuments due within two weeks of the informational meeting\nMissing more than two sessions or being late – dismissal from the process'],
-['mta','Fees','Application Fee, Membership Intake Fees, and any Additional Fees will be discussed at the Spring 2027 informational meeting.\n\nOctober 14 touch base: approximately $5,200 for initial membership covering two years – includes blazer, official pin, and all three levels'],
+['mta','The test','100 questions – 70% to pass\nFounders and their occupations, the Greek alphabet, and the organization\'s history\nThe three levels: Grand Chapter, Western Province, Los Angeles Alumni\nDocuments due within two weeks of the informational meeting'],
+['mta','Fees','Application Fee, Membership Intake Fees, and any Additional Fees will be discussed at the Spring 2027 informational meeting.'],
 ['mta','Mandatory for new members','Western Province Council – Oakland, second week of April 2027\n88th Grand Chapter Meeting (Conclave) – Baltimore, 2027'],
 ['chapter','Chapter history (souvenir book)','Roots in the early 1920s: brothers educated in the South and East, plus Upsilon initiates at UCLA and USC\nThe book says officially chartered December 1923 (the chapter site and the province say August 8, 1938)\n1934: first alumni chapter in the newly defined Western Province, with Edgar J. Johnson as its first Province Polemarch (the province list shows him as No. 9, 1938)\n“The Jewel of the West”'],
 ['chapter','The first Kappa Kastle','Dedicated July 22, 1951\n2104 South Harvard Boulevard, West Adams\nUnder Polemarch Robert F. Greene (1948–1964)\nToday’s Kastle: 1846 S. Crenshaw Boulevard'],
@@ -1075,50 +1106,168 @@ var FC=[
 ['chapter','Los Angeles Alumni Chapter Foundation','The chapter’s charitable arm, and its official charitable partner since 2010\nPresident: John Bowman, Jr.\nScholarships, educational enrichment, financial literacy, career exploration, leadership development'],
 ['chapter','Past Polemarchs (recent)','Current: Gregory Black\n2023–2026 Brent Tilley\n2019–2023 Derek Hamilton\n2014–2017 John Bowman, Jr. (also 1999–2001)\n2011–2014 James Batiste, Jr.\n2008–2011 Leonard C. Ricks, III\n2007–2008 Damon M. Brown\n2004–2007 Carlton W. Blanton (also 1976–1978)'],
 ['chapter','Early Polemarchs','1923–1929 Dr. William Burlin Humphrey (first on the list)\n1929–1931 Dr. William E. Bailey\n1931–1932 Dr. Edgar J. Johnson\n1933–1938 Norman O. Houston\n1948–1964 Robert F. Greene\n1964–1967 Edgar H. Bishop\n1967–1969 Randall C. Bacon'],
-['programs','St. Jude Children’s Research Hospital','Kappa’s national philanthropic partner (the Oct 28 homework)\nSupported since 2003, more than $3.1 million raised\n2024 goal: $2 million more over three years\nSt. Jude Sunday of Hope and the St. Jude Walk each September\nLA Alumni runs its own St. Jude fundraiser'],
-['mta','October 28 touch base','Meet a few brothers every week\nA vote to admit needs a 75% majority\nRecommenders: financial on all three levels, know you well, willing to attend your interviews\nZoom display name: your full name as on your driver’s license\nAsk a brother before sharing his contact info'],
-['mta','October 25 email and November 11 touch base','Attention to detail and punctuality\nIf you can’t make something, communicate. Don’t go silent.\nVolunteering is expected, but not mandatory\nThe informational meeting will cover the detailed requirements']
+['programs','St. Jude Children’s Research Hospital','Kappa’s national philanthropic partner\nSupported since 2003, more than $3.1 million raised\n2024 goal: $2 million more over three years\nSt. Jude Sunday of Hope and the St. Jude Walk each September\nLA Alumni runs its own St. Jude fundraiser']
 ];
-var FKEY='mta.fc.la.v2';
-var known=new Set(store.get(FKEY)||[]);
-function saveKnown(){store.set(FKEY,Array.from(known))}
-var deck='all',order=[],pos=0,flipped=false,onlyUnknown=false;
+/* Spaced repetition. Each card keeps a box (0-5) and a due time, keyed by deck and front,
+   so editing a card's answer or adding cards never scrambles progress. */
+var DAY=864e5,IV=[0,1,3,7,14,30],LEARNED=3,SKEY='mta.fc.la.v3';
+function ck(i){return FC[i][0]+'|'+FC[i][1]}
+var srs=store.get(SKEY);
+if(!srs||typeof srs!=='object'||Array.isArray(srs)){
+  srs={};
+  var old=store.get('mta.fc.la.v2'); /* v2 kept Learned cards by their position in FC */
+  if(Array.isArray(old)){var t0=Date.now();old.forEach(function(i){if(FC[i])srs[ck(i)]={b:LEARNED,d:t0+IV[LEARNED]*DAY,n:1}})}
+  store.set(SKEY,srs);
+}
+function st(i){return srs[ck(i)]}
+function isLearned(i){var s=st(i);return !!s&&s.b>=LEARNED}
+function isDue(i,now){var s=st(i);return !s||s.d<=(now||Date.now())}
+function learnedTotal(){var n=0;for(var i=0;i<FC.length;i++)if(isLearned(i))n++;return n}
+function dueTotal(){var now=Date.now(),n=0;for(var i=0;i<FC.length;i++)if(isDue(i,now))n++;return n}
+function when(ms){
+  var d=ms-Date.now(),x;
+  if(d<=6e4)return 'now';
+  if(d<36e5){x=Math.ceil(d/6e4);return 'in '+x+(x===1?' minute':' minutes')}
+  if(d<20*36e5){x=Math.round(d/36e5);return 'in '+x+(x===1?' hour':' hours')}
+  x=Math.max(1,Math.round(d/DAY));return x===1?'tomorrow':'in '+x+' days';
+}
+var deck='all',q=[],pos=0,flipped=false,dueOnly=true,note='';
 var fcEl=$('fc');
-function deckIdx(){return FC.map(function(c,i){return i}).filter(function(i){return deck==='all'||FC[i][0]===deck})}
-function visible(){return order.filter(function(i){return !onlyUnknown||!known.has(i)})}
-function rebuild(keep){
-  order=deckIdx();if(!keep)pos=0;flipped=false;fcEl.classList.remove('flipped');render();
+function deckIdx(){var a=[];for(var i=0;i<FC.length;i++)if(deck==='all'||FC[i][0]===deck)a.push(i);return a}
+function rebuild(){
+  var all=deckIdx(),now=Date.now();
+  if(dueOnly){
+    /* cards you've seen that are due (weakest first), then cards you haven't seen, in deck order */
+    var seen=all.filter(function(i){return st(i)&&isDue(i,now)}).sort(function(a,b){return st(a).b-st(b).b||st(a).d-st(b).d});
+    q=seen.concat(all.filter(function(i){return !st(i)}));
+  }else q=all;
+  pos=0;note='';show();
 }
+function hint(){
+  var h=$('fc-hint');
+  if(!q.length)return;
+  if(listening){h.textContent=flipped?'Listening: the answer':'Listening: the question';return}
+  h.textContent=note||(flipped?'Tap for the question':'Tap to reveal');
+}
+function setFlip(f){flipped=f;fcEl.classList.toggle('flipped',f);hint()}
+function flip(){if(!q.length)return;note='';setFlip(!flipped)}
 function render(){
-  var v=visible();
-  var all=deckIdx(),learned=all.filter(function(i){return known.has(i)}).length;
-  $('fc-deckscore').textContent=learned+' of '+all.length+' learned in this deck';
-  $('fc-score').textContent=known.size+' of '+FC.length+' learned';
-  $('fc-bar').style.width=(all.length?Math.round(learned/all.length*100):0)+'%';
-  if(!v.length){
-    $('fc-count').textContent='';$('fc-front').textContent='Every card in this deck is learned';
+  var all=deckIdx(),now=Date.now(),l=0;
+  all.forEach(function(i){if(isLearned(i))l++});
+  $('fc-deckscore').textContent=l+' of '+all.length+' learned in this deck';
+  $('fc-score').textContent=learnedTotal()+' of '+FC.length+' learned \u00B7 '+dueTotal()+' due';
+  $('fc-bar').style.width=(all.length?Math.round(l/all.length*100):0)+'%';
+  $('fc-got').disabled=$('fc-miss').disabled=!q.length;
+  if(!q.length){
+    var next=Infinity;all.forEach(function(i){var s=st(i);if(s&&s.d<next)next=s.d});
+    fcEl.classList.remove('is-known');
+    $('fc-count').textContent='';$('fc-front').textContent='You\u2019re caught up on this deck';
     $('fc-title').textContent='';$('fc-back').textContent='';
-    $('fc-hint').textContent='';fcEl.classList.remove('is-known');$('fc-got').textContent='Learned';return;
+    $('fc-hint').textContent=(next<Infinity?'The next card comes back '+when(next)+'. ':'')+'Turn off Due only to keep going.';
+    ring();return;
   }
-  if(pos>=v.length)pos=0;
-  var c=FC[v[pos]];
-  fcEl.classList.toggle('is-known',known.has(v[pos]));
-  $('fc-got').textContent=known.has(v[pos])?'Unlearn':'Learned';
-  $('fc-count').textContent=(pos+1)+' of '+v.length;
-  $('fc-front').textContent=c[1];
-  $('fc-title').textContent=c[1];
-  $('fc-back').textContent=c[2];
-  $('fc-hint').textContent=flipped?'Tap for the question':'Tap to reveal';
-  ring();
+  if(pos>=q.length)pos=0;
+  var i=q[pos],c=FC[i];
+  fcEl.classList.toggle('is-known',isLearned(i));
+  $('fc-count').textContent=(pos+1)+' of '+q.length+(dueOnly?' due':'');
+  $('fc-front').textContent=c[1];$('fc-title').textContent=c[1];$('fc-back').textContent=c[2];
+  hint();ring();
 }
-function flip(){flipped=!flipped;fcEl.classList.toggle('flipped',flipped);$('fc-hint').textContent=flipped?'Tap for the question':'Tap to reveal'}
-function move(d){var v=visible();if(!v.length)return;pos=(pos+d+v.length)%v.length;flipped=false;fcEl.classList.remove('flipped');render()}
-function toggleKnown(){
-  var v=visible();if(!v.length)return;var i=v[pos];
-  known.has(i)?known.delete(i):known.add(i);saveKnown();
-  if(onlyUnknown&&known.has(i)){flipped=false;fcEl.classList.remove('flipped');render()}else move(1);
+function show(){flipped=false;fcEl.classList.remove('flipped');render();if(listening)listenCard()}
+function move(d){if(!q.length)return;pos=(pos+d+q.length)%q.length;note='';show()}
+function gradeCur(ok){
+  if(!q.length)return;
+  var i=q[pos],k=ck(i),s=srs[k],now=Date.now();
+  if(ok&&s&&s.d>now){ /* reviewing early doesn't move it up */
+    note='That card isn\u2019t due yet. It comes back '+when(s.d)+'.';
+    pos=(pos+1)%q.length;show();return;
+  }
+  s=s||{b:0,d:0,n:0};
+  s.b=ok?Math.min(s.b+1,IV.length-1):0;
+  s.d=now+IV[s.b]*DAY;s.n=(s.n||0)+1;srs[k]=s;store.set(SKEY,srs);
+  if(ok){
+    note=(s.b>=LEARNED?'Learned. ':'Got it. ')+'That card comes back '+when(s.d)+'.';
+    if(dueOnly)q.splice(pos,1);else pos++;
+  }else{
+    q.splice(pos,1);q.splice(Math.min(pos+3,q.length),0,i);
+    note=q.length>1?'Missed. That card comes back in a few cards.':'Missed. Try it again.';
+  }
+  if(pos>=q.length)pos=0;
+  show();
 }
-function shuffle(){for(var i=order.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=order[i];order[i]=order[j];order[j]=t}pos=0;flipped=false;fcEl.classList.remove('flipped');render()}
+function shuffle(){for(var i=q.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=q[i];q[i]=q[j];q[j]=t}pos=0;note=q.length>1?'Shuffled.':'';show()}
+
+/* ---------- listen (read cards aloud) ---------- */
+var synth=('speechSynthesis' in window&&'SpeechSynthesisUtterance' in window)?window.speechSynthesis:null;
+var listening=false,lgen=0,ltimer=null,voice=null;
+var GK='Alpha Beta Gamma Delta Epsilon Zeta Eta Theta Iota Kappa Lambda Mu Nu Xi Omicron Pi Rho Sigma Tau Upsilon Phi Chi Psi Omega'.split(' ');
+var GU='\u0391\u0392\u0393\u0394\u0395\u0396\u0397\u0398\u0399\u039A\u039B\u039C\u039D\u039E\u039F\u03A0\u03A1\u03A3\u03A4\u03A5\u03A6\u03A7\u03A8\u03A9';
+var GL='\u03B1\u03B2\u03B3\u03B4\u03B5\u03B6\u03B7\u03B8\u03B9\u03BA\u03BB\u03BC\u03BD\u03BE\u03BF\u03C0\u03C1\u03C3\u03C4\u03C5\u03C6\u03C7\u03C8\u03C9';
+function greekName(ch){var k=GU.indexOf(ch);if(k<0)k=GL.indexOf(ch);if(k<0&&ch==='\u03C2')k=17;return k<0?'':GK[k]}
+function speakable(t){
+  return String(t).split('\n').map(function(line){
+    line=line.replace(/^\s*[\u0391-\u03A9]\s+[\u03B1-\u03C9]\s+([A-Za-z]+)\s*$/,'$1');
+    line=line.replace(/[\u0370-\u03FF]/g,function(ch){var n=greekName(ch);return n?' '+n+' ':''});
+    return line.replace(/\b(\d{1,4})\s*[\u2013-]\s*(\d{1,4})\b/g,'$1 to $2')
+      .replace(/\bWWII\b/g,'World War Two').replace(/\bWWI\b/g,'World War One')
+      .replace(/\s*[\u2013\u2014|]\s*/g,', ').replace(/\u2192/g,', then ').replace(/&/g,' and ')
+      .replace(/\s+/g,' ').replace(/^[,\s]+|[,\s]+$/g,'');
+  }).filter(function(l){return /[A-Za-z0-9]/.test(l)});
+}
+function pickVoice(){
+  if(!synth)return;
+  var vs=synth.getVoices()||[],best=null;
+  for(var i=0;i<vs.length;i++){var v=vs[i];if(!/^en[-_]/i.test(v.lang))continue;
+    var sc=(/^en[-_]US/i.test(v.lang)?2:0)+(v.localService?1:0)+(/natural|enhanced|premium|samantha|aria|google us/i.test(v.name)?2:0);
+    if(!best||sc>best.s)best={v:v,s:sc}}
+  voice=best?best.v:null;
+}
+if(synth){pickVoice();if(synth.addEventListener)synth.addEventListener('voiceschanged',pickVoice)}
+else $('fc-listen').hidden=true;
+function sayLines(lines,done){
+  var g=lgen,k=0;
+  (function next(){
+    if(g!==lgen)return;
+    if(k>=lines.length){done();return}
+    var u=new SpeechSynthesisUtterance(lines[k++]);
+    u.lang='en-US';if(voice)u.voice=voice;u.rate=0.98;
+    u.onend=u.onerror=function(){if(g===lgen)setTimeout(next,140)};
+    if(synth.paused)synth.resume();
+    synth.speak(u);
+  })();
+}
+function listenCard(){
+  lgen++;clearTimeout(ltimer);var g=lgen;
+  function start(){
+    if(g!==lgen||!listening)return;
+    if(!q.length){stopListen();return}
+    var c=FC[q[pos]];
+    setFlip(false);
+    sayLines(speakable(c[1]),function(){
+      ltimer=setTimeout(function(){
+        if(g!==lgen)return;
+        setFlip(true);
+        sayLines(speakable(c[2]),function(){
+          ltimer=setTimeout(function(){if(g===lgen){pos=(pos+1)%q.length;note='';show()}},1800);
+        });
+      },2600);
+    });
+  }
+  if(synth.speaking||synth.pending){synth.cancel();setTimeout(start,90)}else start();
+}
+function stopListen(){
+  if(!listening)return;
+  listening=false;lgen++;clearTimeout(ltimer);if(synth)synth.cancel();
+  $('fc-listen').setAttribute('aria-pressed','false');fcEl.classList.remove('listening');hint();
+}
+function toggleListen(){
+  if(!synth)return;
+  if(listening){stopListen();return}
+  if(!voice)pickVoice();
+  listening=true;$('fc-listen').setAttribute('aria-pressed','true');fcEl.classList.add('listening');
+  listenCard();
+}
+
 /* deck chips */
 var decksEl=$('decks');
 DECKS.forEach(function(d){
@@ -1126,33 +1275,169 @@ DECKS.forEach(function(d){
   b.addEventListener('click',function(){deck=d[0];decksEl.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed','false')});b.setAttribute('aria-pressed','true');rebuild()});
   decksEl.appendChild(b);
 });
+/* a mouse click leaves focus on the button, so blur it and Space keeps flipping the card */
+function tap(fn){return function(e){fn();if(e&&e.detail>0&&e.currentTarget&&e.currentTarget.blur)e.currentTarget.blur()}}
 fcEl.addEventListener('click',flip);
 fcEl.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();flip()}});
-$('fc-prev').addEventListener('click',function(){move(-1)});
-$('fc-next').addEventListener('click',function(){move(1)});
-$('fc-got').addEventListener('click',toggleKnown);
-$('fc-shuffle').addEventListener('click',shuffle);
-$('fc-unknown').addEventListener('click',function(e){onlyUnknown=!onlyUnknown;e.currentTarget.setAttribute('aria-pressed',String(onlyUnknown));pos=0;flipped=false;fcEl.classList.remove('flipped');render()});
-$('fc-reset').addEventListener('click',function(){if(confirm('Clear every Learned mark?')){known.clear();saveKnown();pos=0;flipped=false;fcEl.classList.remove('flipped');render()}});
+$('fc-prev').addEventListener('click',tap(function(){move(-1)}));
+$('fc-next').addEventListener('click',tap(function(){move(1)}));
+$('fc-got').addEventListener('click',tap(function(){gradeCur(true)}));
+$('fc-miss').addEventListener('click',tap(function(){gradeCur(false)}));
+$('fc-shuffle').addEventListener('click',tap(shuffle));
+$('fc-listen').addEventListener('click',tap(toggleListen));
+$('fc-due').addEventListener('click',tap(function(){dueOnly=!dueOnly;$('fc-due').setAttribute('aria-pressed',String(dueOnly));rebuild()}));
+$('fc-reset').addEventListener('click',function(){
+  if(confirm('Start every flash card over? This clears your progress on the cards.')){srs={};store.set(SKEY,srs);rebuild()}
+});
+
+/* ---------- guide search ---------- */
+var qIn=$('q'),qRes=$('q-results'),qClr=$('q-clear'),units=null,lastHits=[],marked=[],qT=null;
+var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function norm(s){
+  s=String(s).toLowerCase();
+  if(s.normalize)s=s.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  return s.replace(/[\u2018\u2019\u02BC]/g,"'").replace(/[\u201C\u201D]/g,'"').replace(/[\u2013\u2014]/g,'-').replace(/\s+/g,' ');
+}
+function txt(el){
+  var out='';
+  (function walk(n){
+    if(n.nodeType===3){out+=n.nodeValue;return}
+    if(n.nodeType!==1||/^(SCRIPT|STYLE|svg)$/i.test(n.tagName))return;
+    for(var c=n.firstChild;c;c=c.nextSibling)walk(c);
+    if(/^(B|SPAN|DIV|P|LI|SMALL|SUMMARY|BR|H2|BLOCKQUOTE)$/.test(n.tagName))out+=' ';
+  })(el);
+  return out.replace(/\s+/g,' ').trim();
+}
+function buildUnits(){
+  units=[];
+  [].forEach.call(document.querySelectorAll('#view-guide section.chapter'),function(sec){
+    var h=sec.querySelector('.chapter-head h2'),name=h?txt(h):'';
+    var body=[].filter.call(sec.children,function(el){return !el.matches('.chapter-head,details,.founders,.src,.timeline')});
+    var bt=body.map(txt).join(' ');
+    if(bt)units.push({sec:name,title:name,text:bt,el:sec,parts:body});
+    [].forEach.call(sec.querySelectorAll('.timeline li'),function(li){
+      var w=li.querySelector('.when'),x=li.querySelector('.what');
+      units.push({sec:name,title:w?txt(w):'',text:x?txt(x):txt(li),el:li,parts:[li]});
+    });
+    [].forEach.call(sec.querySelectorAll('details.fold'),function(d){
+      var s=d.querySelector('summary'),a=d.querySelector('.a');
+      units.push({sec:name,title:s?txt(s):'',text:a?txt(a):'',el:d,parts:[d],fold:d});
+    });
+  });
+  units.forEach(function(u,i){u.i=i;u.nt=norm(u.title);u.nx=norm(u.text)});
+}
+function terms(s){return norm(s).split(' ').map(function(t){return t.replace(/^["'(]+|["'),.?!:;]+$/g,'')}).filter(Boolean)}
+function count(h,t){var n=0,i=h.indexOf(t);while(i>-1&&n<6){n++;i=h.indexOf(t,i+t.length)}return n}
+function search(s){
+  if(!units)buildUnits();
+  var ts=terms(s),phrase=norm(s).trim(),hits=[];
+  if(!ts.length)return hits;
+  units.forEach(function(u){
+    var hay=u.nt+' '+u.nx;
+    if(!ts.every(function(t){return hay.indexOf(t)>-1}))return;
+    var sc=u.fold?1:0;
+    ts.forEach(function(t){if(u.nt.indexOf(t)>-1)sc+=6;sc+=Math.min(count(u.nx,t),5)});
+    if(ts.length>1&&hay.indexOf(phrase)>-1)sc+=8;
+    hits.push({u:u,s:sc});
+  });
+  hits.sort(function(a,b){return b.s-a.s||a.u.i-b.u.i});
+  return hits;
+}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function termRe(ts){
+  var parts=ts.map(function(t){return t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&').replace(/'/g,"['\u2019\u02BC]").replace(/"/g,'["\u201C\u201D]').replace(/-/g,'[-\u2013\u2014]')});
+  parts.sort(function(a,b){return b.length-a.length});
+  return new RegExp('('+parts.join('|')+')','gi');
+}
+function hl(s,re){var out='';s.split(re).forEach(function(p,k){if(p)out+=k%2?'<mark>'+esc(p)+'</mark>':esc(p)});return out}
+function snippet(text,re){
+  re.lastIndex=0;var m=re.exec(text),at=m?m.index:0,a=Math.max(0,at-60),b=Math.min(text.length,at+120),sp;
+  if(a>0){sp=text.indexOf(' ',a);if(sp>-1&&sp<at)a=sp+1}
+  if(b<text.length){sp=text.lastIndexOf(' ',b);if(sp>at)b=sp}
+  return (a>0?'\u2026 ':'')+hl(text.slice(a,b),re)+(b<text.length?' \u2026':'');
+}
+function clearMarks(){
+  marked.forEach(function(m){var p=m.parentNode;if(!p)return;p.replaceChild(document.createTextNode(m.textContent),m);p.normalize()});
+  marked=[];
+}
+function markIn(root,re){
+  var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null),nodes=[],n;
+  while((n=w.nextNode()))nodes.push(n);
+  nodes.forEach(function(node){
+    var bits=node.nodeValue.split(re);if(bits.length<2)return;
+    var f=document.createDocumentFragment();
+    bits.forEach(function(p,k){if(!p)return;if(k%2){var mk=document.createElement('mark');mk.textContent=p;f.appendChild(mk);marked.push(mk)}else f.appendChild(document.createTextNode(p))});
+    node.parentNode.replaceChild(f,node);
+  });
+}
+function showResults(){
+  var s=qIn.value;qClr.hidden=!s;clearMarks();
+  if(s.trim().length<2){qRes.hidden=true;qRes.innerHTML='';lastHits=[];return}
+  var hits=search(s),re=termRe(terms(s)),html='';
+  html+='<p class="q-meta" role="status">'+(hits.length?hits.length+(hits.length===1?' match':' matches'):'No matches. Try another word.')+'</p>';
+  hits.slice(0,12).forEach(function(h){
+    var u=h.u;
+    html+='<button type="button" class="q-hit" data-i="'+u.i+'">'+(u.title!==u.sec?'<span class="q-sec">'+esc(u.sec)+'</span>':'')+
+      '<span class="q-title">'+hl(u.title,re)+'</span><span class="q-snip">'+snippet(u.text,re)+'</span></button>';
+  });
+  if(hits.length>12)html+='<p class="q-meta">Showing the top 12. Add another word to narrow it down.</p>';
+  qRes.innerHTML=html;qRes.hidden=false;lastHits=hits;
+}
+function go(u){
+  clearMarks();
+  if(!isDesktop()&&!views.guide.classList.contains('active'))setView('guide',false);
+  if(u.fold)u.fold.open=true;
+  var re=termRe(terms(qIn.value));
+  u.parts.forEach(function(p){markIn(p,re)});
+  if(!isDesktop())qIn.blur();
+  u.el.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});
+  u.el.classList.remove('hit-flash');void u.el.offsetWidth;u.el.classList.add('hit-flash');
+}
+function clearSearch(){qIn.value='';showResults()}
+qIn.addEventListener('input',function(){clearTimeout(qT);qT=setTimeout(showResults,120)});
+qIn.addEventListener('keydown',function(e){
+  if(e.key==='Enter'){e.preventDefault();clearTimeout(qT);showResults();if(lastHits.length)go(lastHits[0].u)}
+  else if(e.key==='Escape'){clearSearch()}
+  else if(e.key==='ArrowDown'){var f=qRes.querySelector('.q-hit');if(f){e.preventDefault();f.focus()}}
+});
+qRes.addEventListener('click',function(e){var b=e.target.closest('.q-hit');if(b)go(units[+b.dataset.i])});
+qRes.addEventListener('keydown',function(e){
+  var all=[].slice.call(qRes.querySelectorAll('.q-hit')),k=all.indexOf(document.activeElement);
+  if(e.key==='ArrowDown'&&k>-1&&k<all.length-1){e.preventDefault();all[k+1].focus()}
+  else if(e.key==='ArrowUp'){e.preventDefault();if(k>0)all[k-1].focus();else qIn.focus()}
+  else if(e.key==='Escape'){qIn.focus()}
+});
+qClr.addEventListener('click',function(){clearSearch();qIn.focus()});
+
+/* ---------- keyboard ---------- */
+function cardsInView(){
+  if(!isDesktop())return views.cards.classList.contains('active');
+  var r=$('cards').getBoundingClientRect(),h=window.innerHeight;return r.top<h*0.75&&r.bottom>h*0.25;
+}
 document.addEventListener('keydown',function(e){
-  if(e.target.matches('input,textarea,select,summary'))return;
-  if(!isDesktop()&&!views.cards.classList.contains('active'))return;
-  if(e.key===' '&&document.activeElement!==fcEl){e.preventDefault();flip()}
+  if(e.metaKey||e.ctrlKey||e.altKey)return;
+  var t=e.target,tag=t&&t.tagName;
+  if(tag==='INPUT'||tag==='TEXTAREA'||tag==='SELECT'||(t&&t.isContentEditable))return;
+  if(e.key==='/'){e.preventDefault();if(!isDesktop()&&!views.guide.classList.contains('active'))setView('guide');qIn.focus();return}
+  if(!cardsInView())return;
+  if(e.key===' '){if(t===fcEl||tag==='BUTTON'||tag==='A'||tag==='SUMMARY')return;e.preventDefault();flip()}
   else if(e.key==='ArrowLeft')move(-1);
   else if(e.key==='ArrowRight')move(1);
-  else if(e.key==='l'||e.key==='L')toggleKnown();
-  else if(e.key==='s'||e.key==='S')shuffle();
+  else if(/^[gl]$/i.test(e.key))gradeCur(true);
+  else if(/^m$/i.test(e.key))gradeCur(false);
+  else if(/^s$/i.test(e.key))shuffle();
+  else if(/^r$/i.test(e.key))toggleListen();
 });
 
 /* ---------- progress ring ---------- */
 function ring(){
   var r=$('ring');if(!r)return;
-  var pct=FC.length?Math.round(known.size/FC.length*100):0;
+  var n=learnedTotal(),pct=FC.length?Math.round(n/FC.length*100):0;
   var circ=2*Math.PI*25;
   r.setAttribute('stroke-dasharray',(circ*pct/100).toFixed(1)+' 999');
   $('ring-pct').textContent=pct+'%';
   var done=document.querySelectorAll('ul.check input:checked').length,all=document.querySelectorAll('ul.check input').length;
-  $('ring-sub').textContent=known.size+' of '+FC.length+' cards learned, '+done+' of '+all+' tasks done';
+  $('ring-sub').textContent=n+' of '+FC.length+' cards learned, '+done+' of '+all+' tasks done';
 }
 rebuild();checkMeta();
 

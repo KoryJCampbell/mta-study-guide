@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#70110C">
+<meta name="color-scheme" content="light dark">
+<title>Practice | MTA Study Guide</title>
+<meta name="description" content="Practice test, recall drills and the Daily 10 for the Los Angeles (CA) Alumni Chapter MTA study guide, Spring 2027.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<style>
+:root{
+  --crimson:#70110C; --crimson-deep:#4A0A07; --crimson-ink:#2E0604;
+  --cream:#F2EBD7; --paper:#FBF8F1; --paper-2:#F2EBD7; --card:#FFFDF8;
+  --ink:#221A17; --ink-2:#5E514B; --ink-3:#8E8179;
+  --rule:#DCD2BE; --rule-strong:#C9BBA0;
+  --good:#2F6B45; --good-bg:#E5F0E8; --bad:#A3271C; --bad-bg:#F6DEDA;
+  --accent:var(--crimson); --accent-ink:var(--cream); --head:var(--crimson);
+  --on-crimson:#F2EBD7; --on-crimson-2:rgba(242,235,215,.74); --on-crimson-3:rgba(242,235,215,.45);
+  --display:"Cinzel","Trajan Pro","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --body:"Source Sans 3",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#1A1311; --paper-2:#241B18; --card:#211816;
+    --ink:#EFE6D6; --ink-2:#BBAEA2; --ink-3:#8E8179;
+    --rule:#3B2E2A; --rule-strong:#55433D;
+    --good:#8FC9A2; --good-bg:#1F3328; --bad:#F0A097; --bad-bg:#3D1D19;
+    --crimson:#9A2419; --accent:#E9DDC2; --accent-ink:#2E0604; --head:var(--cream);
+  }
+}
+*{box-sizing:border-box}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+@media (min-width:900px){html{font-size:17px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--head)}
+button{font-family:var(--body);color:inherit}
+:focus-visible{outline:3px solid var(--crimson);outline-offset:2px}
+@media (prefers-color-scheme:dark){:focus-visible{outline-color:var(--cream)}}
+[hidden]{display:none!important}
+
+/* masthead */
+.mast{background:linear-gradient(180deg,#70110C 0%,#4A0A07 100%);color:var(--on-crimson);padding:calc(12px + env(safe-area-inset-top)) 18px 18px}
+.mast-in{max-width:44rem;margin:0 auto}
+.home{display:inline-flex;align-items:center;gap:6px;color:var(--on-crimson-2);text-decoration:none;font-size:.9rem;font-weight:600;padding:4px 0}
+.home:hover{color:var(--cream)}
+.ident{display:flex;align-items:center;gap:14px;margin-top:10px}
+.ident svg{width:48px;height:48px;flex:none}
+.ident .org{margin:0;font-family:var(--display);font-weight:600;font-size:.68rem;letter-spacing:.06em;color:var(--on-crimson-2)}
+.ident h1{margin:2px 0 0;font-family:var(--display);font-weight:700;font-size:1.6rem;line-height:1.1;color:var(--cream);letter-spacing:.02em}
+.ident .sub{margin:3px 0 0;font-size:.88rem;color:var(--on-crimson-2)}
+.modes{position:sticky;top:0;z-index:20;background:var(--crimson-ink);display:flex;justify-content:center;gap:6px;padding:8px 12px;border-bottom:1px solid rgba(0,0,0,.25)}
+.modes button{flex:0 1 auto;border:0;background:transparent;color:var(--on-crimson-2);font-size:.92rem;font-weight:600;padding:8px 14px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.modes button[aria-selected="true"]{background:var(--cream);color:var(--crimson-ink)}
+
+main{max-width:44rem;margin:0 auto;padding:24px 18px calc(56px + env(safe-area-inset-bottom))}
+.eyebrow{margin:0;font-size:.74rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+h2{margin:4px 0 10px;font-family:var(--display);font-weight:600;font-size:1.55rem;line-height:1.2;color:var(--head)}
+h3{margin:28px 0 10px;font-family:var(--display);font-weight:600;font-size:1.08rem;color:var(--head)}
+p{margin:0 0 12px}
+.quiet{color:var(--ink-2)}
+.small{font-size:.86rem;color:var(--ink-3)}
+
+.cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:12px;background:var(--crimson);color:#F2EBD7;
+  font-weight:700;font-size:1.02rem;padding:13px 22px;cursor:pointer;min-height:48px}
+.cta:hover{filter:brightness(1.08)}
+.cta:disabled{opacity:.45;cursor:default;filter:none}
+.ghost{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--rule-strong);border-radius:12px;background:transparent;color:var(--head);
+  font-weight:600;font-size:.98rem;padding:11px 18px;cursor:pointer;min-height:46px;text-decoration:none}
+.ghost:hover{background:var(--paper-2)}
+.ghost:disabled{opacity:.4;cursor:default;background:transparent}
+.link{border:0;background:transparent;color:var(--ink-2);font-size:.9rem;text-decoration:underline;text-underline-offset:3px;padding:8px 2px;cursor:pointer}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.spread{display:flex;justify-content:space-between;align-items:center;gap:10px}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 18px}
+.chips button{border:1px solid var(--rule-strong);background:transparent;color:var(--ink-2);font-weight:600;font-size:.92rem;padding:7px 14px;border-radius:999px;cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--crimson);border-color:var(--crimson);color:#F2EBD7}
+.chip-label{margin:0 0 6px;font-size:.8rem;font-weight:600;color:var(--ink-3)}
+
+.box{background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:16px 18px;margin:16px 0}
+.box p:last-child{margin-bottom:0}
+
+/* history list */
+.hist{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.hist li{display:grid;grid-template-columns:5.5rem 1fr auto;gap:10px;align-items:baseline;padding:9px 2px;border-bottom:1px solid var(--rule);font-size:.94rem}
+.hist li span:first-child{color:var(--ink-3)}
+.hist b{font-variant-numeric:tabular-nums}
+.pass{color:var(--good)} .fail{color:var(--bad)}
+
+/* question */
+.qtop{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:.88rem;color:var(--ink-2)}
+.qtop .sec{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--head)}
+.prog{height:5px;background:var(--rule);border-radius:3px;overflow:hidden;margin:8px 0 0}
+.prog i{display:block;height:100%;width:0;background:var(--crimson);transition:width .25s}
+@media (prefers-color-scheme:dark){.prog i{background:var(--cream)}}
+.qtext{margin:20px 0 18px;font-size:1.32rem;line-height:1.35;font-weight:600;color:var(--ink);scroll-margin-top:70px}
+.opts{display:grid;gap:10px}
+.opt{display:flex;gap:12px;align-items:center;width:100%;text-align:left;border:1px solid var(--rule-strong);border-radius:12px;background:var(--card);
+  color:var(--ink);font-size:1.04rem;line-height:1.35;padding:13px 14px;cursor:pointer;min-height:54px;transition:background .12s,border-color .12s}
+.opt:hover{border-color:var(--crimson)}
+.opt .k{flex:none;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--rule-strong);display:grid;place-items:center;font-size:.8rem;font-weight:700;color:var(--ink-2)}
+.opt[aria-pressed="true"]{border-color:var(--crimson);box-shadow:inset 0 0 0 1px var(--crimson);background:var(--paper-2)}
+.opt[aria-pressed="true"] .k{background:var(--crimson);border-color:var(--crimson);color:#F2EBD7}
+.opt.right{border-color:var(--good);box-shadow:inset 0 0 0 1px var(--good);background:var(--good-bg)}
+.opt.right .k{background:var(--good);border-color:var(--good);color:var(--paper)}
+.opt.wrong{border-color:var(--bad);box-shadow:inset 0 0 0 1px var(--bad);background:var(--bad-bg)}
+.opt.wrong .k{background:var(--bad);border-color:var(--bad);color:var(--paper)}
+.opt:disabled{cursor:default}
+.opt:disabled:not(.right):not(.wrong){opacity:.6}
+.qnav{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
+.qnav .cta,.qnav .ghost{min-width:7.5rem}
+.feedback{margin:16px 0 0;padding:12px 14px;border-radius:12px;font-size:.98rem;line-height:1.45}
+.feedback.ok{background:var(--good-bg);color:var(--good)}
+.feedback.no{background:var(--bad-bg);color:var(--ink)}
+.feedback.no b{color:var(--bad)}
+.feedback .n{display:block;margin-top:4px;color:var(--ink-2);font-size:.92rem}
+
+/* results */
+.hero{border-radius:16px;padding:22px 20px;text-align:center;margin:0 0 6px;border:1px solid var(--rule)}
+.hero.pass{background:var(--good-bg);border-color:transparent}
+.hero.fail{background:var(--bad-bg);border-color:transparent}
+.hero .big{margin:0;font-family:var(--display);font-weight:700;font-size:3.2rem;line-height:1;font-variant-numeric:tabular-nums}
+.hero.pass .big{color:var(--good)} .hero.fail .big{color:var(--bad)}
+.hero .verdict{margin:8px 0 0;font-weight:700;font-size:1.08rem}
+.hero .meta{margin:4px 0 0;color:var(--ink-2);font-size:.92rem}
+.secs{list-style:none;margin:0;padding:0}
+.secs li{display:grid;grid-template-columns:minmax(8rem,1fr) 3.4rem minmax(5rem,1.3fr) 2.8rem;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--rule);font-size:.95rem}
+.secs .sc,.secs .pc{font-variant-numeric:tabular-nums;color:var(--ink-2);text-align:right}
+.secs .bar{height:8px;background:var(--rule);border-radius:4px;overflow:hidden}
+.secs .bar i{display:block;height:100%;background:var(--good);border-radius:4px}
+.secs li.low .bar i{background:var(--bad)}
+.secs li.low .pc{color:var(--bad);font-weight:700}
+.misses{list-style:none;margin:0;padding:0;counter-reset:m}
+.misses li{padding:12px 0;border-bottom:1px solid var(--rule)}
+.misses .mq{margin:0 0 4px;font-weight:600}
+.misses .you{margin:0;color:var(--ink-3);font-size:.94rem}
+.misses .you s{text-decoration-color:var(--bad)}
+.misses .ans{margin:0;font-size:.98rem}
+.misses .ans b{color:var(--good)}
+.misses .note{margin:4px 0 0;color:var(--ink-2);font-size:.9rem}
+
+/* drills */
+.drills{display:grid;gap:10px;margin-top:6px}
+.drill{display:block;width:100%;text-align:left;border:1px solid var(--rule);border-radius:14px;background:var(--card);padding:15px 16px;cursor:pointer}
+.drill:hover{border-color:var(--crimson)}
+.drill b{display:block;font-family:var(--display);font-weight:600;font-size:1.08rem;color:var(--head)}
+.drill span{display:block;color:var(--ink-2);font-size:.95rem;margin-top:2px}
+.drill em{display:block;font-style:normal;font-size:.84rem;color:var(--ink-3);margin-top:6px}
+.entry{display:flex;gap:8px;margin:10px 0 0}
+.entry input{flex:1;min-width:0;font-family:var(--body);font-size:1.06rem;color:var(--ink);background:var(--card);border:1px solid var(--rule-strong);border-radius:12px;padding:12px 14px;-webkit-appearance:none;appearance:none}
+.entry input:focus{outline:none;border-color:var(--crimson);box-shadow:0 0 0 3px rgba(112,17,12,.16)}
+@media (prefers-color-scheme:dark){.entry input:focus{border-color:var(--cream);box-shadow:0 0 0 3px rgba(242,235,215,.14)}}
+.entry input:disabled{opacity:.5}
+.msg{min-height:1.5em;margin:8px 2px 0;font-size:.96rem;color:var(--ink-2)}
+.msg.ok{color:var(--good)} .msg.no{color:var(--bad)}
+.shake{animation:shake .32s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.slots{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:1fr;gap:6px}
+@media (min-width:560px){.slots{grid-template-columns:1fr 1fr}}
+.slots li{display:flex;gap:10px;align-items:center;border:1px dashed var(--rule-strong);border-radius:10px;padding:9px 12px;min-height:44px;color:var(--ink-3);font-size:.98rem}
+.slots li .n{flex:none;width:1.4rem;font-family:var(--display);font-weight:600;color:var(--ink-3);text-align:right}
+.slots li.got{border-style:solid;border-color:var(--good);background:var(--good-bg);color:var(--ink)}
+.slots li.shown{border-style:solid;border-color:var(--rule-strong);background:var(--paper-2);color:var(--ink-2)}
+.slots li.flash{animation:pop .4s}
+@keyframes pop{0%{transform:scale(.96)}60%{transform:scale(1.02)}100%{transform:scale(1)}}
+.drill-foot{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-top:16px;color:var(--ink-2);font-size:.92rem}
+.drill-foot .clock{font-variant-numeric:tabular-nums;font-weight:700;color:var(--ink)}
+.drill-foot .grow{flex:1}
+.tiles{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:14px 0 4px}
+@media (min-width:560px){.tiles{grid-template-columns:repeat(8,1fr)}}
+.tiles div{border:1px solid var(--rule);border-radius:9px;padding:6px 2px 5px;text-align:center;min-height:52px;background:var(--card)}
+.tiles b{display:block;font-family:var(--display);font-weight:600;font-size:1.05rem;color:var(--ink-3);line-height:1.2}
+.tiles span{display:block;font-size:.66rem;color:var(--ink-3);line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tiles .cur{border:2px solid var(--crimson);background:var(--paper-2)}
+@media (prefers-color-scheme:dark){.tiles .cur{border-color:var(--cream)}}
+.tiles .ok b{color:var(--head)} .tiles .ok span{color:var(--ink-2)}
+.tiles .miss{border-color:var(--bad);background:var(--bad-bg)} .tiles .miss b,.tiles .miss span{color:var(--bad)}
+.symbol{font-family:var(--display);font-weight:600;font-size:4.2rem;line-height:1.1;text-align:center;color:var(--head);margin:18px 0 6px;letter-spacing:.06em}
+
+/* daily */
+.dias{display:flex;gap:10px;justify-content:center;margin:14px 0 10px;flex-wrap:wrap}
+.dias i{width:13px;height:13px;transform:rotate(45deg);border:1.5px solid var(--rule-strong);border-radius:2px;display:block}
+.dias i.r{background:var(--crimson);border-color:var(--crimson)}
+@media (prefers-color-scheme:dark){.dias i.r{background:var(--cream);border-color:var(--cream)}}
+.dias i.w{border-color:var(--ink-3);background:transparent}
+.dias i.cur{border-color:var(--crimson);box-shadow:0 0 0 2px var(--paper),0 0 0 3.5px var(--crimson)}
+.dias.big{gap:12px;margin:12px 0 8px;flex-wrap:nowrap}
+.dias.big i{width:15px;height:15px}
+.share-box{white-space:pre-line;font-size:.95rem;background:var(--paper-2);border-radius:12px;padding:12px 14px;margin:14px 0 10px;color:var(--ink);font-variant-numeric:tabular-nums}
+.week{display:flex;gap:6px;justify-content:center;margin:12px 0 0}
+.week span{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:.7rem;color:var(--ink-3);width:2.4rem}
+.week b{width:2.1rem;height:2.1rem;border-radius:50%;display:grid;place-items:center;font-size:.8rem;border:1px solid var(--rule);color:var(--ink-2);font-variant-numeric:tabular-nums}
+.week b.on{background:var(--crimson);border-color:var(--crimson);color:#F2EBD7}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translate(-50%,20px);background:var(--ink);color:var(--paper);padding:10px 18px;border-radius:999px;font-weight:600;font-size:.94rem;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:50}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+footer{max-width:44rem;margin:0 auto;padding:18px 18px calc(28px + env(safe-area-inset-bottom));border-top:1px solid var(--rule);font-size:.86rem;color:var(--ink-3)}
+footer a{color:var(--ink-2)}
+@media (max-width:380px){.modes button{padding:8px 11px;font-size:.88rem}.qtext{font-size:1.22rem}}
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="mast-in">
+    <a class="home" href="./">&lsaquo; Study guide</a>
+    <div class="ident">
+      <svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 3 L97 50 L50 97 L3 50 Z" fill="#F2EBD7"/><path d="M50 15 L85 50 L50 85 L15 50 Z" fill="none" stroke="#70110C" stroke-width="1.6"/><text x="50" y="57" text-anchor="middle" font-family="Cinzel,'Trajan Pro',Palatino,serif" font-weight="700" font-size="21" fill="#70110C">&Kappa;&Alpha;&Psi;</text></svg>
+      <div>
+        <p class="org">Los Angeles (CA) Alumni Chapter &middot; MTA Spring 2027</p>
+        <h1>Practice</h1>
+        <p class="sub">A practice test, type-the-answer drills, and the Daily 10</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="modes" role="tablist" aria-label="Practice modes">
+  <button type="button" role="tab" id="tab-test" aria-controls="m-test" data-mode="test" aria-selected="false">Practice test</button>
+  <button type="button" role="tab" id="tab-drills" aria-controls="m-drills" data-mode="drills" aria-selected="false">Drills</button>
+  <button type="button" role="tab" id="tab-daily" aria-controls="m-daily" data-mode="daily" aria-selected="false">Daily 10</button>
+</nav>
+
+<main>
+
+<!-- ============ PRACTICE TEST ============ -->
+<section id="m-test" role="tabpanel" aria-labelledby="tab-test" hidden>
+  <div id="t-intro">
+    <p class="eyebrow">Practice test</p>
+    <h2><span id="t-len-h">100</span> questions. 70% to pass.</h2>
+    <p class="quiet">Questions come from every part of the guide: the Founders and their occupations, the Greek alphabet, the history, the fraternity, the Western Province, the Los Angeles Alumni Chapter and the programs. Each test is a new mix. Nothing is timed, and your place is saved if you leave.</p>
+    <p class="chip-label" id="len-label">Length</p>
+    <div class="chips" id="t-len" role="group" aria-labelledby="len-label">
+      <button type="button" data-n="100" aria-pressed="true">100 questions</button>
+      <button type="button" data-n="50" aria-pressed="false">50</button>
+      <button type="button" data-n="25" aria-pressed="false">25</button>
+    </div>
+    <div class="box" id="t-resume" hidden>
+      <p id="t-resume-text"></p>
+      <div class="row"><button type="button" class="cta" id="t-resume-go">Resume</button><button type="button" class="link" id="t-discard">Discard it</button></div>
+    </div>
+    <div class="row" id="t-start-row"><button type="button" class="cta" id="t-start">Start the test</button><button type="button" class="ghost" id="t-last" hidden>Last results</button></div>
+    <div id="t-hist-wrap" hidden>
+      <h3>Your attempts</h3>
+      <ul class="hist" id="t-history"></ul>
+    </div>
+  </div>
+
+  <div id="t-run" hidden>
+    <div class="qtop"><span id="t-pos"></span><span class="sec" id="t-sec"></span></div>
+    <div class="prog" aria-hidden="true"><i id="t-bar"></i></div>
+    <p class="qtext" id="t-q" aria-live="polite"></p>
+    <div class="opts" id="t-opts"></div>
+    <div class="qnav">
+      <button type="button" class="ghost" id="t-back">&lsaquo; Back</button>
+      <button type="button" class="cta" id="t-next">Next &rsaquo;</button>
+    </div>
+    <div class="spread" style="margin-top:10px">
+      <span class="small" id="t-answered"></span>
+      <button type="button" class="link" id="t-exit">Save and exit</button>
+    </div>
+  </div>
+
+  <div id="t-done" hidden>
+    <div class="hero" id="t-hero">
+      <p class="big" id="t-pct"></p>
+      <p class="verdict" id="t-verdict"></p>
+      <p class="meta" id="t-meta"></p>
+    </div>
+    <h3>By section</h3>
+    <ul class="secs" id="t-secs"></ul>
+    <h3 id="t-miss-h"></h3>
+    <ul class="misses" id="t-misses"></ul>
+    <div class="row" style="margin-top:20px">
+      <button type="button" class="cta" id="t-retake"></button>
+      <button type="button" class="ghost" id="t-new">New test</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DRILLS ============ -->
+<section id="m-drills" role="tabpanel" aria-labelledby="tab-drills" hidden>
+  <div id="dr-list">
+    <p class="eyebrow">Recall drills</p>
+    <h2>Type it from memory</h2>
+    <p class="quiet">No choices to lean on. The Founders and the Greek alphabet are on the test, so make sure you can produce them cold.</p>
+    <div class="drills">
+      <button type="button" class="drill" data-drill="founders"><b>The Ten Founders</b><span>Type all ten names, in any order.</span><em id="best-founders"></em></button>
+      <button type="button" class="drill" data-drill="order"><b>The Greek alphabet in order</b><span>Alpha to Omega, one letter at a time.</span><em id="best-order"></em></button>
+      <button type="button" class="drill" data-drill="symbols"><b>Symbols to names</b><span>See a Greek letter, type its name.</span><em id="best-symbols"></em></button>
+    </div>
+  </div>
+
+  <div id="dr-founders" hidden>
+    <button type="button" class="link dr-back">&lsaquo; All drills</button>
+    <h2>The Ten Founders</h2>
+    <p class="quiet">Type a Founder&rsquo;s name and press Enter. Any order. Small typos are accepted, and you&rsquo;ll see the right spelling.</p>
+    <p class="chip-label" id="f-mode-label">Names needed</p>
+    <div class="chips" id="f-mode" role="group" aria-labelledby="f-mode-label">
+      <button type="button" data-v="2" aria-pressed="true">First and last</button>
+      <button type="button" data-v="3" aria-pressed="false">Full name</button>
+    </div>
+    <form class="entry" id="f-form" autocomplete="off"><input id="f-in" type="text" placeholder="Type a name" aria-label="Founder's name" autocapitalize="words" autocorrect="off" spellcheck="false" enterkeyhint="enter"><button type="submit" class="cta">Enter</button></form>
+    <p class="msg" id="f-msg" aria-live="polite"></p>
+    <ol class="slots" id="f-slots"></ol>
+    <div class="drill-foot"><span class="clock" id="f-clock">0:00</span><span id="f-count">0 of 10</span><span class="grow"></span><button type="button" class="link" id="f-give">Show the rest</button><button type="button" class="link" id="f-restart">Start over</button></div>
+  </div>
+
+  <div id="dr-order" hidden>
+    <button type="button" class="link dr-back">&lsaquo; All drills</button>
+    <h2>The Greek alphabet in order</h2>
+    <p class="quiet">Type each letter&rsquo;s name. It moves on as soon as the spelling is right. A wrong guess gets a hint, and a second one shows the letter.</p>
+    <div class="tiles" id="o-tiles" aria-hidden="true"></div>
+    <form class="entry" id="o-form" autocomplete="off"><input id="o-in" type="text" aria-label="Next letter" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go"><button type="button" class="ghost" id="o-show">Show me</button></form>
+    <p class="msg" id="o-msg" aria-live="polite"></p>
+    <div class="drill-foot"><span class="clock" id="o-clock">0:00</span><span id="o-count">0 of 24</span><span class="grow"></span><button type="button" class="link" id="o-restart">Start over</button></div>
+  </div>
+
+  <div id="dr-symbols" hidden>
+    <button type="button" class="link dr-back">&lsaquo; All drills</button>
+    <h2>Symbols to names</h2>
+    <p class="chip-label" id="s-mode-label">Show</p>
+    <div class="chips" id="s-mode" role="group" aria-labelledby="s-mode-label">
+      <button type="button" data-v="both" aria-pressed="true">Both cases</button>
+      <button type="button" data-v="upper" aria-pressed="false">Capital</button>
+      <button type="button" data-v="lower" aria-pressed="false">Small</button>
+    </div>
+    <div class="symbol" id="s-sym" aria-live="polite"></div>
+    <p class="small" id="s-pos" style="text-align:center"></p>
+    <form class="entry" id="s-form" autocomplete="off"><input id="s-in" type="text" placeholder="Letter name" aria-label="Letter name" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go"><button type="submit" class="cta" id="s-go">Check</button></form>
+    <p class="msg" id="s-msg" aria-live="polite"></p>
+    <div id="s-result" hidden>
+      <div class="hero" id="s-hero"><p class="big" id="s-score"></p><p class="verdict" id="s-verdict"></p></div>
+      <h3 id="s-miss-h"></h3>
+      <ul class="misses" id="s-misses"></ul>
+    </div>
+    <div class="drill-foot"><span id="s-count"></span><span class="grow"></span><button type="button" class="link" id="s-skip">Show me</button><button type="button" class="link" id="s-restart">Start over</button></div>
+  </div>
+</section>
+
+<!-- ============ DAILY 10 ============ -->
+<section id="m-daily" role="tabpanel" aria-labelledby="tab-daily" hidden>
+  <p class="eyebrow" id="d-no"></p>
+  <h2 id="d-date"></h2>
+
+  <div id="d-intro" hidden>
+    <p class="quiet">Ten questions, the same ten for everyone today, so you can compare scores with the other interests. A new set comes out at midnight Pacific.</p>
+    <p class="small" id="d-streak-intro"></p>
+    <button type="button" class="cta" id="d-start">Start today&rsquo;s ten</button>
+    <div class="week" id="d-week-intro"></div>
+  </div>
+
+  <div id="d-run" hidden>
+    <div class="dias" id="d-dias" aria-hidden="true"></div>
+    <div class="qtop"><span id="d-pos"></span><span class="sec" id="d-sec"></span></div>
+    <p class="qtext" id="d-q" aria-live="polite"></p>
+    <div class="opts" id="d-opts"></div>
+    <div class="feedback" id="d-fb" role="status" hidden></div>
+    <div class="qnav" style="justify-content:flex-end"><button type="button" class="cta" id="d-next" hidden>Next &rsaquo;</button></div>
+  </div>
+
+  <div id="d-done" hidden>
+    <div class="hero" id="d-hero">
+      <p class="big" id="d-score"></p>
+      <div class="dias big" id="d-dias-done" aria-hidden="true"></div>
+      <p class="meta" id="d-streak"></p>
+    </div>
+    <div class="share-box" id="d-share"></div>
+    <div class="row">
+      <button type="button" class="cta" id="d-copy">Copy score</button>
+      <button type="button" class="ghost" id="d-share-btn" hidden>Share</button>
+    </div>
+    <p class="small" style="margin-top:12px">Come back after midnight Pacific for a new ten.</p>
+    <div class="week" id="d-week"></div>
+    <h3 id="d-miss-h"></h3>
+    <ul class="misses" id="d-misses"></ul>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <a href="./">Study guide</a> &middot; <a href="./#cards">Flash cards</a> &middot; <a href="game.html">Diamond Run</a><br>
+  Questions come from the study guide. Your scores and progress stay on this device.
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script type="module" src="practice.js"></script>
+<script>
+if('serviceWorker' in navigator&&location.protocol==='https:'){navigator.serviceWorker.register('sw.js').catch(function(){})}
+</script>
+</body>
+</html>

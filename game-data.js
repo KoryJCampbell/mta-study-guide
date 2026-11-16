@@ -292,20 +292,8 @@ q('m-questions', 'mta', 'The MTA test has…', '100 questions', ['50 questions',
 q('m-pass', 'mta', 'Passing score on the test', '70%', ['80%', '75%']);
 q('m-covers', 'mta', 'The test covers the Founders and their occupations, the Greek alphabet, and…', 'The organization’s history', ['Chapter bylaws', 'Parliamentary procedure']);
 q('m-due', 'mta', 'Application documents are due…', 'Within two weeks of the info meeting', ['Within one week of the info meeting', 'By the start of the fraternal year']);
-q('m-sessions', 'mta', 'Missing more than ___ sessions, or being late, means dismissal from the process', 'Two', ['Three', 'Four']);
-q('m-cost', 'mta', 'Approximate cost of initial membership (Oct 14 touch base)', 'About $5,200, covering two years', ['About $5,200, covering one year', 'About $2,600, covering one year']);
-q('m-includes', 'mta', 'The ~$5,200 includes…', 'Blazer, official pin, and all three levels', ['Local chapter dues only', 'Grand Chapter dues only']);
 q('m-council', 'mta', 'Mandatory for new members in April 2027', 'Western Province Council, Oakland', ['Western Province Council, Las Vegas', 'Grand Chapter, Philadelphia']);
 q('m-conclave', 'mta', 'The 88th Grand Chapter Meeting (Conclave), 2027, is in…', 'Baltimore', ['Philadelphia', 'Charlotte']);
-q('m-vote', 'mta', 'A vote to admit a new member needs…', 'A 75% majority', ['A simple majority', 'A unanimous vote'], 'From the October 28 touch base.');
-q('m-zoom-name', 'mta', 'Your Zoom display name should be…', 'Your full name as on your driver’s license', ['Your first name only', 'A nickname brothers know'],
-  'From the October 28 touch base.');
-q('m-recommenders', 'mta', 'Member recommenders should know you well, be financial on all three levels, and be willing to…', 'Attend your interviews', ['Pay your fees', 'Join the MTA committee']);
-q('m-contact', 'mta', 'Before passing along a brother’s contact info to other interests…', 'Ask him first', ['Post it in the group chat', 'Copy the MTA']);
-q('m-silent', 'mta', 'If you can’t make an event…', 'Tell the MTA ahead of time', ['Skip it quietly', 'Send someone in your place'],
-  'Communicate. Don’t go silent. (October 25 email)');
-q('m-souvenir', 'mta', 'At the Ball, the MTA said to use ___ to find and meet LA Alumni brothers', 'The souvenir book', ['The seating chart', 'The chapter website']);
-q('m-volunteer', 'mta', 'Volunteering at chapter events is…', 'Expected, but not mandatory', ['Required for every event', 'Not expected'], 'From the November 11 touch base.');
 
 /* ---------------- Greek ---------------- */
 q('k-kap', 'greek', 'Kappa Alpha Psi in Greek letters', 'ΚΑΨ', ['ΚΑΦ', 'ΚΑΝ']);
