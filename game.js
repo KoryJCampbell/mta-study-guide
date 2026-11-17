@@ -1,7 +1,7 @@
 // Diamond Run: a 3D quiz runner for the LA Alumni MTA study guide.
 // Steer the diamond through the gate that holds the right answer.
 import * as THREE from './vendor/three.module.min.js';
-import { DECKS, FOUNDERS, BANK, greekQuestion } from './game-data.js';
+import { DECKS, FOUNDERS, BANK, greekQuestion, inFounderOrder } from './game-data.js';
 
 const $ = (id) => document.getElementById(id);
 const rand = (n) => Math.floor(Math.random() * n);
@@ -339,7 +339,8 @@ function build(it) {
     a = it.right[rand(it.right.length)];
     wrong = sample(it.wrong.filter((x) => x !== a), 2);
   } else { a = it.a; wrong = it.w; }
-  const opts = shuffle([a, ...wrong]);
+  const all = [a, ...wrong];
+  const opts = inFounderOrder(all) || shuffle(all);
   return { id: it.id, d: it.d, q: it.q, a, n: it.n, opts, correct: opts.indexOf(a) };
 }
 

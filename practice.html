@@ -168,9 +168,10 @@ p{margin:0 0 12px}
 .shake{animation:shake .32s}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 .slots{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:1fr;gap:6px}
-@media (min-width:560px){.slots{grid-template-columns:1fr 1fr}}
+@media (min-width:560px){.slots{grid-template-columns:1fr 1fr;grid-template-rows:repeat(5,auto);grid-auto-flow:column}}
 .slots li{display:flex;gap:10px;align-items:center;border:1px dashed var(--rule-strong);border-radius:10px;padding:9px 12px;min-height:44px;color:var(--ink-3);font-size:.98rem}
 .slots li .n{flex:none;width:1.4rem;font-family:var(--display);font-weight:600;color:var(--ink-3);text-align:right}
+.slots li.next{border-color:var(--head)}
 .slots li.got{border-style:solid;border-color:var(--good);background:var(--good-bg);color:var(--ink)}
 .slots li.shown{border-style:solid;border-color:var(--rule-strong);background:var(--paper-2);color:var(--ink-2)}
 .slots li.flash{animation:pop .4s}
@@ -365,7 +366,7 @@ footer a{color:var(--ink-2)}
     <h2>Type it from memory</h2>
     <p class="quiet">No choices to lean on. The Founders and the Greek alphabet are on the test, so make sure you can produce them cold.</p>
     <div class="drills">
-      <button type="button" class="drill" data-drill="founders"><b>The Ten Founders</b><span>Type all ten names, in any order.</span><em id="best-founders"></em></button>
+      <button type="button" class="drill" data-drill="founders"><b>The Ten Founders</b><span>Type all ten in order: Diggs first, then by last name.</span><em id="best-founders"></em></button>
       <button type="button" class="drill" data-drill="order"><b>The Greek alphabet in order</b><span>Alpha to Omega, one letter at a time.</span><em id="best-order"></em></button>
       <button type="button" class="drill" data-drill="symbols"><b>Symbols to names</b><span>See a Greek letter, type its name.</span><em id="best-symbols"></em></button>
     </div>
@@ -374,7 +375,12 @@ footer a{color:var(--ink-2)}
   <div id="dr-founders" hidden>
     <button type="button" class="link dr-back">&lsaquo; All drills</button>
     <h2>The Ten Founders</h2>
-    <p class="quiet">Type a Founder&rsquo;s name and press Enter. Any order. Small typos are accepted, and you&rsquo;ll see the right spelling.</p>
+    <p class="quiet">Type a Founder&rsquo;s name and press Enter. In order means Diggs first, then by last name. Small typos are accepted, and you&rsquo;ll see the right spelling.</p>
+    <p class="chip-label" id="f-order-label">Order</p>
+    <div class="chips" id="f-order" role="group" aria-labelledby="f-order-label">
+      <button type="button" data-v="1" aria-pressed="true">In order</button>
+      <button type="button" data-v="0" aria-pressed="false">Any order</button>
+    </div>
     <p class="chip-label" id="f-mode-label">Names needed</p>
     <div class="chips" id="f-mode" role="group" aria-labelledby="f-mode-label">
       <button type="button" data-v="2" aria-pressed="true">First and last</button>
@@ -383,7 +389,7 @@ footer a{color:var(--ink-2)}
     <form class="entry" id="f-form" autocomplete="off"><input id="f-in" type="text" placeholder="Type a name" aria-label="Founder's name" autocapitalize="words" autocorrect="off" spellcheck="false" enterkeyhint="enter"><button type="submit" class="cta">Enter</button></form>
     <p class="msg" id="f-msg" aria-live="polite"></p>
     <ol class="slots" id="f-slots"></ol>
-    <div class="drill-foot"><span class="clock" id="f-clock">0:00</span><span id="f-count">0 of 10</span><span class="grow"></span><button type="button" class="link" id="f-give">Show the rest</button><button type="button" class="link" id="f-restart">Start over</button></div>
+    <div class="drill-foot"><span class="clock" id="f-clock">0:00</span><span id="f-count">0 of 10</span><span class="grow"></span><button type="button" class="link" id="f-show">Show me</button><button type="button" class="link" id="f-give">Show the rest</button><button type="button" class="link" id="f-restart">Start over</button></div>
   </div>
 
   <div id="dr-order" hidden>

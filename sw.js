@@ -1,7 +1,7 @@
 // Offline cache for the MTA study guide, the Practice page and the Diamond Run game.
 // Page: network first, fall back to cache. Fonts: cache first. Audio goes straight to the network,
 // since phones stream it in pieces (range requests) and the cache can't store those.
-var CACHE = 'mta-la-v9';
+var CACHE = 'mta-la-v10';
 var CORE = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png',
   './game.html', './game.js', './game-data.js', './vendor/three.module.min.js',
   './practice.html', './practice.js', './crossword-data.js', './apple-touch-icon.png'];

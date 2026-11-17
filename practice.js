@@ -1,6 +1,6 @@
 // Practice page: a practice test, type-the-answer drills, and the Daily 10.
 // Every question comes from game-data.js, which takes its facts from the study guide.
-import { FOUNDERS, GREEK, BANK } from './game-data.js';
+import { FOUNDERS, GREEK, BANK, inFounderOrder } from './game-data.js';
 import { XWORDS, XTHEMES } from './crossword-data.js';
 
 const $ = (id) => document.getElementById(id);
@@ -111,7 +111,9 @@ function build(it, rng) {
     a = pick(it.right, rng);
     wrong = sample(it.wrong.filter((x) => x !== a), 3, rng);
   } else { a = it.a; wrong = it.w.slice(0, 3); }
-  const opts = shuffle([a, ...wrong], rng);
+  // Founder choices read in the guide's order. The shuffle still runs so seeded sets stay the same.
+  const all = [a, ...wrong], mixed = shuffle(all, rng);
+  const opts = inFounderOrder(all) || mixed;
   return { id: it.id, d: it.d, q: it.q, n: it.n || '', opts, a: opts.indexOf(a) };
 }
 
@@ -357,7 +359,8 @@ function showDrillList() {
   drill = null; stopClock();
   ['list', 'founders', 'order', 'symbols'].forEach((k) => { $('dr-' + k).hidden = k !== 'list'; });
   const b = S.drills;
-  $('best-founders').textContent = b.founders ? 'Best: all ten in ' + fmtClock(b.founders.ms) + (b.founders.full ? ', full names' : ', first and last') : 'Not tried yet';
+  const fb = b.foundersInOrder || b.founders;
+  $('best-founders').textContent = fb ? 'Best: ' + fmtClock(fb.ms) + (b.foundersInOrder ? ' in order' : ' in any order') + (fb.full ? ', full names' : ', first and last') : 'Not tried yet';
   $('best-order').textContent = b.order ? 'Best: ' + fmtClock(b.order.ms) + (b.order.miss ? ', ' + b.order.miss + (b.order.miss === 1 ? ' miss' : ' misses') : ', no misses') : 'Not tried yet';
   $('best-symbols').textContent = b.symbols ? 'Best: ' + b.symbols.right + ' of 24' : 'Not tried yet';
 }
@@ -395,7 +398,7 @@ const close = (x, w) => x === w || typos(x, w) <= allowed(w);
 /* ----- the Ten Founders ----- */
 const F_NAMES = Object.values(FOUNDERS);
 const F_TOK = F_NAMES.map((n) => norm(n).split(' '));
-let F = null, fNeed = 2;
+let F = null, fNeed = 2, fInOrder = true;
 const words = (s) => norm(s).replace(/[^a-z\s]/g, ' ').split(/\s+/).filter(Boolean);
 function fMatch(input) {
   const t = words(input);
@@ -422,9 +425,12 @@ function fMatch(input) {
   if (!hint && F_TOK.some(([fi]) => close(t[0], fi))) hint = { kind: 'last' };
   return hint || { kind: 'none' };
 }
+const fHas = (i) => F.found.some((f) => f.i === i);
+const fNext = () => { for (let i = 0; i < 10; i++) if (!fHas(i)) return i; return -1; };
+const fLast = (i) => F_NAMES[i].split(' ').pop();
 function fReset() {
   stopClock();
-  F = { found: [], t0: 0, done: false };
+  F = { found: [], t0: 0, done: false, last: -1 };
   const inp = $('f-in');
   inp.value = ''; inp.disabled = false;
   say($('f-msg'), '');
@@ -432,40 +438,49 @@ function fReset() {
   fRender();
   if (fineHover) inp.focus();
 }
-function fRender(flashLast) {
-  const ol = $('f-slots');
+// Slot k is always the k-th Founder in the guide's order: Diggs first, then by last name.
+function fRender(flash) {
+  const ol = $('f-slots'), next = fNext();
   ol.innerHTML = '';
   for (let k = 0; k < 10; k++) {
-    const li = document.createElement('li'), f = F.found[k];
+    const li = document.createElement('li'), f = F.found.find((x) => x.i === k);
     li.innerHTML = '<span class="n">' + (k + 1) + '</span><span></span>';
-    if (f) { li.className = f.shown ? 'shown' : 'got'; li.lastChild.textContent = F_NAMES[f.i]; if (flashLast && k === F.found.length - 1) li.classList.add('flash'); }
+    if (f) { li.className = f.shown ? 'shown' : 'got'; li.lastChild.textContent = F_NAMES[k]; if (flash && k === F.last) li.classList.add('flash'); }
+    else if (fInOrder && !F.done && k === next) li.className = 'next';
     ol.appendChild(li);
   }
   $('f-count').textContent = F.found.filter((f) => !f.shown).length + ' of 10';
+  $('f-in').placeholder = fInOrder && next >= 0 ? 'Founder number ' + (next + 1) : 'Type a name';
 }
 function fDone() {
   F.done = true; stopClock();
-  F.found.sort((x, y) => x.i - y.i); // the official order: Diggs first, then by last name
   fRender();
-  const ms = Date.now() - F.t0;
+  const ms = Date.now() - F.t0, looked = F.found.filter((f) => f.shown).length;
   $('f-clock').textContent = fmtClock(ms);
   $('f-in').disabled = true;
-  const b = S.drills.founders, full = fNeed === 3;
+  if (looked) { say($('f-msg'), 'All ten, with ' + looked + ' shown. Start over to try it without help.'); return; }
+  const key = fInOrder ? 'foundersInOrder' : 'founders', b = S.drills[key], full = fNeed === 3;
   const better = !b || (full && !b.full) || (full === !!b.full && ms < b.ms);
-  if (better) { S.drills.founders = { ms, full }; save(); }
-  say($('f-msg'), 'All ten in ' + fmtClock(ms) + (better ? '. A new best.' : '.'), 'ok');
+  if (better) { S.drills[key] = { ms, full }; save(); }
+  say($('f-msg'), 'All ten' + (fInOrder ? ' in order' : '') + ' in ' + fmtClock(ms) + (better ? '. A new best.' : '.'), 'ok');
 }
+function fStart() { if (!F.t0) { F.t0 = Date.now(); startClock($('f-clock'), F.t0); } }
 $('f-form').addEventListener('submit', (e) => {
   e.preventDefault();
   if (F.done) return;
   const inp = $('f-in'), v = inp.value, msg = $('f-msg');
   if (!v.trim()) return;
-  if (!F.t0) { F.t0 = Date.now(); startClock($('f-clock'), F.t0); }
+  fStart();
   const m = fMatch(v);
   if (m.kind === 'ok') {
     inp.value = '';
-    if (F.found.some((f) => f.i === m.idx)) { say(msg, 'You already have ' + F_NAMES[m.idx] + '.'); return; }
-    F.found.push({ i: m.idx });
+    if (fHas(m.idx)) { say(msg, 'You already have ' + F_NAMES[m.idx] + '.'); return; }
+    const next = fNext();
+    if (fInOrder && m.idx !== next) {
+      say(msg, fLast(m.idx) + ' is a Founder, but not next. ' + (next === 0 ? 'Who comes first?' : 'Who comes after ' + fLast(next - 1) + '?'), 'no');
+      shake(inp); return;
+    }
+    F.found.push({ i: m.idx }); F.last = m.idx;
     say(msg, m.exact ? 'Yes. ' + F_NAMES[m.idx] + '.' : 'Yes. It’s spelled ' + F_NAMES[m.idx] + '.', 'ok');
     fRender(true);
     if (F.found.length === 10) fDone();
@@ -480,10 +495,19 @@ $('f-form').addEventListener('submit', (e) => {
   }[m.kind];
   if (text) { say(msg, text, 'no'); shake(inp); }
 });
+$('f-show').addEventListener('click', () => {
+  if (F.done) return;
+  fStart();
+  const i = fNext();
+  F.found.push({ i, shown: true }); F.last = i;
+  say($('f-msg'), 'Number ' + (i + 1) + ' is ' + F_NAMES[i] + '.');
+  fRender(true);
+  if (F.found.length === 10) fDone();
+  else if (fineHover) $('f-in').focus();
+});
 $('f-give').addEventListener('click', () => {
   if (F.done) return;
-  for (let i = 0; i < 10; i++) if (!F.found.some((f) => f.i === i)) F.found.push({ i, shown: true });
-  F.found.sort((x, y) => x.i - y.i);
+  for (let i = 0; i < 10; i++) if (!fHas(i)) F.found.push({ i, shown: true });
   F.done = true; stopClock();
   $('f-in').disabled = true;
   fRender();
@@ -492,6 +516,7 @@ $('f-give').addEventListener('click', () => {
 });
 $('f-restart').addEventListener('click', fReset);
 chips('f-mode', (v) => { fNeed = +v; fReset(); });
+chips('f-order', (v) => { fInOrder = v === '1'; fReset(); });
 
 /* ----- the alphabet in order ----- */
 const G_NAMES = GREEK.map((g) => g[2].toLowerCase());

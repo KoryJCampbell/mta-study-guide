@@ -18,6 +18,23 @@ export const FOUNDERS = {
   lee: 'John Milton Lee'
 };
 
+// Answer choices made up only of Founders (full names, or last names like "Asher, Blakemore & Edmonds")
+// are listed in that order. Returns null when any choice is something else.
+const F_KEYS = Object.keys(FOUNDERS);
+const F_LAST = F_KEYS.map((k) => FOUNDERS[k].split(' ').pop());
+function founderRank(s) {
+  const r = String(s).split(/, | & | and /).map((p) => {
+    const i = F_KEYS.findIndex((k) => FOUNDERS[k] === p);
+    return i >= 0 ? i : F_LAST.indexOf(p);
+  });
+  return r.every((i) => i >= 0) ? r[0] : -1;
+}
+export function inFounderOrder(opts) {
+  const r = opts.map(founderRank);
+  if (!r.every((i) => i >= 0)) return null;
+  return opts.map((o, i) => [r[i], o]).sort((x, y) => x[0] - y[0]).map((x) => x[1]);
+}
+
 export const GREEK = [
   ['Α', 'α', 'Alpha'], ['Β', 'β', 'Beta'], ['Γ', 'γ', 'Gamma'], ['Δ', 'δ', 'Delta'],
   ['Ε', 'ε', 'Epsilon'], ['Ζ', 'ζ', 'Zeta'], ['Η', 'η', 'Eta'], ['Θ', 'θ', 'Theta'],
@@ -69,7 +86,7 @@ f('f-gp1', '1st Grand Polemarch, 1911–1917', 'diggs');
 f('f-chair', 'Permanent chairman (president of Alpha Omega)', 'diggs');
 f('f-boomski', 'Nickname “Boomski”', 'armstrong');
 f('f-sgt', 'Sergeant-at-arms', 'armstrong');
-f('f-secretary', 'Secretary', 'lee', ['irvin', 'edmonds'], 'Lee – secretary. Irvin – interim secretary of Alpha Omega. Edmonds – Corresponding Secretary.');
+f('f-secretary', 'Secretary', 'lee', ['irvin', 'edmonds'], 'Edmonds – Corresponding Secretary. Irvin – interim secretary of Alpha Omega. Lee – secretary.');
 f('f-interim', 'Interim secretary of Alpha Omega; Incorporation Committee', 'irvin', ['lee', 'edmonds']);
 f('f-corresponding', 'Corresponding Secretary in the articles of incorporation', 'edmonds', ['lee', 'irvin']);
 f('f-blakie', 'Nickname “Blakie”', 'blakemore');
@@ -77,7 +94,7 @@ f('f-dee', 'Nickname “Dee”', 'alexander');
 f('f-youngest', 'The youngest Founder, at only 17', 'irvin');
 f('f-initiate', 'One of the three freshman first initiates of the Alpha of Kappa Alpha Nu', ['asher', 'blakemore', 'edmonds'], [],
   'The three freshman first initiates: Asher, Blakemore and Edmonds.');
-q('f-initiates', 'founders', 'The three freshman first initiates of the Alpha of Kappa Alpha Nu', 'Asher, Blakemore & Edmonds', ['Diggs, Lee & Armstrong', 'Grant, Caine & Irvin']);
+q('f-initiates', 'founders', 'The three freshman first initiates of the Alpha of Kappa Alpha Nu', 'Asher, Blakemore & Edmonds', ['Diggs, Armstrong & Lee', 'Caine, Grant & Irvin']);
 // Occupations (the test covers Founders and their occupations)
 f('f-dean', 'Professor at universities in five states; served as Dean in Maryland and Oklahoma', 'armstrong');
 f('f-lincoln', 'Instructor at Lincoln Institute, Jefferson City, Missouri', 'asher');
