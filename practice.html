@@ -56,9 +56,13 @@ button{font-family:var(--body);color:inherit}
 .ident .org{margin:0;font-family:var(--display);font-weight:600;font-size:.68rem;letter-spacing:.06em;color:var(--on-crimson-2)}
 .ident h1{margin:2px 0 0;font-family:var(--display);font-weight:700;font-size:1.6rem;line-height:1.1;color:var(--cream);letter-spacing:.02em}
 .ident .sub{margin:3px 0 0;font-size:.88rem;color:var(--on-crimson-2)}
-.modes{position:sticky;top:0;z-index:20;background:var(--crimson-ink);display:flex;justify-content:center;gap:6px;padding:8px 12px;border-bottom:1px solid rgba(0,0,0,.25)}
-.modes button{flex:0 1 auto;border:0;background:transparent;color:var(--on-crimson-2);font-size:.92rem;font-weight:600;padding:8px 14px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.modes{position:sticky;top:0;z-index:20;background:var(--crimson-ink);overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(0,0,0,.25)}
+.modes::-webkit-scrollbar{display:none}
+.modes-in{display:flex;gap:4px;width:max-content;margin:0 auto;padding:8px 10px}
+.modes button{position:relative;flex:none;border:0;background:transparent;color:var(--on-crimson-2);font-size:.92rem;font-weight:600;padding:8px 13px;border-radius:999px;cursor:pointer;white-space:nowrap}
 .modes button[aria-selected="true"]{background:var(--cream);color:var(--crimson-ink)}
+.modes button.playing::after{content:"";position:absolute;top:6px;right:5px;width:7px;height:7px;border-radius:50%;background:#E9C46A;animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
 
 main{max-width:44rem;margin:0 auto;padding:24px 18px calc(56px + env(safe-area-inset-bottom))}
 .eyebrow{margin:0;font-size:.74rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
@@ -202,9 +206,73 @@ p{margin:0 0 12px}
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translate(-50%,20px);background:var(--ink);color:var(--paper);padding:10px 18px;border-radius:999px;font-weight:600;font-size:.94rem;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:50}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 
+/* crossword */
+:root{--x-line:#8E8179;--x-hl:#F7E8C4;--x-sel:#EBC66F}
+@media (prefers-color-scheme:dark){:root{--x-line:#6E5C54;--x-hl:#3B2D1B;--x-sel:#7C5A1C}}
+.ghost.small{min-height:40px;padding:7px 12px;font-size:.9rem}
+.x-bar{position:sticky;top:var(--modes-h,52px);z-index:12;display:flex;align-items:stretch;gap:6px;margin:4px 0 14px;background:#70110C;color:#F2EBD7;border-radius:12px;padding:4px;min-height:56px}
+@media (prefers-color-scheme:dark){.x-bar{background:#5A140F}}
+@media (max-width:560px){.x-themes{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:4px -18px 14px;padding:0 18px}.x-themes::-webkit-scrollbar{display:none}.x-themes button{flex:none}#m-crossword h2{font-size:1.3rem}}
+.x-clue .en{opacity:.75;white-space:nowrap}
+.x-nav{flex:none;width:40px;border:0;border-radius:9px;background:rgba(255,255,255,.1);color:inherit;font-size:1.5rem;line-height:1;cursor:pointer}
+.x-clue{flex:1;min-width:0;margin:0;padding:6px 4px;font-size:.98rem;line-height:1.35}
+.x-clue b{display:block;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(242,235,215,.75)}
+.x-wrap{position:relative;display:flex;justify-content:center;margin:0 -8px}
+.x-grid{display:grid;--cell:30px;user-select:none;-webkit-user-select:none;touch-action:manipulation;padding:1px}
+.xc{position:relative;width:var(--cell);height:var(--cell);background:var(--card);box-shadow:0 0 0 1px var(--x-line);cursor:pointer}
+.xc.x0{background:transparent;box-shadow:none;cursor:default}
+.xc .xn{position:absolute;top:1px;left:2px;font-size:calc(var(--cell) * .3);line-height:1;color:var(--ink-2);font-weight:700;pointer-events:none}
+.xc .xl{position:absolute;inset:0;display:grid;place-items:center;padding-top:calc(var(--cell) * .14);font-size:calc(var(--cell) * .54);font-weight:700;color:var(--ink);pointer-events:none}
+.xc.hl{background:var(--x-hl)}
+.xc.sel{background:var(--x-sel)}
+.xc.bad .xl{color:var(--bad)}
+.xc.bad::after{content:"";position:absolute;inset:0;background:linear-gradient(to top right,transparent 46%,var(--bad) 47%,var(--bad) 53%,transparent 54%);opacity:.45;pointer-events:none}
+.xc.rev::before{content:"";position:absolute;top:0;right:0;border-style:solid;border-width:0 calc(var(--cell) * .3) calc(var(--cell) * .3) 0;border-color:transparent #A3271C transparent transparent;pointer-events:none}
+.x-grid.solved .xc:not(.x0){background:var(--good-bg)}
+.x-input{position:absolute;left:0;top:0;width:30px;height:30px;opacity:0;font-size:16px;padding:0;margin:0;border:0;background:transparent;color:transparent;caret-color:transparent;pointer-events:none}
+.x-tools{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:16px}
+.x-tools .grow{flex:1}
+.x-tools2{margin-top:2px;justify-content:flex-end;gap:14px}
+.x-done-t{margin:0 0 4px;font-family:var(--display);font-weight:600;font-size:1.25rem;color:var(--head)}
+.x-clues{display:grid;gap:0 24px;margin-top:6px}
+@media (min-width:560px){.x-clues{grid-template-columns:1fr 1fr}}
+.x-list{list-style:none;margin:0;padding:0}
+.x-list button{display:flex;gap:8px;width:100%;text-align:left;border:0;background:transparent;color:var(--ink);font-size:.95rem;line-height:1.35;padding:7px 8px;border-radius:8px;cursor:pointer}
+.x-list button b{flex:none;min-width:1.5rem;color:var(--ink-2)}
+.x-list button .en{color:var(--ink-3);white-space:nowrap}
+.x-list button.on{background:var(--x-hl)}
+.x-list button.full{color:var(--ink-3)}
+.x-list button.full b{color:var(--ink-3)}
+
+/* listen */
+.player{background:var(--card);border:1px solid var(--rule);border-radius:16px;padding:16px 16px 10px;margin:14px 0 6px}
+.l-file{margin:0;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.l-now{margin:2px 0 12px;font-family:var(--display);font-weight:600;font-size:1.3rem;line-height:1.25;color:var(--head)}
+.l-seek{display:block;width:100%;margin:0;accent-color:#70110C}
+@media (prefers-color-scheme:dark){.l-seek{accent-color:#E9DDC2}}
+.l-times{display:flex;justify-content:space-between;margin-top:3px;font-size:.82rem;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.l-ctl{display:flex;justify-content:center;align-items:center;gap:10px;margin:8px 0 10px}
+.l-btn{position:relative;display:grid;place-items:center;width:50px;height:50px;border:0;border-radius:50%;background:transparent;color:var(--ink);cursor:pointer}
+.l-btn:hover{background:var(--paper-2)}
+.l-btn svg{width:26px;height:26px}
+.l-btn b{position:absolute;left:50%;top:50%;transform:translate(-50%,-42%);font-size:.56rem;font-weight:700}
+.l-play{display:grid;place-items:center;width:66px;height:66px;border:0;border-radius:50%;background:#70110C;color:#F2EBD7;cursor:pointer;box-shadow:0 4px 14px rgba(112,17,12,.3)}
+@media (prefers-color-scheme:dark){.l-play{background:#9A2419}}
+.l-play svg{width:30px;height:30px}
+.l-opts{display:grid;gap:0 20px}
+@media (min-width:560px){.l-opts{grid-template-columns:auto 1fr}}
+.l-opts .chips{margin-bottom:8px}
+.topics{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.topics li{border-bottom:1px solid var(--rule)}
+.topics button{display:flex;align-items:baseline;justify-content:space-between;gap:12px;width:100%;text-align:left;border:0;background:transparent;color:var(--ink);font-size:1rem;padding:11px 6px;cursor:pointer}
+.topics button span{flex:none;color:var(--ink-3);font-size:.88rem;font-variant-numeric:tabular-nums}
+.topics button.on{color:var(--head);font-weight:700}
+.topics button.on span{color:var(--head)}
+
 footer{max-width:44rem;margin:0 auto;padding:18px 18px calc(28px + env(safe-area-inset-bottom));border-top:1px solid var(--rule);font-size:.86rem;color:var(--ink-3)}
 footer a{color:var(--ink-2)}
-@media (max-width:380px){.modes button{padding:8px 11px;font-size:.88rem}.qtext{font-size:1.22rem}}
+@media (max-width:480px){.modes button{padding:8px 10px;font-size:.88rem}.modes-in{padding:8px 6px;gap:2px}}
+@media (max-width:380px){.modes button{padding:8px 8px;font-size:.84rem}.qtext{font-size:1.22rem}}
 </style>
 </head>
 <body>
@@ -217,16 +285,20 @@ footer a{color:var(--ink-2)}
       <div>
         <p class="org">Los Angeles (CA) Alumni Chapter &middot; MTA Spring 2027</p>
         <h1>Practice</h1>
-        <p class="sub">A practice test, type-the-answer drills, and the Daily 10</p>
+        <p class="sub">Test yourself, drill, solve a crossword, or just listen</p>
       </div>
     </div>
   </div>
 </header>
 
-<nav class="modes" role="tablist" aria-label="Practice modes">
-  <button type="button" role="tab" id="tab-test" aria-controls="m-test" data-mode="test" aria-selected="false">Practice test</button>
-  <button type="button" role="tab" id="tab-drills" aria-controls="m-drills" data-mode="drills" aria-selected="false">Drills</button>
-  <button type="button" role="tab" id="tab-daily" aria-controls="m-daily" data-mode="daily" aria-selected="false">Daily 10</button>
+<nav class="modes" aria-label="Practice modes">
+  <div class="modes-in" role="tablist">
+    <button type="button" role="tab" id="tab-test" aria-controls="m-test" data-mode="test" aria-selected="false">Test</button>
+    <button type="button" role="tab" id="tab-drills" aria-controls="m-drills" data-mode="drills" aria-selected="false">Drills</button>
+    <button type="button" role="tab" id="tab-crossword" aria-controls="m-crossword" data-mode="crossword" aria-selected="false">Crossword</button>
+    <button type="button" role="tab" id="tab-daily" aria-controls="m-daily" data-mode="daily" aria-selected="false">Daily 10</button>
+    <button type="button" role="tab" id="tab-listen" aria-controls="m-listen" data-mode="listen" aria-selected="false">Listen</button>
+  </div>
 </nav>
 
 <main>
@@ -385,7 +457,76 @@ footer a{color:var(--ink-2)}
   </div>
 </section>
 
+
+<!-- ============ CROSSWORD ============ -->
+<section id="m-crossword" role="tabpanel" aria-labelledby="tab-crossword" hidden>
+  <p class="eyebrow" id="x-eyebrow">Crossword</p>
+  <h2 id="x-title">Today&rsquo;s crossword</h2>
+  <div class="chips x-themes" id="x-theme" role="group" aria-label="Puzzle"></div>
+  <div class="x-bar" id="x-bar">
+    <button type="button" class="x-nav" id="x-prev" aria-label="Previous clue">&lsaquo;</button>
+    <p class="x-clue" id="x-clue" aria-live="polite"></p>
+    <button type="button" class="x-nav" id="x-next" aria-label="Next clue">&rsaquo;</button>
+  </div>
+  <div class="x-wrap" id="x-wrap">
+    <div class="x-grid" id="x-grid"></div>
+    <input id="x-input" class="x-input" type="text" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false" enterkeyhint="next" aria-label="Crossword letter">
+  </div>
+  <div class="x-tools">
+    <span class="clock" id="x-clock">0:00</span>
+    <span class="grow"></span>
+    <button type="button" class="ghost small" id="x-check">Check</button>
+    <button type="button" class="ghost small" id="x-rev-l">Reveal letter</button>
+    <button type="button" class="ghost small" id="x-rev-w">Reveal word</button>
+  </div>
+  <div class="x-tools x-tools2">
+    <button type="button" class="link" id="x-rev-all">Reveal the puzzle</button>
+    <button type="button" class="link" id="x-new">New puzzle</button>
+  </div>
+  <div class="box x-done" id="x-done" hidden>
+    <p class="x-done-t" id="x-done-t"></p>
+    <p class="small" id="x-done-s"></p>
+    <div class="share-box" id="x-share" hidden></div>
+    <div class="row"><button type="button" class="cta" id="x-copy" hidden>Copy result</button><button type="button" class="ghost" id="x-another">Another puzzle</button></div>
+  </div>
+  <div class="x-clues">
+    <div><h3>Across</h3><ol class="x-list" id="x-across"></ol></div>
+    <div><h3>Down</h3><ol class="x-list" id="x-down"></ol></div>
+  </div>
+</section>
+
+<!-- ============ LISTEN ============ -->
+<section id="m-listen" role="tabpanel" aria-labelledby="tab-listen" hidden>
+  <p class="eyebrow">Listen</p>
+  <h2>Learn it by ear</h2>
+  <p class="quiet">Recorded audio of the guide. It keeps playing with your screen locked or while you use other apps, so you can have it on during work, in the car or at the gym.</p>
+  <div class="chips" id="l-files" role="group" aria-label="Recording"></div>
+  <div class="player" id="l-player">
+    <p class="l-file" id="l-file"></p>
+    <p class="l-now" id="l-now">Loading&hellip;</p>
+    <input type="range" class="l-seek" id="l-seek" min="0" max="1000" value="0" step="1" aria-label="Position">
+    <div class="l-times"><span id="l-cur">0:00</span><span id="l-left">0:00</span></div>
+    <div class="l-ctl">
+      <button type="button" class="l-btn" id="l-prev" aria-label="Previous topic"><svg viewBox="0 0 24 24"><path d="M6 5h2v14H6zM19 5v14L9 12z" fill="currentColor"/></svg></button>
+      <button type="button" class="l-btn" id="l-back" aria-label="Back 15 seconds"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v4h4"/></svg><b>15</b></button>
+      <button type="button" class="l-play" id="l-play" aria-label="Play"><svg viewBox="0 0 24 24" id="l-play-i"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></button>
+      <button type="button" class="l-btn" id="l-fwd" aria-label="Forward 15 seconds"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 12a8 8 0 1 1-2.4-5.7"/><path d="M20 4v4h-4"/></svg><b>15</b></button>
+      <button type="button" class="l-btn" id="l-next" aria-label="Next topic"><svg viewBox="0 0 24 24"><path d="M16 5h2v14h-2zM5 5v14l10-7z" fill="currentColor"/></svg></button>
+    </div>
+    <div class="l-opts">
+      <div><p class="chip-label">Speed</p><div class="chips" id="l-speed" role="group" aria-label="Speed"></div></div>
+      <div><p class="chip-label">When a topic ends</p><div class="chips" id="l-repeat" role="group" aria-label="Repeat"></div></div>
+    </div>
+    <p class="msg" id="l-msg" aria-live="polite"></p>
+  </div>
+  <h3>Topics</h3>
+  <ol class="topics" id="l-topics"></ol>
+  <p class="small" style="margin-top:14px">The voice is computer-generated from the guide&rsquo;s text. It streams, so it needs a connection. <a id="l-dl" href="#" download>Download this recording</a> to keep it on your phone.</p>
+</section>
+
 </main>
+
+<audio id="l-audio" preload="none"></audio>
 
 <footer>
   <a href="./">Study guide</a> &middot; <a href="./#cards">Flash cards</a> &middot; <a href="game.html">Diamond Run</a><br>

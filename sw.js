@@ -1,9 +1,10 @@
 // Offline cache for the MTA study guide, the Practice page and the Diamond Run game.
-// Page: network first, fall back to cache. Fonts: cache first.
-var CACHE = 'mta-la-v8';
+// Page: network first, fall back to cache. Fonts: cache first. Audio goes straight to the network,
+// since phones stream it in pieces (range requests) and the cache can't store those.
+var CACHE = 'mta-la-v9';
 var CORE = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png',
   './game.html', './game.js', './game-data.js', './vendor/three.module.min.js',
-  './practice.html', './practice.js', './apple-touch-icon.png'];
+  './practice.html', './practice.js', './crossword-data.js', './apple-touch-icon.png'];
 
 self.addEventListener('install', function (e) {
   e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(CORE); }).then(function () { return self.skipWaiting(); }));
@@ -31,6 +32,7 @@ self.addEventListener('fetch', function (e) {
   }
 
   if (url.origin !== location.origin) return;
+  if (/\.mp3$/.test(url.pathname) || req.headers.has('range')) return;
 
   e.respondWith(fetch(req).then(function (res) {
     var copy = res.clone();

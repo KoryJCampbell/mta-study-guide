@@ -1,6 +1,7 @@
 // Practice page: a practice test, type-the-answer drills, and the Daily 10.
 // Every question comes from game-data.js, which takes its facts from the study guide.
 import { FOUNDERS, GREEK, BANK } from './game-data.js';
+import { XWORDS, XTHEMES } from './crossword-data.js';
 
 const $ = (id) => document.getElementById(id);
 const KEY = 'mta.practice.v1';
@@ -193,7 +194,7 @@ const dayNo = (key) => Math.round((keyUTC(key) - Date.UTC(2026, 10, 16)) / 864e5
 const fmtKey = (key, opts) => new Date(keyUTC(key) + 12 * 36e5).toLocaleDateString('en-US', Object.assign({ timeZone: 'UTC' }, opts));
 
 /* ---------------- modes ---------------- */
-const MODES = ['test', 'drills', 'daily'];
+const MODES = ['test', 'drills', 'crossword', 'daily', 'listen'];
 let mode = null;
 function setMode(m, fromHash) {
   if (!MODES.includes(m)) m = 'test';
@@ -201,11 +202,17 @@ function setMode(m, fromHash) {
   MODES.forEach((k) => { $('m-' + k).hidden = k !== m; $('tab-' + k).setAttribute('aria-selected', String(k === m)); });
   if (!fromHash && location.hash !== '#' + m) history.replaceState(null, '', '#' + m);
   try { localStorage.setItem('mta.practice.mode', m); } catch (e) { /* ignore */ }
+  if (m !== 'crossword' && typeof xPause === 'function' && X.p) xPause();
   if (m === 'test') testInit();
   else if (m === 'drills') { if (!drill) showDrillList(); }
+  else if (m === 'crossword') xInit();
+  else if (m === 'listen') listenInit();
   else dailyInit();
 }
 document.querySelectorAll('.modes button').forEach((b) => b.addEventListener('click', () => setMode(b.dataset.mode)));
+const setModesH = () => document.documentElement.style.setProperty('--modes-h', document.querySelector('.modes').offsetHeight + 'px');
+setModesH();
+window.addEventListener('resize', setModesH);
 window.addEventListener('hashchange', () => setMode(location.hash.slice(1), true));
 
 /* ================= PRACTICE TEST ================= */
@@ -741,8 +748,7 @@ function dDone() {
 }
 $('d-start').addEventListener('click', () => { S.daily[D.key] = { r: [], m: [] }; save(); dView('run'); dShow(); });
 $('d-next').addEventListener('click', (e) => { dNext(); tapBlur(e); });
-$('d-copy').addEventListener('click', async () => {
-  const text = shareText();
+async function copyText(text) {
   try { await navigator.clipboard.writeText(text); toast('Copied'); return; } catch (e) { /* fall back below */ }
   const ta = document.createElement('textarea');
   ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
@@ -751,8 +757,589 @@ $('d-copy').addEventListener('click', async () => {
   try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
   ta.remove();
   toast(ok ? 'Copied' : 'Select the text above to copy it');
-});
+}
+$('d-copy').addEventListener('click', () => copyText(shareText()));
 $('d-share-btn').addEventListener('click', () => { navigator.share({ text: shareText() }).catch(() => {}); });
+
+/* ================= CROSSWORD ================= */
+const XMAX_W = 12, XMAX_H = 16, XTARGET = 13;
+if (!S.xw || typeof S.xw !== 'object') S.xw = {};
+if (!S.xw.cur || typeof S.xw.cur !== 'object') S.xw.cur = {};
+if (!S.xw.stats || typeof S.xw.stats !== 'object') S.xw.stats = { solved: 0, best: {}, daily: {} };
+const X = { p: null, sel: null, els: null, cell: 30, tick: 0, timer: null, armed: 0, handled: 0 };
+let xTheme = XTHEMES.some(([v]) => v === S.xw.theme) ? S.xw.theme : 'today';
+
+// "(5,5,2)" for Kappa Alpha Nu, "(4-7)" for Ritz-Carlton, "(5)" for Diggs.
+function enumOf(a) {
+  let out = '';
+  a.split(/([\s-]+)/).filter(Boolean).forEach((part) => {
+    if (/^\s+$/.test(part)) out += ',';
+    else if (/^[\s-]+$/.test(part)) out += '-';
+    else out += part.replace(/[^A-Za-z]/g, '').length;
+  });
+  return '(' + out + ')';
+}
+function xPool(theme, rng) {
+  const greek = [];
+  GREEK.forEach((g, i) => {
+    if (g[2].length < 3) return;
+    const kinds = ['sym', 'pos'];
+    if (i > 0) kinds.push('after');
+    if (i < 23) kinds.push('before');
+    const k = pick(kinds, rng);
+    const c = k === 'sym' ? 'Greek letter ' + g[0] + ' ' + g[1] : k === 'pos' ? 'Letter #' + (i + 1) + ' of the Greek alphabet'
+      : k === 'after' ? 'Greek letter right after ' + GREEK[i - 1][2] : 'Greek letter right before ' + GREEK[i + 1][2];
+    greek.push({ a: g[2], c, t: 'greek' });
+  });
+  let list;
+  if (theme === 'today' || theme === 'mixed') list = XWORDS.concat(sample(greek, 3, rng));
+  else if (theme === 'greek') list = XWORDS.filter((e) => e.t === 'greek').concat(greek);
+  else list = XWORDS.filter((e) => e.t === theme);
+  return list.map((e) => Object.assign({}, e, { w: e.a.toUpperCase().replace(/[^A-Z]/g, '') }));
+}
+// Criss-cross layout: every new word has to cross one already placed, and no two letters touch
+// unless they belong to a word that crosses there.
+function xLayout(pool, rng) {
+  const cells = new Map(), words = [];
+  let minR = 0, maxR = 0, minC = 0, maxC = 0, crossings = 0;
+  const at = (r, c) => cells.get(r + ',' + c);
+  const fits = (w, r, c, dir) => {
+    const dr = dir === 'd' ? 1 : 0, dc = 1 - dr, L = w.length;
+    if (at(r - dr, c - dc) || at(r + dr * L, c + dc * L)) return -1;
+    const r2 = r + dr * (L - 1), c2 = c + dc * (L - 1);
+    if (Math.max(maxR, r2) - Math.min(minR, r) + 1 > XMAX_H || Math.max(maxC, c2) - Math.min(minC, c) + 1 > XMAX_W) return -1;
+    let cross = 0;
+    for (let i = 0; i < L; i++) {
+      const rr = r + dr * i, cc = c + dc * i, cell = at(rr, cc);
+      if (cell) {
+        if (cell.ch !== w[i] || cell[dir]) return -1;
+        cross++;
+      } else if (dir === 'a' ? (at(rr - 1, cc) || at(rr + 1, cc)) : (at(rr, cc - 1) || at(rr, cc + 1))) return -1;
+    }
+    return cross;
+  };
+  const place = (e, r, c, dir) => {
+    const dr = dir === 'd' ? 1 : 0, dc = 1 - dr;
+    for (let i = 0; i < e.w.length; i++) {
+      const key = (r + dr * i) + ',' + (c + dc * i);
+      const cell = cells.get(key) || { ch: e.w[i], a: false, d: false };
+      cell[dir] = true;
+      cells.set(key, cell);
+    }
+    if (!words.length) { minR = maxR = r; minC = maxC = c; }
+    words.push({ e, r, c, dir });
+    minR = Math.min(minR, r); maxR = Math.max(maxR, r + dr * (e.w.length - 1));
+    minC = Math.min(minC, c); maxC = Math.max(maxC, c + dc * (e.w.length - 1));
+  };
+  place(pool[0], 0, 0, 'a');
+  const used = new Set([pool[0].w]), groups = new Set(pool[0].g ? [pool[0].g] : []);
+  for (const e of pool) {
+    if (words.length >= XTARGET) break;
+    if (used.has(e.w) || (e.g && groups.has(e.g))) continue;
+    let best = null;
+    for (const [key, cell] of cells) {
+      const k = key.indexOf(','), r0 = +key.slice(0, k), c0 = +key.slice(k + 1);
+      for (let j = 0; j < e.w.length; j++) {
+        if (e.w[j] !== cell.ch) continue;
+        for (const dir of ['a', 'd']) {
+          if (cell[dir]) continue;
+          const r = dir === 'd' ? r0 - j : r0, c = dir === 'a' ? c0 - j : c0;
+          const cross = fits(e.w, r, c, dir);
+          if (cross < 1) continue;
+          const dr = dir === 'd' ? 1 : 0, dc = 1 - dr;
+          const area = (Math.max(maxR, r + dr * (e.w.length - 1)) - Math.min(minR, r) + 1) * (Math.max(maxC, c + dc * (e.w.length - 1)) - Math.min(minC, c) + 1);
+          const s = cross * 30 - area * 0.15 + rng() * 4;
+          if (!best || s > best.s) best = { r, c, dir, s, cross };
+        }
+      }
+    }
+    if (best) { place(e, best.r, best.c, best.dir); used.add(e.w); if (e.g) groups.add(e.g); crossings += best.cross; }
+  }
+  return { words, w: maxC - minC + 1, h: maxR - minR + 1, minR, minC, crossings };
+}
+function xGenerate(theme, seed) {
+  const rng = rngFor('mta-xword|' + seed), all = xPool(theme, rng);
+  let best = null;
+  for (let attempt = 0; attempt < 24; attempt++) {
+    const keyed = shuffle(all, rng).slice(0, 36).map((e) => ({ e, k: Math.min(e.w.length, 9) + rng() * 5 }));
+    keyed.sort((a, b) => b.k - a.k);
+    const pool = keyed.map((x) => x.e);
+    const lead = pool.findIndex((e) => e.w.length <= XMAX_W && e.w.length >= 5);
+    if (lead > 0) pool.unshift(pool.splice(lead, 1)[0]);
+    const res = xLayout(pool, rng), score = res.words.length * 100 + res.crossings * 8 - res.w * res.h * 0.4;
+    if (!best || score > best.score) { best = res; best.score = score; }
+  }
+  const words = best.words.map((x) => ({ r: x.r - best.minR, c: x.c - best.minC, dir: x.dir, ans: x.e.w, clue: x.e.c, en: enumOf(x.e.a) }));
+  const starts = [...new Set(words.map((w) => w.r * 100 + w.c))].sort((a, b) => a - b);
+  words.forEach((w) => { w.n = starts.indexOf(w.r * 100 + w.c) + 1; });
+  words.sort((a, b) => (a.dir === b.dir ? a.n - b.n : a.dir === 'a' ? -1 : 1));
+  const grid = Array.from({ length: best.h }, () => Array(best.w).fill(''));
+  words.forEach((w) => { for (let i = 0; i < w.ans.length; i++) grid[w.r + (w.dir === 'd' ? i : 0)][w.c + (w.dir === 'a' ? i : 0)] = w.ans[i]; });
+  return { theme, seed, w: best.w, h: best.h, words, grid, fill: grid.map((row) => row.map(() => '')), rev: {}, bad: {}, el: 0, done: false, help: false, gaveUp: false };
+}
+const xCells = (w) => Array.from({ length: w.ans.length }, (_, i) => [w.r + (w.dir === 'd' ? i : 0), w.c + (w.dir === 'a' ? i : 0)]);
+const xWordsAt = (r, c) => X.p.words.filter((w) => (w.dir === 'a' ? w.r === r && c >= w.c && c < w.c + w.ans.length : w.c === c && r >= w.r && r < w.r + w.ans.length));
+
+function xInit() {
+  const box = $('x-theme');
+  if (!box.childElementCount) {
+    XTHEMES.forEach(([v, label]) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.dataset.v = v; b.textContent = label;
+      b.addEventListener('click', () => xOpen(v));
+      box.appendChild(b);
+    });
+  }
+  xOpen(xTheme);
+}
+function xOpen(theme, fresh) {
+  xPause();
+  xTheme = theme; S.xw.theme = theme;
+  let p = fresh ? null : S.xw.cur[theme];
+  if (theme === 'today') {
+    const seed = 'today-' + laKey();
+    if (!p || p.seed !== seed) p = xGenerate('today', seed);
+  } else if (!p) p = xGenerate(theme, theme + '-' + Date.now().toString(36) + Math.floor(Math.random() * 1e6).toString(36));
+  S.xw.cur[theme] = p; X.p = p; X.sel = null; X.armed = 0;
+  save();
+  document.querySelectorAll('#x-theme button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.v === theme)));
+  const label = (XTHEMES.find(([v]) => v === theme) || [])[1];
+  $('x-eyebrow').textContent = theme === 'today' ? 'Crossword · the same puzzle for everyone today' : 'Crossword';
+  $('x-title').textContent = theme === 'today' ? 'Today’s crossword: ' + fmtKey(p.seed.slice(6), { weekday: 'short', month: 'short', day: 'numeric' })
+    : theme === 'mixed' ? 'Mixed crossword' : label + ' crossword';
+  $('x-new').hidden = theme === 'today';
+  $('x-rev-all').textContent = 'Reveal the puzzle';
+  xRender();
+  const start = p.words.find((w) => xCells(w).some(([r, c]) => !p.fill[r][c])) || p.words[0];
+  xGoWord(start);
+  xClock();
+  xShowDone(false);
+}
+function xRender() {
+  const p = X.p, grid = $('x-grid'), wrapW = $('x-wrap').clientWidth || 320;
+  X.cell = Math.max(22, Math.min(40, Math.floor((wrapW - 4) / p.w)));
+  grid.style.setProperty('--cell', X.cell + 'px');
+  grid.style.gridTemplateColumns = 'repeat(' + p.w + ', ' + X.cell + 'px)';
+  grid.style.gridTemplateRows = 'repeat(' + p.h + ', ' + X.cell + 'px)';
+  const num = {};
+  p.words.forEach((w) => { num[w.r + ',' + w.c] = w.n; });
+  grid.innerHTML = '';
+  X.els = [];
+  for (let r = 0; r < p.h; r++) {
+    const row = [];
+    for (let c = 0; c < p.w; c++) {
+      const d = document.createElement('div');
+      if (p.grid[r][c]) {
+        d.className = 'xc'; d.dataset.r = r; d.dataset.c = c;
+        d.innerHTML = (num[r + ',' + c] ? '<span class="xn">' + num[r + ',' + c] + '</span>' : '') + '<span class="xl"></span>';
+      } else d.className = 'xc x0';
+      grid.appendChild(d);
+      row.push(d);
+    }
+    X.els.push(row);
+  }
+  ['a', 'd'].forEach((dir) => {
+    const ol = $(dir === 'a' ? 'x-across' : 'x-down');
+    ol.innerHTML = '';
+    p.words.forEach((w, i) => {
+      if (w.dir !== dir) return;
+      const li = document.createElement('li'), b = document.createElement('button');
+      b.type = 'button'; b.dataset.i = i;
+      b.innerHTML = '<b>' + w.n + '</b><span>' + esc(w.clue) + ' <span class="en">' + w.en + '</span></span>';
+      b.addEventListener('click', () => { xGoWord(w); keepInView($('x-bar')); xFocus(); });
+      li.appendChild(b); ol.appendChild(li);
+    });
+  });
+}
+function xPaint() {
+  const p = X.p, s = X.sel;
+  if (!p || !X.els) return;
+  const cur = new Set(s ? xCells(s.w).map(([r, c]) => r + ',' + c) : []);
+  for (let r = 0; r < p.h; r++) {
+    for (let c = 0; c < p.w; c++) {
+      if (!p.grid[r][c]) continue;
+      const d = X.els[r][c], k = r + ',' + c;
+      d.lastChild.textContent = p.fill[r][c];
+      d.classList.toggle('hl', cur.has(k) && !p.done);
+      d.classList.toggle('sel', !!s && s.r === r && s.c === c && !p.done);
+      d.classList.toggle('bad', !!p.bad[k]);
+      d.classList.toggle('rev', !!p.rev[k]);
+    }
+  }
+  $('x-grid').classList.toggle('solved', p.done && !p.gaveUp);
+  if (s) $('x-clue').innerHTML = '<b>' + s.w.n + (s.w.dir === 'a' ? ' Across' : ' Down') + '</b>' + esc(s.w.clue) + ' <span class="en">' + s.w.en + '</span>';
+  document.querySelectorAll('.x-list button').forEach((b) => {
+    const w = p.words[+b.dataset.i];
+    b.classList.toggle('on', !!s && w === s.w);
+    b.classList.toggle('full', xCells(w).every(([r, c]) => p.fill[r][c]));
+  });
+}
+function xSelect(r, c, dir) {
+  const ws = xWordsAt(r, c);
+  if (!ws.length) return;
+  let w = ws.find((x) => x.dir === dir);
+  if (!w) { w = ws[0]; dir = w.dir; }
+  X.sel = { r, c, dir, w };
+  xPaint();
+  const d = X.els[r][c], inp = $('x-input');
+  inp.style.left = d.offsetLeft + 'px'; inp.style.top = d.offsetTop + 'px';
+  inp.style.width = X.cell + 'px'; inp.style.height = X.cell + 'px';
+}
+function xGoWord(w) {
+  const cells = xCells(w), spot = cells.find(([r, c]) => !X.p.fill[r][c]) || cells[0];
+  xSelect(spot[0], spot[1], w.dir);
+}
+function xFocus() {
+  const inp = $('x-input');
+  inp.value = '​';
+  try { inp.focus({ preventScroll: true }); } catch (e) { inp.focus(); }
+  try { inp.setSelectionRange(1, 1); } catch (e) { /* not supported */ }
+}
+function xNextWord(step, preferEmpty) {
+  const p = X.p, list = p.words, i = Math.max(0, list.indexOf(X.sel.w));
+  for (let n = 1; n <= list.length; n++) {
+    const w = list[(i + step * n + list.length * 4) % list.length];
+    if (!preferEmpty || n === list.length || xCells(w).some(([r, c]) => !p.fill[r][c])) { xGoWord(w); return; }
+  }
+}
+function xAfterChange() { save(); xPaint(); xCheckDone(); }
+function xType(ch) {
+  const p = X.p, s = X.sel;
+  if (!p || !s || p.done) return;
+  xStart();
+  const k = s.r + ',' + s.c;
+  if (!p.rev[k]) { p.fill[s.r][s.c] = ch; delete p.bad[k]; }
+  const cells = xCells(s.w), i = cells.findIndex(([r, c]) => r === s.r && c === s.c);
+  if (i < cells.length - 1) xSelect(cells[i + 1][0], cells[i + 1][1], s.dir);
+  else xNextWord(1, true);
+  xAfterChange();
+}
+function xBack() {
+  const p = X.p, s = X.sel;
+  if (!p || !s || p.done) return;
+  const k = s.r + ',' + s.c;
+  if (p.fill[s.r][s.c] && !p.rev[k]) { p.fill[s.r][s.c] = ''; delete p.bad[k]; }
+  else {
+    const cells = xCells(s.w), i = cells.findIndex(([r, c]) => r === s.r && c === s.c);
+    if (i > 0) {
+      const [r, c] = cells[i - 1];
+      xSelect(r, c, s.dir);
+      if (!p.rev[r + ',' + c]) { p.fill[r][c] = ''; delete p.bad[r + ',' + c]; }
+    }
+  }
+  xAfterChange();
+}
+function xArrow(key) {
+  const s = X.sel;
+  if (!s) return;
+  const dir = key === 'ArrowLeft' || key === 'ArrowRight' ? 'a' : 'd';
+  if (s.dir !== dir && xWordsAt(s.r, s.c).some((w) => w.dir === dir)) { xSelect(s.r, s.c, dir); return; }
+  const dr = key === 'ArrowDown' ? 1 : key === 'ArrowUp' ? -1 : 0, dc = key === 'ArrowRight' ? 1 : key === 'ArrowLeft' ? -1 : 0;
+  let r = s.r + dr, c = s.c + dc;
+  while (r >= 0 && c >= 0 && r < X.p.h && c < X.p.w) {
+    if (X.p.grid[r][c]) { xSelect(r, c, s.dir); return; }
+    r += dr; c += dc;
+  }
+}
+function xStart() {
+  if (!X.p || X.p.done || X.tick) return;
+  X.tick = Date.now();
+  clearInterval(X.timer);
+  X.timer = setInterval(xClock, 1000);
+}
+function xPause() {
+  if (X.tick && X.p) { X.p.el += Date.now() - X.tick; save(); }
+  X.tick = 0; clearInterval(X.timer); X.timer = null;
+  xClock();
+}
+function xClock() { if (X.p) $('x-clock').textContent = fmtClock(X.p.el + (X.tick ? Date.now() - X.tick : 0)); }
+function xCheckDone() {
+  const p = X.p;
+  if (p.done) return;
+  for (let r = 0; r < p.h; r++) for (let c = 0; c < p.w; c++) if (p.grid[r][c] && p.fill[r][c] !== p.grid[r][c]) return;
+  xPause();
+  p.done = true;
+  const st = S.xw.stats;
+  if (!p.gaveUp) {
+    st.solved = (st.solved || 0) + 1;
+    if (!p.help && (!st.best[p.theme] || p.el < st.best[p.theme])) st.best[p.theme] = p.el;
+    if (p.theme === 'today') st.daily[p.seed.slice(6)] = { ms: p.el, help: p.help };
+  }
+  save(); xPaint(); xShowDone(true);
+  try { $('x-input').blur(); } catch (e) { /* ignore */ }
+}
+function xShareText() {
+  const p = X.p;
+  return 'MTA Crossword · ' + fmtKey(p.seed.slice(6), { month: 'short', day: 'numeric', year: 'numeric' }) + '\nSolved in ' + fmtClock(p.el) +
+    (p.help ? ' with help' : ', no help') + '\n' + location.origin + location.pathname + '#crossword';
+}
+function xShowDone(fresh) {
+  const p = X.p, box = $('x-done');
+  box.hidden = !p.done;
+  if (!p.done) return;
+  const best = S.xw.stats.best[p.theme];
+  $('x-done-t').textContent = p.gaveUp ? 'Puzzle revealed' : 'Solved in ' + fmtClock(p.el);
+  $('x-done-s').textContent = p.gaveUp ? 'Every answer is filled in above. Try another one when you’re ready.'
+    : (p.help ? 'You used Check or Reveal on this one.' : 'No help used.') + (best ? ' Your best on this kind of puzzle without help: ' + fmtClock(best) + '.' : '');
+  const share = p.theme === 'today' && !p.gaveUp;
+  $('x-share').hidden = !share; $('x-copy').hidden = !share;
+  if (share) $('x-share').textContent = xShareText();
+  $('x-another').textContent = p.theme === 'today' ? 'Try a themed puzzle' : 'Another puzzle';
+  if (fresh) keepInView(box);
+}
+function xReveal(cells) {
+  const p = X.p;
+  if (!p || p.done) return;
+  cells.forEach(([r, c]) => { if (p.fill[r][c] !== p.grid[r][c]) { p.fill[r][c] = p.grid[r][c]; p.rev[r + ',' + c] = 1; } delete p.bad[r + ',' + c]; });
+  p.help = true;
+  xAfterChange();
+}
+$('x-grid').addEventListener('click', (e) => {
+  const d = e.target.closest('.xc');
+  if (!d || d.classList.contains('x0') || !X.p) return;
+  const r = +d.dataset.r, c = +d.dataset.c, s = X.sel;
+  if (s && s.r === r && s.c === c) xSelect(r, c, s.dir === 'a' ? 'd' : 'a');
+  else xSelect(r, c, s ? s.dir : 'a');
+  // On a phone, bring the clue bar to the top so the grid has room above the keyboard.
+  if (window.innerWidth < 700) {
+    const top = $('x-bar').getBoundingClientRect().top, mh = $('x-bar').offsetTop ? parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--modes-h')) || 52 : 52;
+    if (top > mh + 8) window.scrollTo(0, window.scrollY + top - mh);
+  }
+  xFocus();
+});
+$('x-input').addEventListener('keydown', (e) => {
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  const k = e.key;
+  if (k === 'Backspace') { e.preventDefault(); X.handled = Date.now(); xBack(); }
+  else if (k === 'Delete') { e.preventDefault(); const s = X.sel; if (s && !X.p.rev[s.r + ',' + s.c] && !X.p.done) { X.p.fill[s.r][s.c] = ''; xAfterChange(); } }
+  else if (k.indexOf('Arrow') === 0) { e.preventDefault(); xArrow(k); }
+  else if (k === 'Tab' || k === 'Enter') { e.preventDefault(); xNextWord(e.shiftKey ? -1 : 1, false); }
+  else if (k === ' ') { e.preventDefault(); const s = X.sel; if (s) xSelect(s.r, s.c, s.dir === 'a' ? 'd' : 'a'); }
+  else if (/^[a-zA-Z]$/.test(k)) { e.preventDefault(); X.handled = Date.now(); xType(k.toUpperCase()); }
+});
+// Phone keyboards often skip keydown details, so read what landed in the input instead.
+// A zero-width space stays in the box so Backspace has something to delete.
+$('x-input').addEventListener('input', () => {
+  const inp = $('x-input'), v = inp.value;
+  if (Date.now() - X.handled > 80) {
+    if (!v.length) xBack();
+    else for (const ch of v.replace(/​/g, '').toUpperCase()) if (ch >= 'A' && ch <= 'Z') xType(ch);
+  }
+  inp.value = '​';
+  try { inp.setSelectionRange(1, 1); } catch (e) { /* not supported */ }
+});
+$('x-prev').addEventListener('click', () => { if (X.sel) { xNextWord(-1, false); xFocus(); } });
+$('x-next').addEventListener('click', () => { if (X.sel) { xNextWord(1, false); xFocus(); } });
+$('x-check').addEventListener('click', () => {
+  const p = X.p;
+  if (!p || p.done) return;
+  let wrong = 0, filled = 0;
+  for (let r = 0; r < p.h; r++) {
+    for (let c = 0; c < p.w; c++) {
+      if (!p.grid[r][c] || !p.fill[r][c]) continue;
+      filled++;
+      if (p.fill[r][c] !== p.grid[r][c]) { p.bad[r + ',' + c] = 1; wrong++; }
+    }
+  }
+  if (!filled) { toast('Fill in some letters first'); return; }
+  p.help = true;
+  xAfterChange();
+  toast(wrong ? wrong + (wrong === 1 ? ' letter is wrong' : ' letters are wrong') : 'Everything so far is right');
+});
+$('x-rev-l').addEventListener('click', () => { if (X.sel) { xReveal([[X.sel.r, X.sel.c]]); if (!X.p.done) xFocus(); } });
+$('x-rev-w').addEventListener('click', () => { if (X.sel) { xReveal(xCells(X.sel.w)); if (!X.p.done) { xNextWord(1, true); } } });
+$('x-rev-all').addEventListener('click', () => {
+  const p = X.p, b = $('x-rev-all');
+  if (!p || p.done) return;
+  if (Date.now() - X.armed > 4000) { X.armed = Date.now(); b.textContent = 'Tap again to reveal everything'; setTimeout(() => { if (Date.now() - X.armed >= 4000) b.textContent = 'Reveal the puzzle'; }, 4100); return; }
+  X.armed = 0; b.textContent = 'Reveal the puzzle';
+  p.gaveUp = true;
+  const all = [];
+  for (let r = 0; r < p.h; r++) for (let c = 0; c < p.w; c++) if (p.grid[r][c]) all.push([r, c]);
+  xReveal(all);
+});
+$('x-new').addEventListener('click', () => xOpen(xTheme, true));
+$('x-another').addEventListener('click', () => { if (xTheme === 'today') xOpen('mixed', true); else xOpen(xTheme, true); keepInView($('m-crossword')); });
+$('x-copy').addEventListener('click', () => copyText(xShareText()));
+let xResizeT = 0;
+window.addEventListener('resize', () => {
+  clearTimeout(xResizeT);
+  xResizeT = setTimeout(() => { if (mode === 'crossword' && X.p) { const s = X.sel; xRender(); if (s) xSelect(s.r, s.c, s.dir); else xPaint(); } }, 150);
+});
+document.addEventListener('visibilitychange', () => { if (document.hidden) xPause(); });
+
+/* ================= LISTEN ================= */
+// Two recordings (facts and quiz), each one MP3 with chapter times in audio/tracks.json.
+// One file per recording means playback never has to switch files while the phone is locked.
+const audio = $('l-audio');
+let LM = null, lPending = null, lLastSave = 0, lLastPos = 0, lRep = 0;
+let LS;
+try { LS = JSON.parse(localStorage.getItem('mta.listen.v1')) || {}; } catch (e) { LS = {}; }
+if (!LS || typeof LS !== 'object') LS = {};
+if (!LS.pos || typeof LS.pos !== 'object') LS.pos = {};
+const lSave = () => { try { localStorage.setItem('mta.listen.v1', JSON.stringify(LS)); } catch (e) { /* ignore */ } };
+const SPEEDS = [0.8, 1, 1.25, 1.5];
+const fmtT = (s) => {
+  s = Math.max(0, Math.floor(s || 0));
+  const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), x = s % 60;
+  return (h ? h + ':' + String(m).padStart(2, '0') : String(m)) + ':' + String(x).padStart(2, '0');
+};
+const lFile = () => LM.files.find((f) => f.id === LS.file) || LM.files[0];
+const lDur = () => (isFinite(audio.duration) && audio.duration > 0 ? audio.duration : lFile().duration);
+const lPos = () => (lPending != null ? lPending : audio.currentTime || 0);
+function lChAt(t) {
+  const ch = lFile().chapters;
+  let i = 0;
+  for (let k = 0; k < ch.length; k++) if (t + 0.3 >= ch[k].start) i = k;
+  return i;
+}
+async function listenInit() {
+  if (LM) { lPaint(); return; }
+  try {
+    const r = await fetch('audio/tracks.json', { cache: 'no-cache' });
+    if (!r.ok) throw new Error(r.status);
+    LM = await r.json();
+  } catch (e) {
+    $('l-now').textContent = 'Couldn’t load the recordings';
+    say($('l-msg'), 'Check your connection and try again.', 'no');
+    return;
+  }
+  if (!SPEEDS.includes(LS.speed)) LS.speed = 1;
+  if (LS.repeat !== 'one') LS.repeat = 'all';
+  const fileBox = $('l-files');
+  LM.files.forEach((f) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.dataset.v = f.id;
+    b.textContent = f.title + ' · ' + Math.round(f.duration / 60) + ' min';
+    b.addEventListener('click', () => { if (f.id !== lFile().id) { const playing = !audio.paused; lStorePos(); LS.file = f.id; lSave(); lLoad(playing); } });
+    fileBox.appendChild(b);
+  });
+  SPEEDS.forEach((v) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.dataset.v = v; b.textContent = (v === 1 ? '1' : String(v)) + '×';
+    b.addEventListener('click', () => { LS.speed = v; audio.playbackRate = v; lSave(); lPaint(); });
+    $('l-speed').appendChild(b);
+  });
+  [['all', 'Keep going'], ['one', 'Repeat it']].forEach(([v, label]) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.dataset.v = v; b.textContent = label;
+    b.addEventListener('click', () => { LS.repeat = v; audio.loop = v === 'all'; lRep = lChAt(lPos()); lSave(); lPaint(); });
+    $('l-repeat').appendChild(b);
+  });
+  lLoad(false);
+}
+function lLoad(autoplay) {
+  const f = lFile();
+  LS.file = f.id;
+  audio.src = f.src;
+  audio.loop = LS.repeat === 'all';
+  audio.playbackRate = LS.speed;
+  lPending = LS.pos[f.id] || 0;
+  lRep = lChAt(lPending);
+  const dl = $('l-dl');
+  dl.href = f.src; dl.setAttribute('download', 'MTA Study Guide - ' + f.title + '.mp3');
+  const ol = $('l-topics');
+  ol.innerHTML = '';
+  f.chapters.forEach((ch, i) => {
+    const li = document.createElement('li'), b = document.createElement('button');
+    b.type = 'button'; b.dataset.i = i;
+    b.innerHTML = esc(ch.title) + '<span>' + fmtT(ch.end - ch.start) + '</span>';
+    b.addEventListener('click', () => { lSeek(ch.start); lPlay(); });
+    li.appendChild(b); ol.appendChild(li);
+  });
+  lPaint();
+  if (autoplay) lPlay();
+}
+function lPlay() {
+  audio.playbackRate = LS.speed;
+  const p = audio.play();
+  if (p && p.catch) p.catch(() => say($('l-msg'), 'Tap play again to start the audio.', ''));
+}
+function lSeek(t) {
+  t = Math.max(0, Math.min(t, lDur() - 0.5));
+  if (audio.readyState >= 1) { audio.currentTime = t; lPending = null; } else lPending = t;
+  lRep = lChAt(t);
+  LS.pos[lFile().id] = t; lSave();
+  lPaint();
+}
+function lStorePos() { if (LM) { LS.pos[lFile().id] = lPos(); lSave(); } }
+function lPrev() {
+  const f = lFile(), t = lPos(), i = lChAt(t), ch = f.chapters[i];
+  lSeek(t - ch.start > 3 || i === 0 ? ch.start : f.chapters[i - 1].start);
+}
+function lNext() {
+  const f = lFile(), i = lChAt(lPos());
+  lSeek(f.chapters[(i + 1) % f.chapters.length].start);
+}
+function lMeta(i) {
+  if (!('mediaSession' in navigator) || !LM || typeof MediaMetadata === 'undefined') return;
+  const f = lFile(), ch = f.chapters[i] || f.chapters[0];
+  try {
+    navigator.mediaSession.metadata = new MediaMetadata({ title: ch.title, artist: 'MTA Study Guide', album: f.title,
+      artwork: [{ src: 'icon-192.png', sizes: '192x192', type: 'image/png' }, { src: 'icon-512.png', sizes: '512x512', type: 'image/png' }] });
+  } catch (e) { /* ignore */ }
+}
+let lShownCh = -1;
+function lPaint() {
+  if (!LM) return;
+  const f = lFile(), t = lPos(), d = lDur(), i = lChAt(t), playing = !audio.paused;
+  document.querySelectorAll('#l-files button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.v === f.id)));
+  document.querySelectorAll('#l-speed button').forEach((b) => b.setAttribute('aria-pressed', String(+b.dataset.v === LS.speed)));
+  document.querySelectorAll('#l-repeat button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.v === LS.repeat)));
+  $('l-file').textContent = f.title;
+  $('l-now').textContent = f.chapters[i].title;
+  if (!$('l-seek').matches(':active')) $('l-seek').value = String(Math.round((t / d) * 1000) || 0);
+  $('l-cur').textContent = fmtT(t);
+  $('l-left').textContent = '-' + fmtT(d - t);
+  $('l-play').setAttribute('aria-label', playing ? 'Pause' : 'Play');
+  $('l-play-i').innerHTML = playing ? '<path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/>' : '<path d="M8 5v14l11-7z" fill="currentColor"/>';
+  $('tab-listen').classList.toggle('playing', playing);
+  document.querySelectorAll('#l-topics button').forEach((b) => b.classList.toggle('on', +b.dataset.i === i));
+  if (i !== lShownCh) { lShownCh = i; lMeta(i); }
+}
+audio.addEventListener('loadedmetadata', () => {
+  audio.playbackRate = LS.speed;
+  if (lPending != null) { try { audio.currentTime = lPending; } catch (e) { /* ignore */ } lPending = null; }
+  lPaint();
+});
+audio.addEventListener('timeupdate', () => {
+  if (!LM) return;
+  const f = lFile(), t = audio.currentTime;
+  // "Repeat it": once the topic being held has ended, go back to its start.
+  if (LS.repeat === 'one' && !audio.paused) {
+    const ch = f.chapters[lRep] || f.chapters[lChAt(t)];
+    if (t >= ch.end + 0.4) { audio.currentTime = ch.start; return; }
+  }
+  lPaint();
+  const now = Date.now();
+  if (now - lLastSave > 5000) { lLastSave = now; LS.pos[f.id] = t; lSave(); }
+  if ('mediaSession' in navigator && navigator.mediaSession.setPositionState && Math.abs(t - lLastPos) > 2) {
+    lLastPos = t;
+    try { navigator.mediaSession.setPositionState({ duration: lDur(), playbackRate: audio.playbackRate, position: Math.min(t, lDur()) }); } catch (e) { /* ignore */ }
+  }
+});
+audio.addEventListener('play', () => { say($('l-msg'), ''); lPaint(); if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing'; });
+audio.addEventListener('pause', () => { lStorePos(); lPaint(); if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused'; });
+audio.addEventListener('ended', () => { if (LS.repeat === 'all') { audio.currentTime = 0; lPlay(); } });
+audio.addEventListener('error', () => { if (audio.getAttribute('src')) say($('l-msg'), 'Couldn’t play the audio. Check your connection and try again.', 'no'); });
+window.addEventListener('pagehide', lStorePos);
+$('l-play').addEventListener('click', () => { if (!LM) return; if (audio.paused) lPlay(); else audio.pause(); });
+$('l-prev').addEventListener('click', () => { if (LM) lPrev(); });
+$('l-next').addEventListener('click', () => { if (LM) lNext(); });
+$('l-back').addEventListener('click', () => { if (LM) lSeek(lPos() - 15); });
+$('l-fwd').addEventListener('click', () => { if (LM) lSeek(lPos() + 15); });
+$('l-seek').addEventListener('input', () => { if (!LM) return; const t = (+$('l-seek').value / 1000) * lDur(); $('l-cur').textContent = fmtT(t); $('l-left').textContent = '-' + fmtT(lDur() - t); });
+$('l-seek').addEventListener('change', () => { if (LM) lSeek((+$('l-seek').value / 1000) * lDur()); });
+if ('mediaSession' in navigator) {
+  const ms = navigator.mediaSession, on = (a, fn) => { try { ms.setActionHandler(a, fn); } catch (e) { /* not supported */ } };
+  on('play', () => lPlay());
+  on('pause', () => audio.pause());
+  on('previoustrack', () => lPrev());
+  on('nexttrack', () => lNext());
+  on('seekbackward', (d) => lSeek(lPos() - ((d && d.seekOffset) || 15)));
+  on('seekforward', (d) => lSeek(lPos() + ((d && d.seekOffset) || 15)));
+  on('seekto', (d) => { if (d && d.seekTime != null) lSeek(d.seekTime); });
+}
 
 /* ---------------- keyboard ---------------- */
 const keyIndex = (key) => { if (!key || key.length !== 1) return -1; const i = '1234'.indexOf(key); return i > -1 ? i : 'abcd'.indexOf(key.toLowerCase()); };
@@ -766,6 +1353,9 @@ document.addEventListener('keydown', (e) => {
     if (k > -1 && k < S.cur.qs[S.cur.at].opts.length) { e.preventDefault(); tPick(k); }
     else if ((e.key === 'Enter' && !enterOnButton) || e.key === 'ArrowRight') { e.preventDefault(); tNext(); }
     else if (e.key === 'ArrowLeft') { e.preventDefault(); tBack(); }
+  } else if (mode === 'listen' && e.key === ' ' && tag !== 'BUTTON' && tag !== 'A' && LM) {
+    e.preventDefault();
+    if (audio.paused) lPlay(); else audio.pause();
   } else if (mode === 'daily' && !$('d-run').hidden) {
     const k = keyIndex(e.key);
     if (k > -1 && !dLocked && D && k < D.qs[S.daily[D.key].r.length].opts.length) { e.preventDefault(); dPick(k, true); }

@@ -1,0 +1,101 @@
+{
+ "voice": "af_heart",
+ "files": [
+  {
+   "src": "audio/facts.mp3",
+   "duration": 1119.94,
+   "bytes": 8959786,
+   "chapters": [
+    {
+     "id": "founders",
+     "title": "The Ten Founders",
+     "start": 0.0,
+     "end": 329.62
+    },
+    {
+     "id": "history",
+     "title": "History",
+     "start": 331.62,
+     "end": 442.89
+    },
+    {
+     "id": "fraternity",
+     "title": "The Fraternity",
+     "start": 444.89,
+     "end": 544.6
+    },
+    {
+     "id": "greek",
+     "title": "The Greek Alphabet",
+     "start": 546.6,
+     "end": 634.81
+    },
+    {
+     "id": "province",
+     "title": "The Western Province",
+     "start": 636.81,
+     "end": 736.7
+    },
+    {
+     "id": "chapter",
+     "title": "Los Angeles Alumni",
+     "start": 738.7,
+     "end": 938.68
+    },
+    {
+     "id": "programs",
+     "title": "Programs",
+     "start": 940.68,
+     "end": 1045.02
+    },
+    {
+     "id": "requirements",
+     "title": "Spring 2027 Requirements",
+     "start": 1047.02,
+     "end": 1117.87
+    }
+   ],
+   "id": "facts",
+   "title": "Facts to know"
+  },
+  {
+   "src": "audio/quiz.mp3",
+   "duration": 2258.06,
+   "bytes": 18064809,
+   "chapters": [
+    {
+     "id": "quiz-founders",
+     "title": "Quiz: The Founders",
+     "start": 0.0,
+     "end": 510.45
+    },
+    {
+     "id": "quiz-history",
+     "title": "Quiz: History and the Fraternity",
+     "start": 512.45,
+     "end": 893.23
+    },
+    {
+     "id": "quiz-west",
+     "title": "Quiz: Province and Chapter",
+     "start": 895.23,
+     "end": 1623.3
+    },
+    {
+     "id": "quiz-programs",
+     "title": "Quiz: Programs and Requirements",
+     "start": 1625.3,
+     "end": 2098.72
+    },
+    {
+     "id": "quiz-greek",
+     "title": "Quiz: The Greek Alphabet",
+     "start": 2100.72,
+     "end": 2256.01
+    }
+   ],
+   "id": "quiz",
+   "title": "Quiz yourself"
+  }
+ ]
+}
