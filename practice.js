@@ -1194,7 +1194,7 @@ window.addEventListener('resize', () => {
 document.addEventListener('visibilitychange', () => { if (document.hidden) xPause(); });
 
 /* ================= LISTEN ================= */
-// Two recordings (facts and quiz), each one MP3 with chapter times in audio/tracks.json.
+// Each recording (facts, quick facts, Founders on repeat, quiz) is one MP3 with chapter times in audio/tracks.json.
 // One file per recording means playback never has to switch files while the phone is locked.
 const audio = $('l-audio');
 let LM = null, lPending = null, lLastSave = 0, lLastPos = 0, lRep = 0;

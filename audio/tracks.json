@@ -59,6 +59,90 @@
    "title": "Facts to know"
   },
   {
+   "id": "quickfacts",
+   "title": "Quick facts",
+   "src": "audio/quickfacts.mp3",
+   "duration": 454.54,
+   "bytes": 3636525,
+   "chapters": [
+    {
+     "id": "qf-fraternity",
+     "title": "The Fraternity",
+     "start": 0.0,
+     "end": 81.36
+    },
+    {
+     "id": "qf-founders",
+     "title": "The Founders",
+     "start": 83.36,
+     "end": 177.19
+    },
+    {
+     "id": "qf-objectives",
+     "title": "The Five Objectives",
+     "start": 179.19,
+     "end": 206.36
+    },
+    {
+     "id": "qf-grand",
+     "title": "The Grand Chapter",
+     "start": 208.36,
+     "end": 246.06
+    },
+    {
+     "id": "qf-province",
+     "title": "The Western Province",
+     "start": 248.06,
+     "end": 305.27
+    },
+    {
+     "id": "qf-chapter",
+     "title": "Los Angeles Alumni",
+     "start": 307.27,
+     "end": 371.21
+    },
+    {
+     "id": "qf-programs",
+     "title": "Programs",
+     "start": 373.21,
+     "end": 431.21
+    },
+    {
+     "id": "qf-greek",
+     "title": "The Greek Alphabet",
+     "start": 433.21,
+     "end": 452.48
+    }
+   ]
+  },
+  {
+   "id": "founders",
+   "title": "Founders on repeat",
+   "src": "audio/founders.mp3",
+   "duration": 247.13,
+   "bytes": 1977261,
+   "chapters": [
+    {
+     "id": "fr-full",
+     "title": "Full names, in order",
+     "start": 0.0,
+     "end": 118.06
+    },
+    {
+     "id": "fr-numbered",
+     "title": "Numbered",
+     "start": 120.06,
+     "end": 201.85
+    },
+    {
+     "id": "fr-last",
+     "title": "Last names",
+     "start": 203.85,
+     "end": 245.08
+    }
+   ]
+  },
+  {
    "src": "audio/quiz.mp3",
    "duration": 2258.06,
    "bytes": 18064809,
